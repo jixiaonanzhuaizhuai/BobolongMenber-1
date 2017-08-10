@@ -1,14 +1,9 @@
 package com.lgmember.util;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.ImageReader;
 import android.os.Environment;
 import android.util.Base64;
-import android.util.Log;
-import android.widget.ImageView;
 
 import com.lgmember.activity.R;
 
@@ -18,9 +13,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -104,14 +96,25 @@ public class StringUtil {
      * @param bm
      * @throws IOException
      */
-    public static void saveFile(Bitmap bm, String outPath) throws IOException {
-        File myCaptureFile = new File(outPath);
-        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
-        bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-        bos.flush();
-        bos.close();
-    }
 
+    public static File saveAsFile( Bitmap bm, String iconPath) {
+        File dirFile = new File(iconPath);
+        if (!dirFile.exists()) {
+            dirFile.mkdir();
+        }
+        File myCaptureFile = new File(iconPath);
+        BufferedOutputStream bos = null;
+
+        try {
+            bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
+            bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return myCaptureFile;
+    }
     /*
     * 时间比较*/
     public static int compare_date(String DATE1, String DATE2) {

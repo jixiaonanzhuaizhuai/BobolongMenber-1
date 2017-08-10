@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,7 +31,6 @@ import com.lgmember.business.SmsCodeBusiness;
 import com.lgmember.business.person.CertificationBusiness;
 import com.lgmember.business.UploadImgBusiness;
 import com.lgmember.model.Certification;
-import com.lgmember.util.ActivityCollector;
 import com.lgmember.util.StringUtil;
 import com.lgmember.view.TopBarView;
 import com.yuyh.library.imgsel.ImageLoader;
@@ -40,7 +38,6 @@ import com.yuyh.library.imgsel.ImgSelActivity;
 import com.yuyh.library.imgsel.ImgSelConfig;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -65,6 +62,7 @@ public class CertificationActivity extends BaseActivity
     private String capt_token;
 
     private String outPath;
+
 
     private ArrayAdapter<String> nationAdapt,genderAdapter;
 
@@ -219,23 +217,23 @@ public class CertificationActivity extends BaseActivity
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             List<String> pathList = data.getStringArrayListExtra(ImgSelActivity.INTENT_RESULT);
-            for (String path : pathList) {
-
-                //File file = new File(path);
+            for (final String path : pathList) {
                 if (!TextUtils.isEmpty(path)) {
                     /*Glide.with(CertificationActivity.this)
                             .load(path)
                             .override(300,300)
                             .into(imgShow);
+                    File file = new File(path);
                     uploadIDImg(file);*/
                     outPath = Environment.getExternalStorageDirectory() + "/certification.jpg";
-                    try {
-                        StringUtil.saveFile(StringUtil.getimage(path),outPath);
+                    /*try {
+                        StringUtil.saveFile(StringUtil.getimage(path), outPath);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     File file = new File(outPath);
-                    uploadIDImg(file);
+                    uploadIDImg(file);*/
+                    uploadIDImg(StringUtil.saveAsFile(StringUtil.getimage(path),outPath));
                     Bitmap bm = BitmapFactory.decodeFile(outPath);
                     imgShow.setVisibility(View.VISIBLE);
                     imgShow.setImageBitmap(bm);
