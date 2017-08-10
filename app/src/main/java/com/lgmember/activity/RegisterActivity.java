@@ -2,6 +2,7 @@ package com.lgmember.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -12,8 +13,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lgmember.activity.person.CertificationActivity;
+import com.lgmember.activity.person.PersonalAllActivity;
 import com.lgmember.business.SmsCodeBusiness;
 import com.lgmember.business.RegisterBusiness;
+import com.lgmember.business.login.LoginBusiness;
+import com.lgmember.util.Common;
 import com.lgmember.util.StringUtil;
 
 import org.json.JSONException;
@@ -23,7 +27,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener,RegisterBusiness.RegisterResultHandler,
-		SmsCodeBusiness.GetCodeResultHandler {
+		SmsCodeBusiness.GetCodeResultHandler,LoginBusiness.LoginResultHandler {
 
 	private EditText phoneEdt, codeEdt;
 	private Button requestCodeBtn, regBtn;
@@ -142,9 +146,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,Re
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				//完成业务逻辑
-				startIntent(CertificationActivity.class);
-				finish();
+				//完成业务逻辑，先完成登录，再进入实名认证界面
+				login(phoneTxt,phoneTxt);
+				/*startIntent(CertificationActivity.class);
+				finish();*/
 			}
 		});
 		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -157,7 +162,25 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,Re
 		builder.show();
 
 	}
-    //点击验证码倒计时
+
+	@Override
+	public void onSuccess(int state, boolean need_capt) {
+		if (state == 4) {
+			Intent intent = new
+					Intent(RegisterActivity.this,
+					CertificationActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("phone",phoneTxt);
+			intent.putExtras(bundle);
+			startActivity(intent);
+			finish();
+		}else {
+			startIntent(LoginActivity.class);
+			finish();
+		}
+	}
+
+	//点击验证码倒计时
 	class TimeCount extends CountDownTimer {
 		public TimeCount(long millisInFuture, long countDownInterval) {
 			super(millisInFuture, countDownInterval);
@@ -170,5 +193,15 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,Re
 			requestCodeBtn.setClickable(false);
 			requestCodeBtn.setText(millisUntilFinished / 1000 + "秒后点击重发");
 		}
+	}
+
+	//登录
+	private void login(String loginName,String loginPass) {
+		Common.FLAG = true;
+		LoginBusiness loginBusiness = new
+				LoginBusiness(context, loginName, loginPass, "", false);
+		//处理结果
+		loginBusiness.setHandler(this);
+		loginBusiness.Login();
 	}
 }

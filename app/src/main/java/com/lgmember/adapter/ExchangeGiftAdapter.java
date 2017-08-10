@@ -12,7 +12,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lgmember.activity.R;
+import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.activity.score.ExchangeAllActivity;
 import com.lgmember.activity.score.ExchangeGiftInfoActivity;
 import com.lgmember.model.Gift;
@@ -72,7 +74,7 @@ public class ExchangeGiftAdapter extends BaseAdapter {
         }
         final Gift gift = giftsList.get(position);
         String imgPath = Common.URL_IMG_BASE+gift.getPicture();
-        StringUtil.setNetworkBitmap(context,imgPath,vh.giftImg);
+        Glide.with(context).load(imgPath).placeholder(R.mipmap.defaul_background_img).into(vh.giftImg);
 
         vh.giftName.setText(gift.getName());
         /*vh.giftImg.setOnClickListener(new View.OnClickListener() {

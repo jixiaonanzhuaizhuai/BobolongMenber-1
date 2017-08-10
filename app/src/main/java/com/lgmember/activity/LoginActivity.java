@@ -3,6 +3,7 @@ package com.lgmember.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -125,7 +126,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     //登录
     private void login() {
-
         loginName = getText(userEdt);
         loginPass = getText(pwdEdt);
         cpt = getText(captEdt);
@@ -193,7 +193,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 //完成业务逻辑
-                startIntent(CertificationActivity.class);
+                Intent intent = new
+                        Intent(LoginActivity.this,
+                        CertificationActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("phone",loginName);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

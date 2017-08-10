@@ -8,8 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lgmember.activity.BaseActivity;
 import com.lgmember.activity.R;
+import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.business.score.ExchangeGiftInfoBusiness;
 import com.lgmember.model.Gift;
 import com.lgmember.util.Common;
@@ -69,7 +71,7 @@ public class ExchangeGiftInfoActivity extends BaseActivity implements ExchangeGi
     @Override
     public void onSuccess(Gift gift) {
         picture = Common.URL_IMG_BASE+gift.getPicture();
-        StringUtil.setNetworkBitmap(context,picture,iv_gift_img);
+        Glide.with(ExchangeGiftInfoActivity.this).load(picture).placeholder(R.mipmap.defaul_background_img).into(iv_gift_img);
         tv_gift_name.setText(""+gift.getName());
         tv_gift_desc.setText(""+gift.getDescription());
         tv_gift_point.setText(""+gift.getPoint());

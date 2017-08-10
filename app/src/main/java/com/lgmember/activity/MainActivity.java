@@ -18,6 +18,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -578,9 +579,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		tv_level.setText(StringUtil.numToLevels(member.getLevel())+"");
 
 		String IDcard = member.getIdno();
-
-		birthday = IDcard.substring(6,10)+"-"+IDcard.substring(10,12)+"-"+IDcard.substring(12,14);
-		age = StringUtil.IDcard2Age(IDcard);
+		if (!TextUtils.isEmpty(IDcard)){
+			birthday = IDcard.substring(6,10)+"-"+IDcard.substring(10,12)+"-"+IDcard.substring(12,14);
+			age = StringUtil.IDcard2Age(IDcard);
+		}
 		gender = StringUtil.numToGender(member.getGender());
 		nation = StringUtil.numToNation(member.getNation());
 	}

@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.lgmember.activity.BaseActivity;
 import com.lgmember.activity.R;
+import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.business.message.UpdateMessageStateBusiness;
 import com.lgmember.model.Message;
 import com.lgmember.util.Common;
@@ -53,7 +55,7 @@ public class MessageDetailActivity extends BaseActivity implements UpdateMessage
         tv_author = (TextView)findViewById(R.id.tv_author);
 
         String picture = Common.URL_IMG_BASE + message.getPicture();
-        StringUtil.setNetworkBitmap(context,picture,iv_img);
+        Glide.with(MessageDetailActivity.this).load(picture).placeholder(R.mipmap.defaul_background_img).into(iv_img);
 
         tv_title.setText(message.getTitle()+"");
         tv_create_time.setText(message.getCreate_time()+"");

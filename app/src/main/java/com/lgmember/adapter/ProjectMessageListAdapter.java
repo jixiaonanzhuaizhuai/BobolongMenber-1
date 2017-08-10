@@ -13,7 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lgmember.activity.R;
+import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.model.Project;
 import com.lgmember.model.ProjectMessage;
 import com.lgmember.util.Common;
@@ -90,7 +92,7 @@ public class ProjectMessageListAdapter extends BaseAdapter {
             vh.iv_img.setImageResource(R.drawable.touxiang);
         }else {
             String path = Common.URL_IMG_BASE+str;
-            StringUtil.setNetworkBitmap(context,path,vh.iv_img);
+            Glide.with(context).load(path).placeholder(R.mipmap.defaul_background_img).into(vh.iv_img);
         }
         vh.title.setText(""+projectMessage.getTitle());
         vh.create_time.setText(""+projectMessage.getStart_time());

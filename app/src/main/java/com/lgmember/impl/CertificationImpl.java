@@ -28,11 +28,11 @@ public class CertificationImpl extends HttpApi {
         try {
             jsonObject.put("name",certification.getName());
             jsonObject.put("idno",certification.getIdno());
-          //  jsonObject.put("gender",certification.getGender());
+            jsonObject.put("gender",certification.getGender());
             jsonObject.put("nation",certification.getNation());
             jsonObject.put("upload_session_id",certification.getUpload_session_id());
-            jsonObject.put("capt",certification.getCapt());
-            jsonObject.put("capt_token",certification.getCapt_token());
+            /*jsonObject.put("capt",certification.getCapt());
+            jsonObject.put("capt_token",certification.getCapt_token());*/
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -6,13 +6,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lgmember.activity.BaseActivity;
+import com.lgmember.activity.MainActivity;
 import com.lgmember.activity.R;
 import com.lgmember.business.collection.CollectionAddBusiness;
 import com.lgmember.business.project.JoinActivityBusiness;
@@ -44,18 +47,15 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 	private ImageView iv_collection;
 	private TextView tv_collection;
 	private boolean is_collection ;
+	private String pictureUrl = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_activitydetail);
-
-		Intent intent = this.getIntent();
-		int id =
-				intent.getIntExtra("id",0);
-		projectMessage = (ProjectMessage) DataLargeHolder.getInstance().retrieve(id);
 		init();
 	}
+
 
 	private void addCollection() {
 		CollectionAddBusiness collectionAddBusiness = new CollectionAddBusiness(context,projectMessage_id);
@@ -70,16 +70,15 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 	}
 
 	private void init(){
-
+		Intent intent = this.getIntent();
+		int id =
+				intent.getIntExtra("id",0);
+		projectMessage = (ProjectMessage) DataLargeHolder.getInstance().retrieve(id);
 		ll_collection = (LinearLayout)findViewById(R.id.ll_collection);
 		iv_collection = (ImageView)findViewById(R.id.iv_collection) ;
 		tv_collection = (TextView)findViewById(R.id.tv_collection);
 		ll_collection.setOnClickListener(this);
-		is_collection = projectMessage.getSaved();
-		if (is_collection){
-			iv_collection.setImageResource(R.mipmap.collection_checked);
-			tv_collection.setText("取消收藏");
-		}
+
 
 		ll_share = (LinearLayout)findViewById(R.id.ll_share);
 		ll_share.setOnClickListener(this);
@@ -97,6 +96,11 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 		joinBtn = (Button)findViewById(R.id.joinBtn);
 		joinBtn.setOnClickListener(this);
 
+		is_collection = projectMessage.getSaved();
+		if (is_collection){
+			iv_collection.setImageResource(R.mipmap.collection_checked);
+			tv_collection.setText("取消收藏");
+		}
 		projectMessage_id = projectMessage.getId();
 
 		List<Tag> tagList = projectMessage.getTags();
@@ -106,8 +110,9 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 		for (int i = 0;i<tagList.size();i++){
 			tags.add(tagList.get(i).getTag());
 		}
-		String pictureUrl = Common.URL_IMG_BASE+projectMessage.getPicture();
-		StringUtil.setNetworkBitmap(this,pictureUrl,imageView);
+		pictureUrl = Common.URL_IMG_BASE + projectMessage.getPicture();
+		Glide.with(ProjectMessageDetailActivity.this).load(pictureUrl).placeholder(R.mipmap.defaul_background_img).into(imageView);
+
 
 		tv_title.setText(projectMessage.getTitle());
 		tv_content.setText(Html.fromHtml(projectMessage.getContent()));
@@ -132,6 +137,8 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 		}else {
 			joinBtn.setText("报名参与");
 		}
+
+
 	}
 
 	@Override

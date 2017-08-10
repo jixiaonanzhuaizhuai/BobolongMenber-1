@@ -145,19 +145,26 @@ public class CertificationActivity extends BaseActivity
                 uploadImg();
                 break;
             case R.id.commitBtn:
-                DialogPhoneCode();
-                //commit();
+                //DialogPhoneCode();
+                commit();
                 break;
         }
     }
-    public void commit(String capt){
+    public void commit(){
         Certification certification = new Certification();
         certification.setName(getText(nameEdt));
         certification.setIdno(getText(IDcardEdt));
         certification.setNation(nation);
         certification.setUpload_session_id(session_id);
-        certification.setCapt(capt);
-        certification.setCapt_token(capt_token);
+        boolean genderBoolean;
+        if (gender == 0){
+            genderBoolean = true;
+        }else {
+            genderBoolean = false;
+        }
+        certification.setGender(genderBoolean);
+        /*certification.setCapt(capt);
+        certification.setCapt_token(capt_token);*/
 
         editor = sharedPreferences.edit();
         editor.putString("userName", getText(nameEdt));
@@ -212,10 +219,15 @@ public class CertificationActivity extends BaseActivity
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             List<String> pathList = data.getStringArrayListExtra(ImgSelActivity.INTENT_RESULT);
-
             for (String path : pathList) {
+
                 //File file = new File(path);
                 if (!TextUtils.isEmpty(path)) {
+                    /*Glide.with(CertificationActivity.this)
+                            .load(path)
+                            .override(300,300)
+                            .into(imgShow);
+                    uploadIDImg(file);*/
                     outPath = Environment.getExternalStorageDirectory() + "/certification.jpg";
                     try {
                         StringUtil.saveFile(StringUtil.getimage(path),outPath);
@@ -269,6 +281,7 @@ public class CertificationActivity extends BaseActivity
     @Override
     public void onSuccess() {
         showToast("提交成功");
+        startIntent(MainActivity.class);
         finish();
     }
 
@@ -329,7 +342,7 @@ public class CertificationActivity extends BaseActivity
                 if (getText(edt_code).equals("")){
                     showToast("请输入验证码!");
                 }else {
-                    commit(getText(edt_code));
+                    //commit(getText(edt_code));
                     dialog.dismiss();
                 }
 

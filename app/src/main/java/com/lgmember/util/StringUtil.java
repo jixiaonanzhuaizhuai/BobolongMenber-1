@@ -33,33 +33,6 @@ import java.util.regex.Pattern;
 
 public class StringUtil {
 
-
-    /*获取网络图片*/
-    static Bitmap bitmap;
-    public static void setNetworkBitmap(Context context,final String path, ImageView imageView) {
-
-        Runnable networkImg = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL httpUrl = new URL(path);
-                    HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection();
-                    conn.setConnectTimeout(6000);
-                    conn.setDoInput(true);
-                    conn.setUseCaches(false);
-                    InputStream in = conn.getInputStream();
-                    bitmap = BitmapFactory.decodeStream(in);
-                    in.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        new Thread(networkImg).start();
-        while(bitmap == null)
-            continue;
-        imageView.setBackground(new BitmapDrawable(context.getResources(),bitmap));
-    }
     /*
      * 通过时间秒毫秒数判断两个时间的间隔
      * @param date1
@@ -236,7 +209,6 @@ public class StringUtil {
     }
     //bitmap 转 base64
     public static String bitmapToBase64(Bitmap bitmap) {
-
         String result = null;
         ByteArrayOutputStream baos = null;
         try {

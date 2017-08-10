@@ -12,8 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lgmember.activity.BaseActivity;
 import com.lgmember.activity.R;
+import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.business.score.ExchangeGiftBusiness;
 import com.lgmember.business.score.ExchangeGiftInfoBusiness;
 import com.lgmember.business.score.ScoresRuleBusiness;
@@ -212,6 +214,6 @@ public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresRu
     @Override
     public void onSuccess(Gift gift) {
         String picture = Common.URL_IMG_BASE+gift.getPicture();
-        StringUtil.setNetworkBitmap(context,picture,giftImg);
+        Glide.with(ExchangeGiftDetailActivity.this).load(picture).placeholder(R.mipmap.defaul_background_img).into(giftImg);
     }
 }
