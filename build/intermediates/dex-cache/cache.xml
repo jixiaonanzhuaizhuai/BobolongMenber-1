@@ -7,8 +7,17 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="3f496372c99224d5be1b9576dae5ef0ed0608565">
+        sha1="5bb47426295d535a28289469330186de0f739b3c">
         <dex dex="D:\Android_all1\android\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_3bf26c11543c6a8cf124f6309b105461003040ae\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Yanan_Wu\.android\build-cache\989404f4d281d02ef14cbc7bfea25e3d095ae07a\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="23c7a11871518ab47ff5864687a5b68a17f36ed7">
+        <dex dex="D:\Android_all1\android\app\build\intermediates\pre-dexed\debug\classes_b145a4b35590e1b5e84f367832fced2c40127940.jar" />
     </item>
     <item
         is-multidex="true"
@@ -36,6 +45,15 @@
         revision="25.0.2"
         sha1="a401911b86797eb56a18a4a7ee00a9e8335eb64b">
         <dex dex="D:\Android_all1\android\app\build\intermediates\pre-dexed\debug\core-3.3.0_48e44376206c901d362ded9152ae11b575ee6647.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Yanan_Wu\.android\build-cache\a015fc21206a4127750d03957b980799d1570232\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cb604171452892c383d023307362c618161c4ab3">
+        <dex dex="D:\Android_all1\android\app\build\intermediates\pre-dexed\debug\classes_21546416ef2abb7da852f993bca90b6883457cdf.jar" />
     </item>
 
 </items>

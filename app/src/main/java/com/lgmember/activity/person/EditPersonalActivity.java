@@ -3,8 +3,10 @@ package com.lgmember.activity.person;
 
 
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.lgmember.activity.BaseActivity;
 import com.lgmember.activity.R;
 import com.lgmember.activity.score.ExchangeGiftDetailActivity;
@@ -22,6 +26,7 @@ import com.lgmember.business.message.MemberMessageBusiness;
 import com.lgmember.model.Member;
 import com.lgmember.util.StringUtil;
 import com.lgmember.view.TopBarView;
+import com.lljjcoder.citypickerview.widget.CityPicker;
 
 public class EditPersonalActivity extends BaseActivity implements
 		MemberMessageBusiness.MemberMessageResulHandler,
@@ -29,7 +34,7 @@ public class EditPersonalActivity extends BaseActivity implements
 		TopBarView.onTitleBarClickListener,SmsCodeBusiness.GetCodeResultHandler,SmsCodeIfCorrectBusiness.ValidateSmsCodeResultHandler {
 
 	private TopBarView topBar;
-	private EditText edt_mobile,edt_addr,edt_company,edt_job_title,
+	private EditText edt_mobile,edt_addr,edt_addr_info,edt_company,edt_job_title,
 					edt_month_income,edt_month_outcome;
 	private Spinner sp_education;
 	private int nation,education;
@@ -88,15 +93,47 @@ public class EditPersonalActivity extends BaseActivity implements
 
 		edt_mobile = (EditText)findViewById(R.id.edt_mobile);
 		edt_addr = (EditText)findViewById(R.id.edt_addr);
+		edt_addr.setInputType(InputType.TYPE_NULL);
+		edt_addr_info = (EditText)findViewById(R.id.edt_addr_info);
 		edt_company = (EditText)findViewById(R.id.edt_company);
 		edt_job_title = (EditText)findViewById(R.id.edt_job_title);
 		edt_month_income = (EditText)findViewById(R.id.edt_month_income);
 		edt_month_outcome = (EditText)findViewById(R.id.edt_month_outcome);
+		edt_addr.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				CityPicker cityPicker = new CityPicker.Builder(EditPersonalActivity.this).textSize(20)
+						.titleTextColor("#000000")
+						.backgroundPop(0xa0000000)
+						.province("黑龙江省")
+						.city("哈尔滨市")
+						.district("南岗区")
+						.textColor(Color.parseColor("#000000"))
+						.provinceCyclic(true)
+						.cityCyclic(false)
+						.districtCyclic(false)
+						.visibleItemsCount(7)
+						.itemPadding(10)
+						.build();
+
+				cityPicker.show();
+				cityPicker.setOnCityItemClickListener(new CityPicker.OnCityItemClickListener() {
+					@Override
+					public void onSelected(String... citySelected) {
+						edt_addr.setText(citySelected[0] + citySelected[1] + citySelected[2]);
+					}
+
+					@Override
+					public void onCancel() {
+					}
+				});
+			}
+		});
 
 	}
 
 	private void submitData() {
-		String addr = getText(edt_addr);
+		String addr = getText(edt_addr)+getText(edt_addr_info);
 		String mobile = getText(edt_mobile);
 		String company = getText(edt_company);
 		String job_title = getText(edt_job_title);

@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -91,6 +92,7 @@ public class AboutUsActivity extends BaseActivity implements TopBarView.onTitleB
         try {
             PackageInfo pInfo = pm.getPackageInfo(getPackageName(),0);
             currVersion = String.valueOf(pInfo.versionCode);
+
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

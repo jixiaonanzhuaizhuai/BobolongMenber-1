@@ -118,12 +118,12 @@ public class SettingActivity extends BaseActivity implements TopBarView.onTitleB
                         PersistentCookieStore(getApplicationContext());
                 cookieStore.removeAll();
                 Common.FLAG = false;
-                //设置自动登录为false
+                /*//设置自动登录为false
                 sharedPreferences =
                         this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("AUTO_ISCHECK",false);
-                editor.commit();
+                editor.commit();*/
                 //关闭所有的窗口，跳转到登录界面
                 Intent intent = new
                         Intent(SettingActivity.this,LoginActivity.class);

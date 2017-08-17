@@ -226,13 +226,6 @@ public class CertificationActivity extends BaseActivity
                     File file = new File(path);
                     uploadIDImg(file);*/
                     outPath = Environment.getExternalStorageDirectory() + "/certification.jpg";
-                    /*try {
-                        StringUtil.saveFile(StringUtil.getimage(path), outPath);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    File file = new File(outPath);
-                    uploadIDImg(file);*/
                     uploadIDImg(StringUtil.saveAsFile(StringUtil.getimage(path),outPath));
                     Bitmap bm = BitmapFactory.decodeFile(outPath);
                     imgShow.setVisibility(View.VISIBLE);

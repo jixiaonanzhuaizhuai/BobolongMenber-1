@@ -3,6 +3,7 @@ package com.lgmember.AudioRecorder;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -28,10 +29,15 @@ import com.lgmember.AudioRecorder.model.AudioChannel;
 import com.lgmember.AudioRecorder.model.AudioSampleRate;
 import com.lgmember.AudioRecorder.model.AudioSource;
 import com.lgmember.activity.BaseActivity;
+import com.lgmember.activity.LoginActivity;
 import com.lgmember.activity.MainActivity;
 import com.lgmember.activity.R;
+import com.lgmember.activity.person.CertificationActivity;
+import com.lgmember.activity.person.PersonalAllActivity;
+import com.lgmember.business.message.MemberMessageBusiness;
 import com.lgmember.business.project.ActivityCodeBusiness;
 import com.lgmember.business.sign.UploadRecordBusiness;
+import com.lgmember.model.Member;
 import com.lgmember.util.StringUtil;
 import com.lgmember.view.TopBarView;
 import com.yanzhenjie.permission.AndPermission;
@@ -53,7 +59,7 @@ import omrecorder.PullTransport;
 import omrecorder.Recorder;
 
 public class AudioRecorderActivity1 extends BaseActivity
-        implements PullTransport.OnAudioChunkPulledListener, MediaPlayer.OnCompletionListener ,View.OnClickListener,ActivityCodeBusiness.ActivityCodeResulHandler ,TopBarView.onTitleBarClickListener,UploadRecordBusiness.UploadRecordResulHandler{
+        implements PullTransport.OnAudioChunkPulledListener, MediaPlayer.OnCompletionListener ,View.OnClickListener,ActivityCodeBusiness.ActivityCodeResulHandler ,TopBarView.onTitleBarClickListener,UploadRecordBusiness.UploadRecordResulHandler,MemberMessageBusiness.MemberMessageResulHandler{
 
     private String filePath;
     private AudioSource source;
@@ -79,6 +85,9 @@ public class AudioRecorderActivity1 extends BaseActivity
     private AlertDialog dialog;
     private TopBarView topBar;
     private TextView tv_record_state;
+
+    private int flagAuthorized ;
+    private String phone;
 
     private static final int REQUEST_CODE_CAMERA = 100;
     private static final int REQUEST_CODE_SETTING = 300;
@@ -140,9 +149,49 @@ public class AudioRecorderActivity1 extends BaseActivity
                 codeSign();
                 break;*/
             case R.id.btn_scan:
-                cameraPermission();
+                //先判断是否实名认证过，再进行二维码扫描签到
+                if (flagAuthorized == 1){
+                    cameraPermission();
+                }else if (flagAuthorized == 2){
+                    showToast("您已提交实名认证,正在审核中,请稍后签到...");
+                }else {
+                    showDialog();
+                }
                 break;
         }
+
+    }
+
+    //弹出对话框
+    public void showDialog(){
+        //注册成功后的业务逻辑
+        AlertDialog.Builder builder = new AlertDialog.Builder(AudioRecorderActivity1.this);
+        builder.setTitle("自助实名认证");
+        builder.setMessage("请先实名认证，通过‘实名认证’即可签到，享受龙广会员俱乐部的贴心服务。");
+        builder.setPositiveButton("实名认证", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                //完成业务逻辑
+                Intent intent = new
+                        Intent(AudioRecorderActivity1.this,
+                        CertificationActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("phone",phone);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                startIntent(MainActivity.class);
+                finish();
+            }
+        });
+        builder.show();
 
     }
 
@@ -240,12 +289,19 @@ public class AudioRecorderActivity1 extends BaseActivity
     @Override
     public void onResume() {
         super.onResume();
+        getMemberMsg();
         try {
             visualizerView.onResume();
         } catch (Exception e) {
         }
     }
 
+    private void getMemberMsg() {
+
+        MemberMessageBusiness memberMessage = new MemberMessageBusiness(context);
+        memberMessage.setHandler(this);
+        memberMessage.getMemberMessage();
+    }
     @Override
     protected void onPause() {
         try {
@@ -275,10 +331,6 @@ public class AudioRecorderActivity1 extends BaseActivity
     public void onAudioChunkPulled(AudioChunk audioChunk) {
         float amplitude = isRecording ? (float) audioChunk.maxAmplitude() : 0f;
         visualizerHandler.onDataReceived(amplitude);
-    }
-
-    private void selectAudio() {
-       // setResult(RESULT_OK);
     }
 
     public void toggleRecording(View v) {
@@ -343,7 +395,14 @@ public class AudioRecorderActivity1 extends BaseActivity
         }
     }
 
-    final TimeCount timeCount = new TimeCount(10000,1000);
+    final TimeCount timeCount = new TimeCount(5000,1000);
+
+    @Override
+    public void onSuccess(Member member) {
+        flagAuthorized = member.getAuthorized();
+        phone = member.getMobile();
+    }
+
     class TimeCount extends CountDownTimer {
         public TimeCount(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);

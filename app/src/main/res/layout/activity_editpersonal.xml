@@ -48,13 +48,35 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
             <TextView
-                android:text="家庭住址"
+                android:text="所在地区"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginLeft="15dp"/>
             <EditText
                 android:id="@+id/edt_addr"
+                android:textColor="#000000"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:textCursorDrawable="@null"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <include layout="@layout/common_line"></include>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:text="详细地址"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="15dp"/>
+            <EditText
+                android:id="@+id/edt_addr_info"
                 android:textColor="#000000"
                 android:background="@null"
                 android:layout_width="match_parent"
