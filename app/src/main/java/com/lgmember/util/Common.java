@@ -15,6 +15,9 @@ public class Common {
     //sp保存是否自动录音
     public static String SP_IF_RECORDER = "sp_if_recorder";
 
+   //sp保存实名认证结果
+   public static String SP_AUTHORIZED = "sp_authorized";
+
     //版本更新时的时间计算
     public static String SP_VERSION_UPDATE_TIME = "sp_version_update_time";
 

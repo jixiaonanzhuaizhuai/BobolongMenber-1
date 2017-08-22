@@ -6,6 +6,7 @@ import android.util.Log;
 import com.lgmember.api.HttpApi;
 import com.lgmember.bean.ExchangeGiftResultBean;
 import com.lgmember.bean.GiftDetailResultBean;
+import com.lgmember.bean.HttpResultBean;
 import com.lgmember.business.score.ExchangeAllGiftBusiness;
 import com.lgmember.business.score.ExchangeGiftBusiness;
 import com.lgmember.business.score.ExchangeGiftInfoBusiness;
@@ -124,7 +125,6 @@ public class ExchangeImpl extends HttpApi {
                 .enqueue(new JsonResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, final JSONObject response) {
-                        Log.i("-----888----",response.toString());
                         GiftDetailResultBean giftDetailResultBean = JsonUtil.parseJsonWithGson(response.toString(),GiftDetailResultBean.class);
 
                         if (giftDetailResultBean.getCode() == 0){
@@ -168,9 +168,32 @@ public class ExchangeImpl extends HttpApi {
                 .enqueue(new JsonResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, final JSONObject response) {
+                        /**
+                         * 返回结果
+                         *
+                         * @param code   操作代码
+                         * @param result 结果 0 成功 1 数量不足 2 积分不足 3 超过个人数量限制
+                         */
+                        int code = 100;
+                        int result = 99;
+                        try {
+                            code = response.getInt("code");
+                            result = response.getInt("result");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (code == 0){
+                            if (result == 0){
+                                handler.onExchangeGiftSuccess("兑换成功！");
+                            }else if (result == 1){
+                                handler.onExchangeGiftSuccess("对不起，该礼品已兑换完！");
+                            }else if (result == 2){
+                                handler.onExchangeGiftSuccess("对不起，该礼品兑换超过个人数量限制！");
+                            }
+                        }else {
+                            handler.onError(code);
+                        }
 
-                        Log.i("-----888----",response.toString());
-                        handler.onExchangeGiftSuccess(response);
                     }
 
                     @Override

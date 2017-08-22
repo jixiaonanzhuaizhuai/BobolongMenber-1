@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lgmember.AudioRecorder.AndroidAudioRecorder;
+import com.lgmember.AudioRecorder.AudioRecorderActivity1;
 import com.lgmember.AudioRecorder.model.AudioChannel;
 import com.lgmember.AudioRecorder.model.AudioSampleRate;
 import com.lgmember.AudioRecorder.model.AudioSource;
@@ -37,6 +38,7 @@ import com.lgmember.activity.card.MyCardActivity;
 import com.lgmember.activity.collection.CollectionActivity;
 import com.lgmember.activity.feedback.ReportProblemActivity;
 import com.lgmember.activity.message.MyMessageActivity;
+import com.lgmember.activity.person.CertificationActivity;
 import com.lgmember.activity.person.EditPersonalActivity;
 import com.lgmember.activity.person.PersonalAllActivity;
 import com.lgmember.activity.project.ProjectMessageDetailActivity;
@@ -98,7 +100,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private BadgeView badgeView;
 	private String currVersion;
 
-    private String cardNum;
+    private String cardNum,phone;
 	private AlertDialog dialog;
 
 	private ProgressDialog progressDialog;
@@ -124,6 +126,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private static final int ON_LOAD_MORE = 2;
 
 	private String oldStartTime;
+	private int authorized;
 
 	Message message;
 
@@ -370,7 +373,16 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			startIntent(MyMessageActivity.class);
 			break;
 		case R.id.signBtn:
-			recordPermission();
+			 //0 未实名认证 1 已实名认证 2 提交实名认证 3 提交没有通过
+			if (authorized == 0){
+				showDialog("请先实名认证，认证通过后才可以签到!");
+			}else if (authorized ==1){
+				recordPermission();
+			}else if (authorized == 2){
+				showToast("您提交的实名认证正在审核中，审核通过后即可签到!");
+			}else if (authorized == 3){
+				showDialog("您提交的实名认证未审核通过，通过后即可签到！");
+			}
 			//startIntent(SignActivity.class);
 			break;
 		case R.id.editInfo:
@@ -481,10 +493,15 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 						startIntent(MyCardActivity.class);
 						return true;
 					case R.id.sign:
-						recordPermission();
-						//recordAudio();
-						//recordAudio();
-						//startIntent(SignActivity.class);
+						if (authorized == 0){
+							showDialog("请先实名认证，认证通过后才可以签到!");
+						}else if (authorized ==1){
+							recordPermission();
+						}else if (authorized == 2){
+                            showToast("您提交的实名认证正在审核中，审核通过后即可签到!");
+						}else if (authorized == 3){
+							showDialog("您提交的实名认证未审核通过，通过后即可签到！");
+						}
 						return true;
 					case R.id.messages:
 						startIntent(MyMessageActivity.class);
@@ -552,9 +569,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			xRecommendBanner.stopAutoPlay();
 		}else {
 			for (int i=0;i<hotProjectMessageList.size();i++){
-				String pictureUrl = Common.URL_BASE+"project_img/"+projectMessageList.get(i).getPicture();
+				String pictureUrl = Common.URL_BASE+"project_img/"+hotProjectMessageList.get(i).getPicture();
 				recommendImages.add(pictureUrl);
-				recommendTitleList.add(projectMessageList.get(i).getTitle());
+				recommendTitleList.add(hotProjectMessageList.get(i).getTitle());
 		}
 			xRecommendBanner.setData(recommendImages,recommendTitleList);
 			initBanner(xRecommendBanner,recommendImages,hotProjectMessageList);
@@ -564,9 +581,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	//会员个人信息
 	@Override
 	public void onSuccess(Member member) {
-
+		sp.edit().putInt(Common.SP_AUTHORIZED,member.getAuthorized()).commit();
+		authorized = member.getAuthorized();
+		phone = member.getMobile();
         cardNum = member.getCard_no();
-
 		//后台传过来的图片为空，设置为默认的，否则，就用后台传过来的
 		if (member.getAvatar() == null || member.getAvatar().isEmpty()){
 			iv_photo.setImageResource(R.drawable.touxiang);
@@ -788,6 +806,35 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 	}
 
+	//弹出对话框
+	public void showDialog(String s){
+		//注册成功后的业务逻辑
+		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+		builder.setTitle("自助实名认证");
+		builder.setMessage(s);
+		builder.setPositiveButton("实名认证", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				//完成业务逻辑
+				Intent intent = new
+						Intent(MainActivity.this,
+						CertificationActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("phone",phone);
+				intent.putExtras(bundle);
+				startActivity(intent);
+				finish();
+			}
+		});
+		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+			}
+		});
+		builder.show();
 
+	}
 
 }

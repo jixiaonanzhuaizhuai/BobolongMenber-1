@@ -67,7 +67,7 @@ public class ExchangeGiftBusiness {
         //当参数不合法时
         public void onArgumentMobileFormatError();
         //成功
-        public void onExchangeGiftSuccess(JSONObject jsonObject);
+        public void onExchangeGiftSuccess(String s);
     }
     public void setHandler(ExchangeGiftHandler handler){
         this.handler = handler;

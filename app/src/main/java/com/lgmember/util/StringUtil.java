@@ -3,8 +3,10 @@ package com.lgmember.util;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Base64;
 
+import com.google.zxing.common.StringUtils;
 import com.lgmember.activity.R;
 
 import java.io.BufferedOutputStream;
@@ -25,6 +27,107 @@ import java.util.regex.Pattern;
 
 public class StringUtil {
 
+    public static Bitmap getBitmapFromFile(String path, int width, int height) {
+        if (TextUtils.isEmpty(path)) {
+            BitmapFactory.Options opts = null;
+            opts = getOptions(width, height);
+            try {
+                return BitmapFactory.decodeFile(path, opts);
+            } catch (OutOfMemoryError e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 获取Options
+     *
+     * @param width
+     * @param height
+     * @return
+     */
+    private static BitmapFactory.Options getOptions(int width, int height) {
+        BitmapFactory.Options opts = null;
+        if (width > 0 && height > 0) {
+            opts = new BitmapFactory.Options();
+            opts.inJustDecodeBounds = true;
+//                BitmapFactory.decodeFile(path, opts);
+            // 计算图片缩放比例
+            final int minSideLength = Math.min(width, height);
+            opts.inSampleSize = computeSampleSize(opts, minSideLength, width * height);
+            opts.inJustDecodeBounds = false;
+            opts.inInputShareable = true;
+            opts.inPurgeable = true;
+        }
+        return opts;
+    }
+
+    public static int computeSampleSize(BitmapFactory.Options options, int minSideLength, int maxNumOfPixels) {
+        int initialSize = computeInitialSampleSize(options, minSideLength,
+                maxNumOfPixels);
+
+        int roundedSize;
+        if (initialSize <= 8) {
+            roundedSize = 1;
+            while (roundedSize < initialSize) {
+                roundedSize <<= 1;
+            }
+        } else {
+            roundedSize = (initialSize + 7) / 8 * 8;
+        }
+
+        return roundedSize;
+    }
+
+    private static int computeInitialSampleSize(BitmapFactory.Options options,
+                                                int minSideLength, int maxNumOfPixels) {
+        double w = options.outWidth;
+        double h = options.outHeight;
+
+        int lowerBound = (maxNumOfPixels == -1) ? 1 : (int) Math.ceil(Math
+                .sqrt(w * h / maxNumOfPixels));
+        int upperBound = (minSideLength == -1) ? 128 : (int) Math.min(Math
+                .floor(w / minSideLength), Math.floor(h / minSideLength));
+        if (upperBound < lowerBound) {
+            // return the larger one when there is no overlapping zone.
+            return lowerBound;
+        }
+        if ((maxNumOfPixels == -1) && (minSideLength == -1)) {
+            return 1;
+        } else if (minSideLength == -1) {
+            return lowerBound;
+        } else {
+            return upperBound;
+        }
+    }
+
+    /**
+     * 把图片写入SD卡
+     *
+     * @param bmp
+     */
+    public static void writeImage2SD(Bitmap bmp, String filePath) {
+        FileOutputStream iStream = null;
+        File fImage = null;
+        try {
+            fImage = new File(filePath);
+            fImage.createNewFile();
+            iStream = new FileOutputStream(fImage);
+            bmp.compress(Bitmap.CompressFormat.PNG, 50, iStream);
+            iStream.close();
+        } catch (Exception e) {
+
+        } finally {
+            if (iStream != null) {
+                try {
+                    iStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     /*
      * 通过时间秒毫秒数判断两个时间的间隔
      * @param date1
@@ -310,11 +413,11 @@ public class StringUtil {
         if (num == -1){
             return "报名参与";
         }else if (num == 0){
-            return "报名未签到";
+            return "您已报名还未签到";
         }else if(num == 1){
-            return "报名且签到";
+            return "您已报名且已签到";
         }else if(num == 2){
-            return "未报名但签到";
+            return "您未报名但已签到";
         }else if (num == 3){
             return "后补报名";
         }

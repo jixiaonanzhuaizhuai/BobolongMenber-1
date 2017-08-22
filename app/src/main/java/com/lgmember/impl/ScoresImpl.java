@@ -5,8 +5,13 @@ import android.util.Log;
 
 import com.lgmember.api.HttpApi;
 import com.lgmember.bean.HistoryScoresBean;
+import com.lgmember.bean.MemberResultBean;
+import com.lgmember.bean.ScoresInfoResultBean;
 import com.lgmember.business.score.HistoryScoresBusiness;
+import com.lgmember.business.score.ScoresInfoBusiness;
 import com.lgmember.business.score.ScoresRuleBusiness;
+import com.lgmember.model.Member;
+import com.lgmember.model.ScoresInfo;
 import com.lgmember.util.Common;
 import com.lgmember.util.JsonUtil;
 import com.tsy.sdk.myokhttp.MyOkHttp;
@@ -39,7 +44,7 @@ public class ScoresImpl extends HttpApi {
                     }
                 });
     }
-    public void getScoresInfo(final ScoresRuleBusiness.ScoresRuleHandler handler, Context context){
+    public void getScoresInfo(final ScoresInfoBusiness.ScoresInfoHandler handler, Context context){
         //判断没有网络应该如何处理
         if (!app.isNetWorkEnable(context)) {
             handler.onNetworkDisconnect();
@@ -51,13 +56,20 @@ public class ScoresImpl extends HttpApi {
                 .enqueue(new JsonResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, JSONObject response) {
-                        //Log.i("----999333----",response.toString());
-                        handler.onSuccess(response);
 
+                        ScoresInfoResultBean scoresInfoResultBean =
+                                JsonUtil.parseJsonWithGson(response
+                                        .toString(),ScoresInfoResultBean.class);
+                        ScoresInfo scoresInfo = scoresInfoResultBean.getData();
+                        if (scoresInfoResultBean.getCode() == 0) {
+                            Log.i("----99999----", "onSuccess: "+scoresInfo);
+                            handler.onSuccess(scoresInfo);
+                        }else {
+                            handler.onError(scoresInfoResultBean.getCode());
+                        }
                     }
                     @Override
                     public void onFailure(int statusCode, String error_msg) {
-                        //Log.i("----666----",statusCode+error_msg);
                         handler.onFailed(statusCode,error_msg);
                     }
                 });

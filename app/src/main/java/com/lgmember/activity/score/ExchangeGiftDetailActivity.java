@@ -5,19 +5,23 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.lgmember.activity.BaseActivity;
 import com.lgmember.activity.R;
 import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.business.score.ExchangeGiftBusiness;
 import com.lgmember.business.score.ExchangeGiftInfoBusiness;
+import com.lgmember.business.score.ScoresInfoBusiness;
 import com.lgmember.business.score.ScoresRuleBusiness;
 import com.lgmember.business.SmsCodeBusiness;
 import com.lgmember.model.Gift;
@@ -33,12 +37,11 @@ import org.json.JSONObject;
  * Created by Yanan_Wu on 2016/12/19.
  */
 
-public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresRuleBusiness.ScoresRuleHandler,SmsCodeBusiness.GetCodeResultHandler,ExchangeGiftBusiness.ExchangeGiftHandler,TopBarView.onTitleBarClickListener ,ExchangeGiftInfoBusiness.ExchangeGiftInfoHandler{
+public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresInfoBusiness.ScoresInfoHandler,SmsCodeBusiness.GetCodeResultHandler,ExchangeGiftBusiness.ExchangeGiftHandler,TopBarView.onTitleBarClickListener {
 
     private TextView nameTxt;
     private EditText adressTxt, phoneTxt;
     private ImageView giftImg;
-    private int gift_id;
     private String mobile;
     private String sms_capt_tokenTxt = "";
     private String capt = "";
@@ -47,21 +50,19 @@ public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresRu
 
     private AlertDialog dialog;
 
+    private Gift gift;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exchangegiftdetail);
-        Bundle bundle = this.getIntent().getExtras();
-        gift_id = bundle.getInt("gift_id");
+       /* Bundle bundle = this.getIntent().getExtras();
+        gift_id = bundle.getInt("gift_id");*/
+       String gift_json = getIntent().getStringExtra("gift");
+        gift = new Gson().fromJson(gift_json,Gift.class);
         init();
-        getGiftData();
         fillData();
     }
 
-    private void getGiftData() {
-            ExchangeGiftInfoBusiness exchangeGiftInfoBusiness = new ExchangeGiftInfoBusiness(context,gift_id);
-            exchangeGiftInfoBusiness.setHandler(this);
-            exchangeGiftInfoBusiness.getGiftInfo();
-    }
 
     public void init() {
 
@@ -71,6 +72,8 @@ public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresRu
         nameTxt = (TextView) findViewById(R.id.nameTxt);
         phoneTxt = (EditText) findViewById(R.id.phoneTxt);
         giftImg = (ImageView) findViewById(R.id.giftImg);
+        String picture = Common.URL_IMG_BASE+gift.getPicture();
+        Glide.with(ExchangeGiftDetailActivity.this).load(picture).placeholder(R.mipmap.defaul_background_img).into(giftImg);
         btn_exchange_gift = (Button)findViewById(R.id.btn_exchange_gift);
         btn_exchange_gift.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,35 +81,22 @@ public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresRu
                 DialogPhoneCode();
             }
         });
+
     }
 
     private void fillData() {
-        ScoresRuleBusiness scoresRuleBusiness = new ScoresRuleBusiness(context);
+        ScoresInfoBusiness scoresInfoBusiness = new ScoresInfoBusiness(context);
         //处理结果
-        scoresRuleBusiness.setHandler(this);
-        scoresRuleBusiness.getScoresInfo();
+        scoresInfoBusiness.setHandler(this);
+        scoresInfoBusiness.getScoresInfo();
     }
-    private ScoresInfo scoresInfo = new ScoresInfo();
     @Override
-    public void onSuccess(JSONObject jsob) {
-        int code = 100;
-        try {
-            code = jsob.getInt("code");
-            if (code == 0){
-                JSONObject jobject = jsob.getJSONObject("data");
-                scoresInfo.setName(jobject.getString("name"));
-                scoresInfo.setAddr(jobject.getString("addr"));
-                scoresInfo.setMobile(jobject.getString("mobile"));
-                nameTxt.setText(scoresInfo.getName());
-                adressTxt.setText(scoresInfo.getAddr());
-                mobile = scoresInfo.getMobile();
-                phoneTxt.setText(mobile);
-            }else {
-                showToast(context.getString(StringUtil.codeTomsg(code)));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public void onSuccess(ScoresInfo scoresInfo) {
+        nameTxt.setText(scoresInfo.getName());
+        adressTxt.setText(scoresInfo.getAddr());
+        mobile = scoresInfo.getMobile();
+        phoneTxt.setText(mobile+"");
+
     }
 
     public void DialogPhoneCode() {
@@ -164,8 +154,7 @@ public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresRu
 
 
     private void exchangeGift(String smsCode) {
-        ExchangeGiftBusiness exchangeGiftBusiness = new ExchangeGiftBusiness(context,gift_id,
-                scoresInfo.getName(),scoresInfo.getAddr(),scoresInfo.getMobile(),smsCode,sms_capt_tokenTxt);
+        ExchangeGiftBusiness exchangeGiftBusiness = new ExchangeGiftBusiness(context,gift.getId(), getText(nameTxt),getText(adressTxt),getText(phoneTxt),smsCode,sms_capt_tokenTxt);
         exchangeGiftBusiness.setHandler(this);
         exchangeGiftBusiness.exchangeGift();
     }
@@ -188,18 +177,14 @@ public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresRu
         showToast("手机格式不正确");
     }
     @Override
-    public void onExchangeGiftSuccess(JSONObject jsonObject) {
-        try {
-            int code = jsonObject.getInt("code");
-            if (code == 0){
-                showToast("兑换成功");
-                startIntent(ExchangeScoresActivity.class);
-            }else {
-                showToast(context.getString(StringUtil.codeTomsg(code)));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public void onExchangeGiftSuccess(String s) {
+        btn_exchange_gift.setEnabled(false);
+        if (TextUtils.equals(s,"兑换成功")){
+            btn_exchange_gift.setText(s +"");
+        }else {
+            showToast(s);
         }
+
     }
 
     @Override
@@ -211,9 +196,4 @@ public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresRu
     public void onRightClick() {
     }
 
-    @Override
-    public void onSuccess(Gift gift) {
-        String picture = Common.URL_IMG_BASE+gift.getPicture();
-        Glide.with(ExchangeGiftDetailActivity.this).load(picture).placeholder(R.mipmap.defaul_background_img).into(giftImg);
-    }
 }

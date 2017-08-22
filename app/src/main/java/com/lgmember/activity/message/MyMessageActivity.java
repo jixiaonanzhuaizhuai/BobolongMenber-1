@@ -3,9 +3,11 @@ package com.lgmember.activity.message;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -241,11 +243,14 @@ public class MyMessageActivity extends BaseActivity implements RemindNumBusiness
 
 	@Override
 	public void onSuccess(MessageBean bean) {
+		remindList.clear();
 		messageList.clear();
 		total = bean.getTotal();
 		if (total == 0){
 			progressBar.setVisibility(View.GONE);
 			loadDesc.setText("当前还没有数据");
+			messageListAdapter.notifyDataSetChanged();
+			lv_message.setAdapter(messageListAdapter);
 		}else {
 			ll_loading.setVisibility(View.GONE);
 			messageList.addAll(bean.getData());
@@ -280,9 +285,12 @@ public class MyMessageActivity extends BaseActivity implements RemindNumBusiness
 
 	@Override
 	public void onSuccess(RemindListResultBean bean) {
+		messageList.clear();
 		remindList.clear();
 		total = bean.getTotal();
 		if (total == 0){
+			messageListAdapter.notifyDataSetChanged();
+			lv_message.setAdapter(messageListAdapter);
 			progressBar.setVisibility(View.GONE);
 			loadDesc.setText("当前还没有数据");
 		}else {

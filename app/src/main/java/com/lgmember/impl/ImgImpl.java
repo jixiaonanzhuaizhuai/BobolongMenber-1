@@ -46,7 +46,6 @@ public class ImgImpl extends HttpApi {
                 .enqueue(new JsonResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, final JSONObject response) {
-                        Log.i(TAG, "onSuccess: 0000000"+response.toString());
                         try {
                             int code = response.getInt("code");
                             if (code == 0) {

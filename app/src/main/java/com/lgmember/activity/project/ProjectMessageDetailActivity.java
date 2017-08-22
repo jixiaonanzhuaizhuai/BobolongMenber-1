@@ -2,6 +2,7 @@ package com.lgmember.activity.project;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -49,6 +50,8 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 	private boolean is_collection ;
 	private String pictureUrl = null;
 
+	private SharedPreferences sp;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,6 +73,7 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 	}
 
 	private void init(){
+		sp = this.getSharedPreferences(Common.SP_NAME, MODE_PRIVATE);
 		Intent intent = this.getIntent();
 		int id =
 				intent.getIntExtra("id",0);
@@ -137,8 +141,6 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 		}else {
 			joinBtn.setText("报名参与");
 		}
-
-
 	}
 
 	@Override
@@ -150,7 +152,17 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 				startActivity(intent);
 				break;
 			case R.id.joinBtn:
-				joinActivity();
+				////0 未实名认证 1 已实名认证 2 提交实名认证 3 提交没有通过
+				int authorized = sp.getInt(Common.SP_AUTHORIZED,99);
+				if (authorized == 0){
+					showToast("您还未实名认证，认证通过后才可以报名参与！");
+				}else if (authorized == 1){
+					joinActivity();
+				}else if(authorized == 2){
+					showToast("您提交的实名认证正在审核中，审核通过后，即可报名参与！");
+				}else if (authorized == 3){
+					showToast("您提交的实名认证没有通过审核，审核通过才可报名参与！");
+				}
 				break;
 			case R.id.ll_collection:
 				if (is_collection){

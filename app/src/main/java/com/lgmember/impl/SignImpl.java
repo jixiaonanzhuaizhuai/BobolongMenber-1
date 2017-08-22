@@ -74,7 +74,6 @@ public class SignImpl extends HttpApi {
                 .enqueue(new JsonResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, JSONObject response) {
-                        Log.i(TAG, "onSuccess: ------"+response);
 
                         try {
                             int code = response.getInt("code");
@@ -120,7 +119,12 @@ public class SignImpl extends HttpApi {
                 .enqueue(new JsonResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, JSONObject response) {
-
+                        /**
+                         * 返回结果
+                         *
+                         * @param code   操作代码
+                         * @param result 结果 0 成功, 1 已签到, 2 签到必须报名项目失败 3 活动已结束 4 未实名认证用户无法签到
+                         */
                         try {
                             int code = response.getInt("code");
                             String resultString = null;
@@ -132,8 +136,10 @@ public class SignImpl extends HttpApi {
                                     resultString = "已签到";
                                 }else if (result == 2){
                                     resultString = "请报名后再签到";
-                                }else {
-                                    resultString = "活动码无效";
+                                }else if(result == 3){
+                                    resultString = "活动已结束";
+                                }else if (result == 4){
+                                    resultString = "未实名认证用户无法签到";
                                 }
                                 handler.onActivityCodeSuccess(resultString);
                             }else {

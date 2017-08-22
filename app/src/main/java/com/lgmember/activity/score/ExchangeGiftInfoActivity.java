@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.lgmember.activity.BaseActivity;
 import com.lgmember.activity.R;
 import com.lgmember.activity.project.ProjectMessageDetailActivity;
@@ -25,26 +26,24 @@ import org.json.JSONObject;
  * Created by Yanan_Wu on 2017/3/8.
  */
 
-public class ExchangeGiftInfoActivity extends BaseActivity implements ExchangeGiftInfoBusiness.ExchangeGiftInfoHandler,View.OnClickListener ,TopBarView.onTitleBarClickListener {
+public class ExchangeGiftInfoActivity extends BaseActivity implements View.OnClickListener ,TopBarView.onTitleBarClickListener {
     private ImageView iv_gift_img;
     private TextView tv_gift_name,tv_gift_desc,tv_gift_point,tv_gift_number;
-    private int gift_id;
     private Button btn_change;
     private TopBarView topBar;
     private boolean flag ;
 
     private String picture;
+    private Gift gift;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exchange_gift_info);
-
-        Bundle bundle = this.getIntent().getExtras();
-        gift_id = bundle.getInt("gift_id");
-        flag = bundle.getBoolean("flag");
+        flag = getIntent().getBooleanExtra("flag",false);
+        String gift_json = getIntent().getStringExtra("gift");
+        gift = new Gson().fromJson(gift_json,Gift.class);
         init();
-        fillData();
     }
     private void init() {
         topBar = (TopBarView)findViewById(R.id.topbar);
@@ -55,6 +54,13 @@ public class ExchangeGiftInfoActivity extends BaseActivity implements ExchangeGi
         tv_gift_point = (TextView)findViewById(R.id.tv_gift_point);
         tv_gift_number = (TextView)findViewById(R.id.tv_gift_number);
         btn_change = (Button)findViewById(R.id.btn_exchange);
+        picture = Common.URL_IMG_BASE+gift.getPicture();
+        Glide.with(ExchangeGiftInfoActivity.this).load(picture).placeholder(R.mipmap.defaul_background_img).into(iv_gift_img);
+
+        tv_gift_name.setText(""+gift.getName());
+        tv_gift_desc.setText(""+gift.getDescription());
+        tv_gift_point.setText(""+gift.getPoint());
+        tv_gift_number.setText(""+gift.getNumber());
         btn_change.setOnClickListener(this);
 
         if (!flag){
@@ -62,30 +68,14 @@ public class ExchangeGiftInfoActivity extends BaseActivity implements ExchangeGi
         }
     }
 
-    private void fillData() {
-        ExchangeGiftInfoBusiness exchangeGiftInfoBusiness = new ExchangeGiftInfoBusiness(context,gift_id);
-        exchangeGiftInfoBusiness.setHandler(this);
-        exchangeGiftInfoBusiness.getGiftInfo();
-    }
 
-    @Override
-    public void onSuccess(Gift gift) {
-        picture = Common.URL_IMG_BASE+gift.getPicture();
-        Glide.with(ExchangeGiftInfoActivity.this).load(picture).placeholder(R.mipmap.defaul_background_img).into(iv_gift_img);
-        tv_gift_name.setText(""+gift.getName());
-        tv_gift_desc.setText(""+gift.getDescription());
-        tv_gift_point.setText(""+gift.getPoint());
-        tv_gift_number.setText(""+gift.getNumber());
-    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_exchange:
                 Intent intent = new Intent(ExchangeGiftInfoActivity.this,ExchangeGiftDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("gift_id",gift_id);
-                intent.putExtras(bundle);
+                intent.putExtra("gift",new Gson().toJson(gift));
                 startActivity(intent);
                 break;
         }

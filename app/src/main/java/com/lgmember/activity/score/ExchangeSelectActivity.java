@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.lgmember.activity.BaseActivity;
 import com.lgmember.activity.BaseFragment;
 import com.lgmember.activity.MainActivity;
@@ -114,10 +115,12 @@ public class ExchangeSelectActivity extends BaseFragment implements ExchangeAllG
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(),ExchangeGiftInfoActivity.class);
-                Bundle bundle = new Bundle();
+                /*Bundle bundle = new Bundle();
                 bundle.putInt("gift_id",giftList.get(position).getId());
                 bundle.putBoolean("flag",true);
-                intent.putExtras(bundle);
+                intent.putExtras(bundle);*/
+                intent.putExtra("flag",true);
+                intent.putExtra("gift",new Gson().toJson(giftList.get(position)));
                 startActivity(intent);
 
             }

@@ -1,5 +1,6 @@
 package com.lgmember.activity.person;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -22,22 +24,33 @@ import android.widget.ImageView;
 import android.view.View.OnClickListener;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lgmember.activity.BaseActivity;
+import com.lgmember.activity.LoginActivity;
 import com.lgmember.activity.MainActivity;
 import com.lgmember.activity.R;
 import com.lgmember.business.SmsCodeBusiness;
+import com.lgmember.business.message.MemberMessageBusiness;
 import com.lgmember.business.person.CertificationBusiness;
 import com.lgmember.business.UploadImgBusiness;
 import com.lgmember.model.Certification;
+import com.lgmember.model.Member;
 import com.lgmember.util.StringUtil;
 import com.lgmember.view.TopBarView;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
+import com.yanzhenjie.permission.Rationale;
+import com.yanzhenjie.permission.RationaleListener;
 import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelActivity;
 import com.yuyh.library.imgsel.ImgSelConfig;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -45,7 +58,7 @@ import java.util.List;
  */
 
 public class CertificationActivity extends BaseActivity
-        implements OnClickListener, CertificationBusiness.CertificationResulHandler ,UploadImgBusiness.UploadImgResulHandler,TopBarView.onTitleBarClickListener,SmsCodeBusiness.GetCodeResultHandler {
+        implements OnClickListener, CertificationBusiness.CertificationResulHandler ,UploadImgBusiness.UploadImgResulHandler,TopBarView.onTitleBarClickListener,SmsCodeBusiness.GetCodeResultHandler,MemberMessageBusiness.MemberMessageResulHandler {
 
     private int REQUEST_CODE = 0;
     private Button uploadImgBtn, commitBtn;
@@ -63,6 +76,8 @@ public class CertificationActivity extends BaseActivity
 
     private String outPath;
 
+    private boolean flag = false;
+    private boolean flagDiag = true;
 
     private ArrayAdapter<String> nationAdapt,genderAdapter;
 
@@ -72,12 +87,27 @@ public class CertificationActivity extends BaseActivity
 
     private String phone;
 
+    private static final int REQUEST_CODE_PERMISSION_CAMERA = 100;
+    private static final int REQUEST_CODE_SETTING = 300;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_certification);
         context = this;
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getMemberData();
+    }
+
+    private void getMemberData() {
+        MemberMessageBusiness memberMessage = new MemberMessageBusiness(context);
+        memberMessage.setHandler(this);
+        memberMessage.getMemberMessage();
     }
 
     private void init() {
@@ -140,7 +170,8 @@ public class CertificationActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.uploadImgBtn:
-                uploadImg();
+                loadImgPermission();
+                //uploadImg();
                 break;
             case R.id.commitBtn:
                 //DialogPhoneCode();
@@ -148,6 +179,27 @@ public class CertificationActivity extends BaseActivity
                 break;
         }
     }
+
+    private void loadImgPermission() {
+        // 申请单个权限。
+        AndPermission.with(this)
+                .requestCode(REQUEST_CODE_PERMISSION_CAMERA)
+                .permission(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE)
+                .callback(permissionListener)
+                // rationale作用是：用户拒绝一次权限，再次申请时先征求用户同意，再打开授权对话框；
+                // 这样避免用户勾选不再提示，导致以后无法申请权限。
+                // 你也可以不设置。
+                .rationale(new RationaleListener() {
+                    @Override
+                    public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
+                        // 这里的对话框可以自定义，只要调用rationale.resume()就可以继续申请。
+                        AndPermission.rationaleDialog(CertificationActivity.this, rationale).
+                                show();
+                    }
+                })
+                .start();
+    }
+
     public void commit(){
         Certification certification = new Certification();
         certification.setName(getText(nameEdt));
@@ -211,30 +263,6 @@ public class CertificationActivity extends BaseActivity
         ImgSelActivity.startActivity(this, config, REQUEST_CODE);
     }
 
-    //上传图片后的处理
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            List<String> pathList = data.getStringArrayListExtra(ImgSelActivity.INTENT_RESULT);
-            for (final String path : pathList) {
-                if (!TextUtils.isEmpty(path)) {
-                    /*Glide.with(CertificationActivity.this)
-                            .load(path)
-                            .override(300,300)
-                            .into(imgShow);
-                    File file = new File(path);
-                    uploadIDImg(file);*/
-                    outPath = Environment.getExternalStorageDirectory() + "/certification.jpg";
-                    uploadIDImg(StringUtil.saveAsFile(StringUtil.getimage(path),outPath));
-                    Bitmap bm = BitmapFactory.decodeFile(outPath);
-                    imgShow.setVisibility(View.VISIBLE);
-                    imgShow.setImageBitmap(bm);
-                }
-            }
-        }
-    }
-
     private void uploadIDImg(File file) {
         session_id = java.util.UUID.randomUUID().toString();
         UploadImgBusiness uploadImgBusiness = new UploadImgBusiness(context,session_id,file);
@@ -247,12 +275,13 @@ public class CertificationActivity extends BaseActivity
         //注册成功后的业务逻辑
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("实名认证通知");
-        builder.setMessage("未通过实名认证，原因是"+s+"，您需要重新申请实名认证");
+        builder.setMessage("您未通过实名认证，原因是"+s+"，请您重新申请实名认证");
         builder.setPositiveButton("重新申请", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 //完成业务逻辑
+                flagDiag = false;
                 nameEdt.setText("");
                 IDcardEdt.setText("");
             }
@@ -263,6 +292,7 @@ public class CertificationActivity extends BaseActivity
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 //业务逻辑
+                flagDiag = false;
             }
         });
         builder.show();
@@ -271,22 +301,26 @@ public class CertificationActivity extends BaseActivity
 
     @Override
     public void onSuccess() {
+        flag = true;
         showToast("提交成功");
         startIntent(MainActivity.class);
         finish();
     }
 
-    public void onError(int code) {
-        showDialog(context.getString(StringUtil.codeTomsg(code)));
-    }
-
     @Override
-    public void onUploadImgSuccess() {}
+    public void onUploadImgSuccess() {
+        showToast("图片上传成功");
+    }
 
     @Override
     public void onBackClick() {
-        finish();
+        if (flag == true){
+            startIntent(MainActivity.class);
+        }else {
+            startIntent(LoginActivity.class);
+        }
     }
+
 
     @Override
     public void onRightClick() {
@@ -364,9 +398,96 @@ public class CertificationActivity extends BaseActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){
-            startIntent(MainActivity.class);
+            if (flag == true){
+                startIntent(MainActivity.class);
+            }else {
+                startIntent(LoginActivity.class);
+            }
+
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    /**
+     * 回调监听。
+     */
+    private PermissionListener permissionListener = new PermissionListener() {
+        @Override
+        public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+            switch (requestCode) {
+                case REQUEST_CODE_PERMISSION_CAMERA: {
+                    uploadImg();
+                    break;
+                }
+            }
+        }
+
+        @Override
+        public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+            switch (requestCode) {
+                case REQUEST_CODE_PERMISSION_CAMERA: {
+                    showToast("获取相机权限失败！！");
+                    break;
+                }
+            }
+
+            // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
+            if (AndPermission.hasAlwaysDeniedPermission(CertificationActivity.this, deniedPermissions)) {
+                // 第一种：用默认的提示语。
+                AndPermission.defaultSettingDialog(CertificationActivity.this, REQUEST_CODE_SETTING).show();
+
+            }
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_SETTING){
+            uploadImg();
+        }
+        //上传图片后的处理
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            List<String> pathList = data.getStringArrayListExtra(ImgSelActivity.INTENT_RESULT);
+            for (final String path : pathList) {
+                if (!TextUtils.isEmpty(path)) {
+                    Glide.with(CertificationActivity.this)
+                            .load(path)
+                            .override(300,300)
+                            .into(imgShow);
+                    Bitmap bm = BitmapFactory.decodeFile(path);
+                    imgShow.setVisibility(View.VISIBLE);
+                    imgShow.setImageBitmap(bm);
+                    outPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath() + "certification";
+                    try {
+                        saveFile(bm,outPath,"00.jpg");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+    public void saveFile(Bitmap bm,String path, String fileName) throws IOException {
+        File dirFile = new File(path);
+        if(!dirFile.exists()){
+            dirFile.mkdir();
+        }
+        File myCaptureFile = new File(path , fileName);
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
+        bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+        bos.flush();
+        bos.close();
+        uploadIDImg(myCaptureFile);
+    }
+
+    @Override
+    public void onSuccess(Member member) {
+
+        if(member.getAuthorized() == 3 && flagDiag == true){
+            showDialog(member.getReason());
+        }
+
+    }
 }
+

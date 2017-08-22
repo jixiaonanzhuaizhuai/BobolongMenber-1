@@ -90,7 +90,9 @@ public class AudioRecorderActivity1 extends BaseActivity
     private String phone;
 
     private static final int REQUEST_CODE_CAMERA = 100;
+    private static final int REQUEST_CODE_RECORD_AUDIO = 200;
     private static final int REQUEST_CODE_SETTING = 300;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,51 +151,14 @@ public class AudioRecorderActivity1 extends BaseActivity
                 codeSign();
                 break;*/
             case R.id.btn_scan:
+                cameraPermission();
                 //先判断是否实名认证过，再进行二维码扫描签到
-                if (flagAuthorized == 1){
-                    cameraPermission();
-                }else if (flagAuthorized == 2){
-                    showToast("您已提交实名认证,正在审核中,请稍后签到...");
-                }else {
-                    showDialog();
-                }
                 break;
         }
 
     }
 
-    //弹出对话框
-    public void showDialog(){
-        //注册成功后的业务逻辑
-        AlertDialog.Builder builder = new AlertDialog.Builder(AudioRecorderActivity1.this);
-        builder.setTitle("自助实名认证");
-        builder.setMessage("请先实名认证，通过‘实名认证’即可签到，享受龙广会员俱乐部的贴心服务。");
-        builder.setPositiveButton("实名认证", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-                //完成业务逻辑
-                Intent intent = new
-                        Intent(AudioRecorderActivity1.this,
-                        CertificationActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("phone",phone);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-                startIntent(MainActivity.class);
-                finish();
-            }
-        });
-        builder.show();
 
-    }
 
     private void cameraPermission() {
         AndPermission.with(this)
@@ -269,11 +234,10 @@ public class AudioRecorderActivity1 extends BaseActivity
         }
         if(requestCode == REQUEST_CODE_SETTING) {
 
-            Intent intent = new Intent(AudioRecorderActivity1.this,
+            /*Intent intent = new Intent(AudioRecorderActivity1.this,
                     com.yzq.zxinglibrary.android.CaptureActivity.class);
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent, 0);*/
 
-            /*startActivityForResult(new Intent(this, CaptureActivity.class) , 0);*/
 
         }
     }
@@ -334,7 +298,22 @@ public class AudioRecorderActivity1 extends BaseActivity
     }
 
     public void toggleRecording(View v) {
-        Util.wait(100, new Runnable() {
+
+        AndPermission.with(this)
+                .requestCode(REQUEST_CODE_RECORD_AUDIO)
+                .permission(Manifest.permission.RECORD_AUDIO)
+                .callback(permissionListener)
+                .rationale(new RationaleListener() {
+                    @Override
+                    public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
+                        AndPermission.rationaleDialog(
+                                AudioRecorderActivity1.this, rationale).
+                                show();
+                    }
+                })
+                .start();
+
+        /*Util.wait(100, new Runnable() {
             @Override
             public void run() {
                 if (isRecording) {
@@ -343,7 +322,7 @@ public class AudioRecorderActivity1 extends BaseActivity
                     resumeRecording();
                 }
             }
-        });
+        });*/
     }
 
     private void resumeRecording() {
@@ -419,7 +398,7 @@ public class AudioRecorderActivity1 extends BaseActivity
         }
         public void onTick(long millisUntilFinished) {
             recordView.setClickable(false);
-            tv_record_state.setText("正在录音，还剩"+millisUntilFinished / 1000 + "秒");
+            tv_record_state.setText("正在签到，还剩"+millisUntilFinished / 1000 + "秒");
         }
     }
 
@@ -518,8 +497,19 @@ public class AudioRecorderActivity1 extends BaseActivity
                     Intent intent = new Intent(AudioRecorderActivity1.this,
                             com.yzq.zxinglibrary.android.CaptureActivity.class);
                     startActivityForResult(intent, 0);
-                    /*startActivityForResult(new Intent(AudioRecorderActivity1.this, CaptureActivity.class) , 0);*/
                     break;
+                    }
+                case REQUEST_CODE_RECORD_AUDIO:{
+                     Util.wait(100, new Runnable() {
+                        @Override
+                        public void run() {
+                            if (isRecording) {
+                                stopRecording();
+                            } else {
+                                resumeRecording();
+                            }
+                        }
+                    });
                 }
             }
         }
@@ -528,7 +518,11 @@ public class AudioRecorderActivity1 extends BaseActivity
         public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
             switch (requestCode) {
                 case REQUEST_CODE_CAMERA: {
-                    Toast.makeText(AudioRecorderActivity1.this, "请求权限失败了", Toast.LENGTH_SHORT).show();
+                    showToast("请求相机权限失败了");
+                    break;
+                }
+                case REQUEST_CODE_RECORD_AUDIO:{
+                    showToast("请求录音权限失败了");
                     break;
                 }
             }

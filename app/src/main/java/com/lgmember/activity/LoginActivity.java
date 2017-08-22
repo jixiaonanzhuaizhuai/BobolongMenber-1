@@ -30,11 +30,11 @@ import com.lgmember.util.Common;
 public class LoginActivity extends BaseActivity implements OnClickListener, LoginBusiness.LoginResultHandler, ImgCptBusiness.ImgCptResultHandler, IfNeedCaptBusiness.IfNeedCaptResultHandler {
 
     private Button loginBtn;
-    private TextView userEdt, pwdEdt, registerTxt, forgetPassTxt;
+    private TextView registerTxt, forgetPassTxt;
     private String loginName;
     private String loginPass;
     private String cpt = "";
-    private EditText captEdt;
+    private EditText userEdt,pwdEdt,captEdt;
     private ImageView iv_captImg;
     private LinearLayout ll_capt;
     private CheckBox autoLogin;
@@ -67,8 +67,18 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         iv_captImg = (ImageView) findViewById(R.id.iv_captImg);
         iv_captImg.setOnClickListener(this);
         loginBtn = (Button) findViewById(R.id.loginBtn);
-        userEdt = (TextView) findViewById(R.id.userEdt);
-        pwdEdt = (TextView) findViewById(R.id.pwdEdt);
+        userEdt = (EditText) findViewById(R.id.userEdt);
+        pwdEdt = (EditText) findViewById(R.id.pwdEdt);
+        pwdEdt.setOnFocusChangeListener(new android.view.View.
+                OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // 此处为得到焦点时的处理内容
+                    showToast("默认密码为您的手机号！");
+                }
+            }
+        });
         registerTxt = (TextView) findViewById(R.id.registerTxt);
         forgetPassTxt = (TextView) findViewById(R.id.forgetPassTxt);
         loginBtn.setOnClickListener(this);
@@ -207,8 +217,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
-                startIntent(MainActivity.class);
-                finish();
+                /*startIntent(MainActivity.class);
+                finish();*/
             }
         });
         builder.show();

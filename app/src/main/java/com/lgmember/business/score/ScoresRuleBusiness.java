@@ -5,6 +5,7 @@ import android.content.Context;
 import com.lgmember.api.HttpHandler;
 import com.lgmember.bean.MessageBean;
 import com.lgmember.impl.ScoresImpl;
+import com.lgmember.model.ScoresInfo;
 
 import org.json.JSONObject;
 
@@ -24,10 +25,8 @@ public class ScoresRuleBusiness {
         ScoresImpl scoresRule = new ScoresImpl();
         scoresRule.getScoresRule(handler,context);
     }
-    public  void getScoresInfo(){
-        ScoresImpl scoresRule = new ScoresImpl();
-        scoresRule.getScoresInfo(handler,context);
-    }
+
+
     private ScoresRuleHandler handler;
     public interface ScoresRuleHandler extends HttpHandler {
         //当参数为空
@@ -36,5 +35,6 @@ public class ScoresRuleBusiness {
     public void setHandler(ScoresRuleHandler handler){
         this.handler = handler;
     }
+
 
     }

@@ -45,7 +45,6 @@ public class CertificationImpl extends HttpApi {
                 .enqueue(new JsonResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, final JSONObject response) {
-                        Log.i("=------6660--", "onSuccess: "+response.toString());
                         try {
                             int code = response.getInt("code");
                             if (code == 0){
