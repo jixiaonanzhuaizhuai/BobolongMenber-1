@@ -97,7 +97,7 @@ public class ProjectMessageListAdapter extends BaseAdapter {
         vh.title.setText(""+projectMessage.getTitle());
         vh.create_time.setText(""+projectMessage.getStart_time());
         vh.state.setText(""+StringUtil.numToJoinState(projectMessage.getState()));
-        vh.checkin_end_time.setText(""+projectMessage.getEnd_time());
+        vh.checkin_end_time.setText(""+StringUtil.subString(projectMessage.getCheckin_end_time()));
 
         return view;
     }

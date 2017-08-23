@@ -493,6 +493,21 @@ public class StringUtil {
         }
     }
 
+    /*
+    截取报名时间
+     */
+    public static String subString(String str){
+        String firStr = str.substring(0, 11);
+        String midStr = str.substring(11,12);
+        String lasStr = str.substring(12, 13);
+        if(Integer.parseInt(midStr) == 0){
+            return firStr + lasStr + "点";
+        }else{
+            return firStr + midStr + lasStr + "点";
+        }
+
+    }
+
 
 
 }

@@ -124,7 +124,7 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 		tv_hyperlink.setOnClickListener(this);
 		tv_create_time.setText(projectMessage.getStart_time());
 		tv_count.setText(""+projectMessage.getCount());
-		tv_checkin_end_time.setText(projectMessage.getEnd_time());
+		tv_checkin_end_time.setText(StringUtil.subString(projectMessage.getCheckin_end_time()));
 		is_collection = projectMessage.getSaved();
 
 		SimpleDateFormat df =
