@@ -1,6 +1,7 @@
 package com.lgmember.activity.score;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -184,6 +185,11 @@ public class ExchangeGiftDetailActivity extends BaseActivity implements ScoresIn
         }else {
             showToast(s);
         }
+        Intent intent = new Intent();
+        intent.setClass(this, ExchangeScoresActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
 
     }
 

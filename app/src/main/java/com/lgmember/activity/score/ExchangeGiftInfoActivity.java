@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 public class ExchangeGiftInfoActivity extends BaseActivity implements View.OnClickListener ,TopBarView.onTitleBarClickListener {
     private ImageView iv_gift_img;
-    private TextView tv_gift_name,tv_gift_desc,tv_gift_point,tv_gift_number;
+    private TextView tv_gift_name,tv_gift_desc,tv_gift_point,tv_gift_number,tv_gift__limit_number;
     private Button btn_change;
     private TopBarView topBar;
     private boolean flag ;
@@ -53,6 +53,7 @@ public class ExchangeGiftInfoActivity extends BaseActivity implements View.OnCli
         tv_gift_desc = (TextView)findViewById(R.id.tv_gift_desc);
         tv_gift_point = (TextView)findViewById(R.id.tv_gift_point);
         tv_gift_number = (TextView)findViewById(R.id.tv_gift_number);
+        tv_gift__limit_number = (TextView) findViewById(R.id.tv_gift__limit_number);
         btn_change = (Button)findViewById(R.id.btn_exchange);
         picture = Common.URL_IMG_BASE+gift.getPicture();
         Glide.with(ExchangeGiftInfoActivity.this).load(picture).placeholder(R.mipmap.defaul_background_img).into(iv_gift_img);
@@ -61,6 +62,7 @@ public class ExchangeGiftInfoActivity extends BaseActivity implements View.OnCli
         tv_gift_desc.setText(""+gift.getDescription());
         tv_gift_point.setText(""+gift.getPoint());
         tv_gift_number.setText(""+gift.getNumber());
+        tv_gift__limit_number.setText(""+gift.getLimit_number());
         btn_change.setOnClickListener(this);
 
         if (!flag){

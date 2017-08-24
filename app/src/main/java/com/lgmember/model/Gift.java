@@ -11,6 +11,7 @@ public class Gift {
     private int point = 0;
     private String picture = null;
     private int number = 0;
+    private int limit_number = 0;
     public String getPicture() {
         return picture;
     }
@@ -59,16 +60,24 @@ public class Gift {
         this.number = number;
     }
 
+    public int getLimit_number() {
+        return limit_number;
+    }
+
+    public void setLimit_number(int limit_number) { this.limit_number = limit_number; }
+
     public Gift(){
         super();
     }
 
-    public Gift(int id, String name, String description, int point, String picture,int number) {
+    public Gift(int id, String name, String description, int point, String picture,int number, int limit_number) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.point = point;
         this.picture = picture;
         this.number = number;
+        this.limit_number = limit_number;
     }
+
 }
