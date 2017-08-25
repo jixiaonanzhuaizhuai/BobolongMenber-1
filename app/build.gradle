@@ -53,7 +53,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25+'
     testCompile 'junit:junit:4.12'
-    compile 'com.xhb:xbanner:1+'/*轮播图，带有标题*/
+    compile 'com.xhb:xbanner:1.2.9'/*轮播图，带有标题*/
     compile 'com.nineoldandroids:library:2.4.0'/*用轮播库时，用到的*/
     compile 'com.getui:sdk:2.10.2.0'
     compile 'com.android.support:recyclerview-v7:25+'

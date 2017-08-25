@@ -185,7 +185,6 @@ public class PersonalAllActivity extends BaseActivity implements TopBarView.onTi
             List<String> pathList = data.getStringArrayListExtra(ImgSelActivity.INTENT_RESULT);
             //startPhotoZoom(data.getData());
             for (String path : pathList) {
-
                 File file = new File(path);
                 if (file.exists()) {
                     UpdatePhoto(file);

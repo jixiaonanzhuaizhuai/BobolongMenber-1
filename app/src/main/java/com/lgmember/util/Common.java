@@ -82,6 +82,10 @@ public class Common {
     public static String URL_TAGS_LIST = URL_BASE+"project2/get-tag-list";
     //全部礼物列表
     public static String URL_EXCHANGE_ALL_GIGT = URL_BASE+"point/giftlist";
+
+    //已兑换的列表
+    public static String URL_EXCHANGE_ALREADY_GIGT = URL_BASE+"point/gift-send-list";
+
     //筛选后的礼物列表
     public static String URL_EXCHANGE_SELECT_GIGT = URL_BASE+"point/giftexchangelist";
     //点击某行礼物显示该礼物的详细信息

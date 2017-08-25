@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.lgmember.api.HttpHandler;
 import com.lgmember.bean.ExchangeGiftResultBean;
+import com.lgmember.bean.ExchangeSendGiftResultBean;
 import com.lgmember.impl.ExchangeImpl;
 import com.lgmember.impl.ScoresImpl;
 
@@ -41,13 +42,26 @@ public class ExchangeAllGiftBusiness {
         exchangeImpl.getSelectExchangeGift(pageNo,pageSize,handler,context);
     }
 
+    public void getAlreadyGift() {
+        // TODO 可能还要验证密码
+        // 登陆
+        exchangeImpl = new ExchangeImpl();
+        exchangeImpl.getAlreadyExchangeGift(pageNo,pageSize,handlerSend,context);
+    }
+
     private ExchangeAllGiftHandler handler;
     public interface ExchangeAllGiftHandler extends HttpHandler {
         public void onSuccess(ExchangeGiftResultBean bean);
     }
-
-
     public void setHandler(ExchangeAllGiftHandler handler){
         this.handler = handler;
+    }
+
+    private ExchangeSendGiftHandler handlerSend;
+    public interface ExchangeSendGiftHandler extends HttpHandler {
+        public void onSuccess(ExchangeSendGiftResultBean bean);
+    }
+    public void setHandler(ExchangeSendGiftHandler handlerSend){
+        this.handlerSend = handlerSend;
     }
 }

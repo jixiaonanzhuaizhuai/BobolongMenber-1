@@ -24,15 +24,16 @@ public class ExchangeScoresActivity extends FragmentActivity {
 
 	// 定义数组来存放Fragment界面
 	private Class fragmentArray[] = {
-			ExchangeAllActivity.class, ExchangeSelectActivity.class};
+			ExchangeAllActivity.class, ExchangeSelectActivity.class,ExchangeAlreadyActivity.class};
 
 	// 定义数组来存放按钮图片
 	private int mImageViewArray[] = {
 			R.drawable.manage_tab_item_alreadyjoin,
-			R.drawable.manage_tab_item_soonjoin};
+			R.drawable.manage_tab_item_soonjoin,
+			R.drawable.manage_tab_item_hot};
 
 	// Tab选项卡的文字
-	private String mTextviewArray[] = { "所有礼品", "自动筛选"};
+	private String mTextviewArray[] = { "所有礼品", "可兑换礼品","已兑换礼品"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -46,6 +46,7 @@ public class TagsListAdapter extends RecyclerView.Adapter<TagsListAdapter.ViewHo
         holder.ll_tag_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 int position = holder.getAdapterPosition();
                 Tag tag = mTagsList.get(position);
                 TagProjectMessageListActivity.actionStart(v.getContext(),tag.getId());

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.lgmember.api.HttpApi;
 import com.lgmember.bean.ExchangeGiftResultBean;
+import com.lgmember.bean.ExchangeSendGiftResultBean;
 import com.lgmember.bean.GiftDetailResultBean;
 import com.lgmember.bean.HttpResultBean;
 import com.lgmember.business.score.ExchangeAllGiftBusiness;
@@ -85,7 +86,6 @@ public class ExchangeImpl extends HttpApi {
                 .enqueue(new JsonResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, final JSONObject response) {
-                        Log.i(TAG, "onSuccess: "+response.toString());
 
                         ExchangeGiftResultBean exchangeGiftResultBean =
                                 JsonUtil.parseJsonWithGson(response.toString(),
@@ -93,6 +93,39 @@ public class ExchangeImpl extends HttpApi {
                         int code = exchangeGiftResultBean.getCode();
                         if (code == 0){
                             handler.onSuccess(exchangeGiftResultBean);
+                        }else {
+                            handler.onError(code);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, String error_msg) {
+                        handler.onFailed(statusCode, error_msg);
+                    }
+                });
+
+    }
+    public void getAlreadyExchangeGift(int pageNo, int pageSize, final ExchangeAllGiftBusiness.ExchangeSendGiftHandler handler, Context context) {
+        //判断没有网络应该如何处理
+        if (!app.isNetWorkEnable(context)) {
+            handler.onNetworkDisconnect();
+        }
+        MyOkHttp mMyOkhttp = new MyOkHttp(okHttpClient());
+        mMyOkhttp.get()
+                .url(Common.URL_EXCHANGE_ALREADY_GIGT)
+                .addParam("pageNo",String.valueOf(pageNo))
+                .addParam("pageSize",String.valueOf(pageSize))
+                .tag(this)
+                .enqueue(new JsonResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, final JSONObject response) {
+
+                        ExchangeSendGiftResultBean exchangeSendGiftResultBean =
+                                JsonUtil.parseJsonWithGson(response.toString(),
+                                        ExchangeSendGiftResultBean.class);
+                        int code = exchangeSendGiftResultBean.getCode();
+                        if (code == 0){
+                            handler.onSuccess(exchangeSendGiftResultBean);
                         }else {
                             handler.onError(code);
                         }

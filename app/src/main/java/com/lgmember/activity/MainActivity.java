@@ -19,6 +19,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -61,6 +62,7 @@ import com.lgmember.model.ProjectMessage;
 import com.lgmember.model.Tag;
 import com.lgmember.util.ActivityCollector;
 import com.lgmember.util.Common;
+import com.lgmember.util.CustomLinearLayoutManager;
 import com.lgmember.util.DataLargeHolder;
 import com.lgmember.util.QRCodeUtil;
 import com.lgmember.util.StringUtil;
@@ -121,6 +123,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private RecyclerView recyclerView;
 	private TagsListAdapter adapter;
 
+	private List<ProjectMessage> projectMessageList;
+	List<String> allTitleList;
+	private List<ProjectMessage> hotProjectMessageList;
+	List<String> recommendTitleList;
+
 
 	private static final int ON_REFRESH = 1;
 	private static final int ON_LOAD_MORE = 2;
@@ -135,7 +142,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 				case ON_REFRESH:
-					//adapter.notifyDataSetChanged();
 					mPullableLayout.stopPullBehavior();
 					break;
 				case ON_LOAD_MORE:
@@ -163,19 +169,120 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		//录音
 		sp = this.getSharedPreferences(Common.SP_NAME, MODE_PRIVATE);
 		if_auto_start = sp.getBoolean(Common.SP_IF_RECORDER,false);
-		versionNoUpdateTime();
-		pageNo = 1;
-		tagList.clear();
-		allImages.clear();
-		recommendImages.clear();
+		versionNoUpdateTime();pageNo = 1;
+
 		getUnreadRemindNum();
 		getMemberMsg();
 		getProjectMessage();
 		getHotProjectMessage();
 		getTagsList();
-		allBanner.startAutoPlay();
-		xRecommendBanner.startAutoPlay();
+
 }
+
+	private void initView() {
+
+		projectMessageList = new ArrayList<>();
+		allTitleList = new ArrayList<>();
+		hotProjectMessageList = new ArrayList<>();
+		recommendTitleList = new ArrayList<>();
+
+		progressDialog = new ProgressDialog(this);
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		progressDialog.setCancelable(true);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setTitle("更新进度提示");
+
+		tagList = new ArrayList<>();
+		//获取标签列表数据
+		allImages = new ArrayList<>();
+		recommendImages = new ArrayList<>();
+		iv_photo = (ImageView)findViewById(R.id.touxiang);
+		iv_photo.setOnClickListener(this);
+		tv_name = (TextView)findViewById(R.id.tv_name);
+		tv_card_no = (TextView)findViewById(R.id.tv_card_no);
+		tv_point = (TextView)findViewById(R.id.tv_point);
+		tv_level = (TextView)findViewById(R.id.tv_level);
+		tv_gender = (TextView)findViewById(R.id.tv_gender);
+		tv_age = (TextView)findViewById(R.id.tv_age);
+		tv_nation = (TextView)findViewById(R.id.tv_nation);
+		tv_birthday = (TextView)findViewById(R.id.tv_birthday);
+		menuTxt = (TextView) findViewById(R.id.menu_txt);
+		messageBtn = (TextView) findViewById(R.id.messageBtn);
+		signBtn = (TextView) findViewById(R.id.signBtn);
+		moreInfo = (TextView) findViewById(R.id.moreInfo);
+		sexTxt = (TextView)findViewById(R.id.sexTxt);
+		ageTxt = (TextView)findViewById(R.id.ageTxt);
+		nationTxt = (TextView)findViewById(R.id.nationTxt);
+		birthdayTxt = (TextView)findViewById(R.id.birthdayTxt);
+		editInfo = (TextView)findViewById(R.id.editInfo);
+		moreactivity = (TextView)findViewById(R.id.moreactivity);
+		rmoreactivity = (TextView)findViewById(R.id.rmoreactivity);
+
+		allBanner = (XBanner) findViewById(R.id.allBanner);
+		xRecommendBanner = (XBanner) findViewById(R.id.recommendBanner);
+		initAllBanner();
+		initRecommendBanner();
+
+		menuTxt.setOnClickListener(this);
+		messageBtn.setOnClickListener(this);
+		signBtn.setOnClickListener(this);
+		editInfo.setOnClickListener(this);
+		moreInfo.setOnClickListener(this);
+		moreactivity.setOnClickListener(this);
+		rmoreactivity.setOnClickListener(this);
+
+		badgeView = new BadgeView(this);
+		badgeView.setTargetView(messageBtn);
+		badgeView.setBadgeCount(unReadNum);
+		badgeView.setBadgeMargin(5,5,5,5);
+
+		recyclerView = (RecyclerView)findViewById(R.id.rc_tags_list);
+
+		CustomLinearLayoutManager customLinearLayoutManager= new CustomLinearLayoutManager(context);
+		recyclerView.setLayoutManager(customLinearLayoutManager);
+
+		/*RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(this);
+		recyclerView.setLayoutManager(layoutManager);*/
+		adapter = new TagsListAdapter(tagList);
+		recyclerView.setAdapter(adapter);
+
+
+		mPullableLayout = (SmartPullableLayout)findViewById(R.id.layout_pullable);
+		mPullableLayout.setOnPullListener(new SmartPullableLayout.OnPullListener() {
+			@Override
+			public void onPullDown() {
+				getInitData();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						mHandler.sendEmptyMessage(ON_REFRESH);
+					}
+				}).start();
+
+			}
+			@Override
+			public void onPullUp() {
+				getInitData();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						mHandler.sendEmptyMessage(ON_LOAD_MORE);
+					}
+				}).start();
+			}
+
+		});
+	}
 
 	/*版本暂不更新，一天提示一次*/
 	private void versionNoUpdateTime() {
@@ -197,31 +304,57 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			getServiceVersion();
 		}
 	}
-	private void initBanner(XBanner xBanner , final List<String> imgList,final List<ProjectMessage> bannerprojectMessageList) {
-		//加载广告图片
-		xBanner.setmAdapter(new XBanner.XBannerAdapter() {
+
+	private void initAllBanner() {
+		allBanner.setmAdapter(new XBanner.XBannerAdapter() {
 			@Override
 			public void loadBanner(XBanner banner, Object model, View view, int position) {
-				Glide.with(MainActivity.this).load(imgList.get(position)).into((ImageView) view);
-			}
-		});
-		xBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
+				Glide.with(MainActivity.this).load(allImages.get(position)).into((ImageView) view);
+			}});
+		allBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
 			@Override
 			public void onItemClick(XBanner banner, int position) {
-				ProjectMessage projectMessage =
-						bannerprojectMessageList.get(position);
-				DataLargeHolder.getInstance()
-						.save(projectMessage.getId(),projectMessage);
-				Intent intent = new
-						Intent(MainActivity.this,
-						ProjectMessageDetailActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putInt("id",projectMessage.getId());
-				intent.putExtras(bundle);
-				startActivity(intent);
+					ProjectMessage projectMessage =
+							projectMessageList.get(position);
+					DataLargeHolder.getInstance()
+							.save(projectMessage.getId(), projectMessage);
+					Intent intent = new
+							Intent(MainActivity.this,
+							ProjectMessageDetailActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putInt("id", projectMessage.getId());
+					intent.putExtras(bundle);
+					startActivity(intent);
+
 			}
 		});
 
+	}
+
+	private void initRecommendBanner() {
+		xRecommendBanner.setmAdapter(new XBanner.XBannerAdapter() {
+			@Override
+			public void loadBanner(XBanner banner, Object model, View view, int position) {
+				Glide.with(MainActivity.this).load(recommendImages.get(position)).into((ImageView) view);
+			}});
+		xRecommendBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
+			@Override
+			public void onItemClick(XBanner banner, int position) {
+				if (hotProjectMessageList.size()>0) {
+					ProjectMessage projectMessage =
+							hotProjectMessageList.get(position);
+					DataLargeHolder.getInstance()
+							.save(projectMessage.getId(), projectMessage);
+					Intent intent = new
+							Intent(MainActivity.this,
+							ProjectMessageDetailActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putInt("id", projectMessage.getId());
+					intent.putExtras(bundle);
+					startActivity(intent);
+				}
+			}
+		});
 	}
 
 	private void getServiceVersion() {
@@ -230,94 +363,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		versionBusiness.getVersion();
 	}
 
-	private void initView() {
-		progressDialog = new ProgressDialog(this);
-		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		progressDialog.setCancelable(true);
-		progressDialog.setCanceledOnTouchOutside(false);
-		progressDialog.setTitle("更新进度提示");
-
-		tagList = new ArrayList<>();
-		//获取标签列表数据
-		allImages = new ArrayList<>();
-		recommendImages = new ArrayList<>();
-		iv_photo = (ImageView)findViewById(R.id.touxiang);
-        iv_photo.setOnClickListener(this);
-		tv_name = (TextView)findViewById(R.id.tv_name);
-		tv_card_no = (TextView)findViewById(R.id.tv_card_no);
-		tv_point = (TextView)findViewById(R.id.tv_point);
-		tv_level = (TextView)findViewById(R.id.tv_level);
-		tv_gender = (TextView)findViewById(R.id.tv_gender);
-		tv_age = (TextView)findViewById(R.id.tv_age);
-		tv_nation = (TextView)findViewById(R.id.tv_nation);
-		tv_birthday = (TextView)findViewById(R.id.tv_birthday);
-		menuTxt = (TextView) findViewById(R.id.menu_txt);
-		messageBtn = (TextView) findViewById(R.id.messageBtn);
-		signBtn = (TextView) findViewById(R.id.signBtn);
-		moreInfo = (TextView) findViewById(R.id.moreInfo);
-		sexTxt = (TextView)findViewById(R.id.sexTxt);
-		ageTxt = (TextView)findViewById(R.id.ageTxt);
-		nationTxt = (TextView)findViewById(R.id.nationTxt);
-		birthdayTxt = (TextView)findViewById(R.id.birthdayTxt);
-		editInfo = (TextView)findViewById(R.id.editInfo);
-		moreactivity = (TextView)findViewById(R.id.moreactivity);
-		rmoreactivity = (TextView)findViewById(R.id.rmoreactivity);
-		allBanner = (XBanner) findViewById(R.id.allBanner);
-		xRecommendBanner = (XBanner) findViewById(R.id.recommendBanner);
-		menuTxt.setOnClickListener(this);
-		messageBtn.setOnClickListener(this);
-		signBtn.setOnClickListener(this);
-		editInfo.setOnClickListener(this);
-		moreInfo.setOnClickListener(this);
-		moreactivity.setOnClickListener(this);
-		rmoreactivity.setOnClickListener(this);
-
-		badgeView = new BadgeView(this);
-		badgeView.setTargetView(messageBtn);
-		badgeView.setBadgeCount(unReadNum);
-		badgeView.setBadgeMargin(5,5,5,5);
-
-		recyclerView = (RecyclerView)findViewById(R.id.rc_tags_list);
-		RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(this);
-		recyclerView.setLayoutManager(layoutManager);
-		adapter = new TagsListAdapter(tagList);
-		recyclerView.setAdapter(adapter);
-
-
-		mPullableLayout = (SmartPullableLayout)findViewById(R.id.layout_pullable);
-		mPullableLayout.setOnPullListener(new SmartPullableLayout.OnPullListener() {
-			@Override
-			public void onPullDown() {
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							getInitData();
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						mHandler.sendEmptyMessage(ON_REFRESH);
-					}
-				}).start();
-			}
-			@Override
-			public void onPullUp() {
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						mHandler.sendEmptyMessage(ON_LOAD_MORE);
-					}
-				}).start();
-			}
-
-		});
-	}
 
 	public void recordAudio() {
 		AndroidAudioRecorder.with(this)
@@ -531,50 +576,36 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 	}
 
-	// 停止自动翻页
-	@Override
-	protected void onPause() {
-
-		super.onPause();
-		//停止翻页
-		allBanner.stopAutoPlay();
-		xRecommendBanner.stopAutoPlay();
-	}
-
-	private List<ProjectMessage> projectMessageList = new ArrayList<>();
-	List<String> allTitleList = new ArrayList<>();
 	@Override
 	public void onSuccess(ProjectMessageBean bean) {
+		allImages.clear();
+		allTitleList.clear();
+		projectMessageList.clear();
+
 		projectMessageList = bean.getList();
-		if (projectMessageList.size() == 0){
-			allBanner.stopAutoPlay();
-		}else {
+		if (projectMessageList.size() != 0){
 			for (int i=0;i<projectMessageList.size();i++){
 				String pictureUrl = Common.URL_IMG_BASE+projectMessageList.get(i).getPicture();
 				allImages.add(pictureUrl);
 				allTitleList.add(projectMessageList.get(i).getTitle());
 			}
 			allBanner.setData(allImages,allTitleList);
-			initBanner(allBanner,allImages,projectMessageList);
 		}
-
-
 	}
-	private List<ProjectMessage> hotProjectMessageList = new ArrayList<>();
-	List<String> recommendTitleList = new ArrayList<>();
+
 	@Override
 	public void onHotSuccess(ProjectMessageBean bean) {
+		recommendImages.clear();
+		hotProjectMessageList.clear();
+		recommendTitleList.clear();
 		hotProjectMessageList = bean.getList();
-		if (hotProjectMessageList.size() == 0){
-			xRecommendBanner.stopAutoPlay();
-		}else {
+		if (hotProjectMessageList.size() != 0){
 			for (int i=0;i<hotProjectMessageList.size();i++){
-				String pictureUrl = Common.URL_BASE+"project_img/"+hotProjectMessageList.get(i).getPicture();
+				String pictureUrl = Common.URL_IMG_BASE+hotProjectMessageList.get(i).getPicture();
 				recommendImages.add(pictureUrl);
 				recommendTitleList.add(hotProjectMessageList.get(i).getTitle());
 		}
 			xRecommendBanner.setData(recommendImages,recommendTitleList);
-			initBanner(xRecommendBanner,recommendImages,hotProjectMessageList);
 		}
 
 	}
@@ -696,7 +727,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 	@Override
 	public void onTagListSuccess(TagsListResultBean tagsListResultBean) {
-
+		tagList.clear();
 		tagList.addAll(tagsListResultBean.getData());
 		adapter.notifyDataSetChanged();
 	}
