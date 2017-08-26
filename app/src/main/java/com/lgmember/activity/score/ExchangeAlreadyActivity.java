@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,10 +108,10 @@ public class ExchangeAlreadyActivity extends BaseFragment implements ExchangeAll
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*Intent intent = new Intent(getActivity(),ExchangeGiftInfoActivity.class);
-                intent.putExtra("flag",false);
-                intent.putExtra("gift",new Gson().toJson(giftList.get(position)));
-                startActivity(intent);*/
+                Intent intent = new Intent(getActivity(),ExchangeAlreadyGiftDetail.class);
+//                intent.putExtra("flag",false);
+                intent.putExtra("giftSend",new Gson().toJson(giftSendsList.get(position)));
+                startActivity(intent);
 
             }
         });

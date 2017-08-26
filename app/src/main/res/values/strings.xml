@@ -20,7 +20,7 @@
     <string name="error_state_record">正在录音中，请先停止录音</string>
     <string name="error_unknown">无法识别的错误</string>
 
-     <string name="argument_empty">参数不完整</string>
+    <string name="argument_empty">参数不完整</string>
     <string name="phone_format_error">手机号格式不正确</string>
     <string name="http_network_disconnect">网络连接错误</string>
     <string name="server_error">服务器错误</string>
