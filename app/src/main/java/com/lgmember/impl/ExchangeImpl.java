@@ -1,13 +1,11 @@
 package com.lgmember.impl;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.lgmember.api.HttpApi;
 import com.lgmember.bean.ExchangeGiftResultBean;
 import com.lgmember.bean.ExchangeSendGiftResultBean;
 import com.lgmember.bean.GiftDetailResultBean;
-import com.lgmember.bean.HttpResultBean;
 import com.lgmember.business.score.ExchangeAllGiftBusiness;
 import com.lgmember.business.score.ExchangeGiftBusiness;
 import com.lgmember.business.score.ExchangeGiftInfoBusiness;

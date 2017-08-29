@@ -6,6 +6,7 @@ import com.lgmember.api.HttpHandler;
 import com.lgmember.bean.MessageBean;
 import com.lgmember.impl.ScoresImpl;
 import com.lgmember.model.ScoresInfo;
+import com.lgmember.model.ScoresRule;
 
 import org.json.JSONObject;
 
@@ -30,7 +31,7 @@ public class ScoresRuleBusiness {
     private ScoresRuleHandler handler;
     public interface ScoresRuleHandler extends HttpHandler {
         //当参数为空
-        public void onSuccess(JSONObject jsonObject);
+        public void onSuccess(ScoresRule scoresRule);
     }
     public void setHandler(ScoresRuleHandler handler){
         this.handler = handler;

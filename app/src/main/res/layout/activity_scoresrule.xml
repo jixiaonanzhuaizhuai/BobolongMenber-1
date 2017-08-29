@@ -532,6 +532,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <Button
+        android:id="@+id/upgradeBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="积分升级"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_margin="15dp"
+        android:textColor="#eeeeee"
+        android:background="@drawable/login_btn_bg"
+        />
 
 </LinearLayout>
 </ScrollView>

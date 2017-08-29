@@ -52,6 +52,9 @@ public class Common {
     public static String URL_EDIT_MEMBER_MESSAGE = URL_BASE+"profile-update";
     //积分规则
     public static String URL_SCORES_RULE = URL_BASE+"point/rule";
+   //积分升级
+   public static String URL_SCORES_UPGRADE = URL_BASE+"member/upgrade";
+
     //历史积分
     public static String URL_HISTORY_SCORES = URL_BASE+"point/history";
     //积分消息

@@ -5,11 +5,14 @@ import android.util.Log;
 
 import com.lgmember.api.HttpApi;
 import com.lgmember.bean.HistoryScoresBean;
+import com.lgmember.bean.HttpResultBean;
 import com.lgmember.bean.MemberResultBean;
 import com.lgmember.bean.ScoresInfoResultBean;
+import com.lgmember.bean.ScoresRuleResultBean;
 import com.lgmember.business.score.HistoryScoresBusiness;
 import com.lgmember.business.score.ScoresInfoBusiness;
 import com.lgmember.business.score.ScoresRuleBusiness;
+import com.lgmember.business.score.UpgradeScoresBusiness;
 import com.lgmember.model.Member;
 import com.lgmember.model.ScoresInfo;
 import com.lgmember.util.Common;
@@ -23,6 +26,33 @@ import org.json.JSONObject;
 
 public class ScoresImpl extends HttpApi {
 
+    public void upgradeScores(final UpgradeScoresBusiness.UpgradeScoresHandler handler, Context context){
+        //判断没有网络应该如何处理
+        if (!app.isNetWorkEnable(context)) {
+            handler.onNetworkDisconnect();
+        }
+        MyOkHttp mMyOkhttp = new MyOkHttp(okHttpClient());
+        mMyOkhttp.post()
+                .url(Common.URL_SCORES_UPGRADE)
+                .tag(this)
+                .enqueue(new JsonResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, JSONObject response) {
+                        HttpResultBean httpResultBean = JsonUtil.parseJsonWithGson(response.toString(),HttpResultBean.class);
+                        int code = httpResultBean.getCode();
+                        if (code == 0){
+                            handler.onSuccess();
+                        }else {
+                            handler.onError(code);
+                        }
+                    }
+                    @Override
+                    public void onFailure(int statusCode, String error_msg) {
+                        handler.onFailed(statusCode,error_msg);
+                    }
+                });
+    }
+
     public void getScoresRule(final ScoresRuleBusiness.ScoresRuleHandler handler, Context context){
         //判断没有网络应该如何处理
         if (!app.isNetWorkEnable(context)) {
@@ -35,8 +65,13 @@ public class ScoresImpl extends HttpApi {
                 .enqueue(new JsonResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, JSONObject response) {
-                       handler.onSuccess(response);
-
+                        ScoresRuleResultBean scoresRuleResultBean = JsonUtil.parseJsonWithGson(response.toString(),ScoresRuleResultBean.class);
+                        int code = scoresRuleResultBean.getCode();
+                        if (code == 0){
+                            handler.onSuccess(scoresRuleResultBean.getData());
+                        }else {
+                            handler.onError(code);
+                        }
                     }
                     @Override
                     public void onFailure(int statusCode, String error_msg) {
