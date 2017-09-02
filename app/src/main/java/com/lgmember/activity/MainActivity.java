@@ -42,6 +42,7 @@ import com.lgmember.activity.message.MyMessageActivity;
 import com.lgmember.activity.person.CertificationActivity;
 import com.lgmember.activity.person.EditPersonalActivity;
 import com.lgmember.activity.person.PersonalAllActivity;
+import com.lgmember.activity.person.PersonalAllActivity1;
 import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.activity.project.ProjectMessageManageActivity;
 import com.lgmember.activity.score.ExchangeScoresActivity;
@@ -523,7 +524,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.personal:
-                        startIntent(PersonalAllActivity.class);
+                        startIntent(PersonalAllActivity1.class);
                         return true;
                     case R.id.activity:
                     	startIntent(ProjectMessageManageActivity.class);

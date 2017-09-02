@@ -70,6 +70,9 @@ dependencies {
     compile 'me.rawnhwang.library:smart-android-widgets:1.0.0'/*下拉、上拉刷新页面*/
     compile 'com.github.yuzhiqiang1993:zxing:1.5'
     compile 'liji.library.dev:citypickerview:1.1.0'/*城市三级列表*/
+    /*照相takephoto  兼容6.0版本 ，7.0 版本*/
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
 
 
