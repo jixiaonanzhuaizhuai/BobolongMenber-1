@@ -1,24 +1,21 @@
 package com.lgmember.activity.score;
 
-import android.app.TabActivity;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.lgmember.activity.R;
-import com.lgmember.view.TopBarView;
 
 
-public class MyScoresActivity extends FragmentActivity implements TopBarView.onTitleBarClickListener {
+public class MyScoresActivity extends FragmentActivity {
 
-	private TopBarView topBar;
+
 
 	// 定义FragmentTabHost对象
 	private FragmentTabHost mTabHost;
@@ -50,8 +47,7 @@ public class MyScoresActivity extends FragmentActivity implements TopBarView.onT
 	 */
 	private void initView() {
 
-		topBar = (TopBarView)findViewById(R.id.topbar);
-		topBar.setClickListener(this);
+
 		// 实例化布局对象
 		layoutInflater = LayoutInflater.from(this);
 
@@ -88,15 +84,5 @@ public class MyScoresActivity extends FragmentActivity implements TopBarView.onT
 		textView.setText(mTextviewArray[index]);
 
 		return view;
-	}
-
-	@Override
-	public void onBackClick() {
-		finish();
-	}
-
-	@Override
-	public void onRightClick() {
-
 	}
 	}

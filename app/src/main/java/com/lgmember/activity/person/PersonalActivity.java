@@ -18,9 +18,9 @@ import com.lgmember.view.TopBarView.onTitleBarClickListener;
 public class PersonalActivity extends BaseActivity implements onTitleBarClickListener,MemberMessageBusiness.MemberMessageResulHandler{
 
 	private TopBarView topbar;
-	private TextView tv_name,tv_idno,tv_mobile,tv_gender,tv_addr,tv_company,tv_job_title,tv_nation, tv_source,tv_create_time,tv_education,tv_month_income,tv_month_outcome,tv_level, tv_authorized,tv_point, tv_card_no;
+	private TextView tv_name,tv_idno,tv_mobile,tv_gender,tv_addr,tv_company,tv_job_title,tv_nation, tv_source,tv_create_time,tv_education,tv_month_income,tv_month_outcome,tv_level, tv_authorized,tv_point, tv_card_no,tv_emergency_call;
 
-	private LinearLayout ll_name,ll_idno,ll_mobile,ll_gender,ll_addr,ll_company,ll_job_title,ll_nation, ll_source,ll_create_time,ll_education,ll_month_income,ll_month_outcome,ll_level, ll_authorized,ll_point, ll_card_no;
+	private LinearLayout ll_name,ll_idno,ll_mobile,ll_gender,ll_addr,ll_company,ll_job_title,ll_nation, ll_source,ll_create_time,ll_education,ll_month_income,ll_month_outcome,ll_level, ll_authorized,ll_point, ll_card_no,ll_emergency_call;
 
 
 
@@ -60,6 +60,7 @@ public class PersonalActivity extends BaseActivity implements onTitleBarClickLis
 		tv_authorized = (TextView)findViewById(R.id.tv_authorized);
 		tv_point = (TextView)findViewById(R.id.tv_point);
 		tv_card_no = (TextView)findViewById(R.id.tv_card_no);
+		tv_emergency_call = (TextView)findViewById(R.id.tv_emergency_call);
 
 		ll_name = (LinearLayout) findViewById(R.id.ll_name);
 		ll_idno = (LinearLayout)findViewById(R.id.ll_idno);
@@ -78,6 +79,7 @@ public class PersonalActivity extends BaseActivity implements onTitleBarClickLis
 		ll_authorized = (LinearLayout)findViewById(R.id.ll_authorized);
 		ll_point = (LinearLayout)findViewById(R.id.ll_point);
 		ll_card_no = (LinearLayout)findViewById(R.id.ll_card_no);
+		ll_emergency_call = (LinearLayout)findViewById(R.id.ll_emergency_call);
 
 	}
 
@@ -102,6 +104,7 @@ public class PersonalActivity extends BaseActivity implements onTitleBarClickLis
 		empty2hide(StringUtil.authorized2String(member.getAuthorized()),ll_authorized,tv_authorized);
 		empty2hide(""+member.getPoint(),ll_point,tv_point);
 		empty2hide(member.getCard_no(),ll_card_no,tv_card_no);
+		empty2hide(member.getEmergency_call(),ll_emergency_call,tv_emergency_call);
 	}
 
 	private void empty2hide(String str,LinearLayout ll,TextView tv) {

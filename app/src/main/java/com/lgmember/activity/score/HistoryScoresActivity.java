@@ -24,6 +24,7 @@ import com.lgmember.bean.HistoryScoresBean;
 import com.lgmember.business.score.HistoryScoresBusiness;
 import com.lgmember.model.HistoryScores;
 import com.lgmember.util.StringUtil;
+import com.lgmember.view.TopBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ import me.hwang.widgets.SmartPullableLayout;
  * Created by Yanan_Wu on 2016/12/19.
  */
 
-public class HistoryScoresActivity extends BaseFragment implements HistoryScoresBusiness.HistoryScoresResultHandler {
+public class HistoryScoresActivity extends BaseFragment implements HistoryScoresBusiness.HistoryScoresResultHandler,TopBarView.onTitleBarClickListener {
 
     private LinearLayout ll_loading;
     private ProgressBar progressBar;
@@ -44,6 +45,8 @@ public class HistoryScoresActivity extends BaseFragment implements HistoryScores
     private int pageSize = 5;
     private int total;
     private boolean isLoading;
+
+    private TopBarView topBar;
 
     private List<HistoryScores> historyScoresList = new ArrayList<HistoryScores>();
     private HistoryScoresListAdapter adapter;
@@ -95,6 +98,10 @@ public class HistoryScoresActivity extends BaseFragment implements HistoryScores
     }
 
     public void init(View view) {
+
+        topBar = (TopBarView)view.findViewById(R.id.topbar);
+        topBar.setClickListener(this);
+
         listView = (ListView) view.findViewById(R.id.lv_history_scores);
         ll_loading = (LinearLayout) view.findViewById(R.id.ll_loading);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar1);
@@ -174,5 +181,15 @@ public class HistoryScoresActivity extends BaseFragment implements HistoryScores
             adapter.notifyDataSetChanged();
             isLoading = false;
         }
+    }
+
+    @Override
+    public void onBackClick() {
+        getActivity().finish();
+    }
+
+    @Override
+    public void onRightClick() {
+
     }
 }

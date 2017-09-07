@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lgmember.activity.person.CertificationActivity;
@@ -33,6 +36,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,Re
 	private Button requestCodeBtn, regBtn;
 	private TimeCount timeCount;
 	private String phoneTxt,codeTxt,sms_capt_tokenTxt;
+	private CheckBox cb_user_agreenment;
+	private TextView tv_agreenment;
 	private String TAG = "------>RegisterActivity";
 
 	@Override
@@ -59,9 +64,11 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,Re
 		phoneEdt = (EditText) findViewById(R.id.phoneEdt);
 		codeEdt = (EditText) findViewById(R.id.codeEdt);
 		requestCodeBtn = (Button) findViewById(R.id.requestCodeBtn);
+		cb_user_agreenment = (CheckBox)findViewById(R.id.cb_user_agreement);
+		tv_agreenment = (TextView)findViewById(R.id.tv_agreenment);
+		tv_agreenment.setOnClickListener(this);
 
 		timeCount = new TimeCount(60000,1000);
-
 		regBtn = (Button) findViewById(R.id.regBtn);
 		requestCodeBtn.setOnClickListener(this);
 		regBtn.setOnClickListener(this);
@@ -76,7 +83,14 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,Re
 				}
 				break;
 			case R.id.regBtn:
-				register();
+				if (cb_user_agreenment.isChecked()){
+					register();
+				}else {
+					showToast("请先同意播播龙用户协议！");
+				}
+				break;
+			case R.id.tv_agreenment:
+				startIntent(UserAgreementActivity.class);
 				break;
 		}
 	}

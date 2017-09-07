@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,8 +35,8 @@ public class EditPersonalActivity extends BaseActivity implements
 		TopBarView.onTitleBarClickListener,SmsCodeBusiness.GetCodeResultHandler,SmsCodeIfCorrectBusiness.ValidateSmsCodeResultHandler {
 
 	private TopBarView topBar;
-	private EditText edt_mobile,edt_addr,edt_addr_info,edt_company,edt_job_title,
-					edt_month_income,edt_month_outcome;
+	private EditText edt_mobile,edt_addr,edt_company,edt_job_title,
+					edt_month_income,edt_month_outcome,edt_emergency_call;
 	private Spinner sp_education;
 	private int nation,education;
 
@@ -92,9 +93,9 @@ public class EditPersonalActivity extends BaseActivity implements
 
 
 		edt_mobile = (EditText)findViewById(R.id.edt_mobile);
+		edt_emergency_call = (EditText)findViewById(R.id.edt_emergency_call) ;
 		edt_addr = (EditText)findViewById(R.id.edt_addr);
 		edt_addr.setInputType(InputType.TYPE_NULL);
-		edt_addr_info = (EditText)findViewById(R.id.edt_addr_info);
 		edt_company = (EditText)findViewById(R.id.edt_company);
 		edt_job_title = (EditText)findViewById(R.id.edt_job_title);
 		edt_month_income = (EditText)findViewById(R.id.edt_month_income);
@@ -133,25 +134,19 @@ public class EditPersonalActivity extends BaseActivity implements
 	}
 
 	private void submitData() {
-		String addr = getText(edt_addr)+getText(edt_addr_info);
-		String mobile = getText(edt_mobile);
-		String company = getText(edt_company);
-		String job_title = getText(edt_job_title);
-		int month_income = Integer.parseInt(getText(edt_month_income));
-		int month_outcome = Integer.parseInt(getText(edt_month_outcome));
-
 		Member member = new Member();
 		member.setName(name);
 		member.setIdno(idno);
 		member.setGender(gender);
-		member.setMobile(mobile);
-		member.setAddr(addr);
-		member.setCompany(company);
-		member.setJob_title(job_title);
+		member.setMobile(getText(edt_mobile));
+		member.setEmergency_call(getText(edt_emergency_call));
+		member.setAddr(getText(edt_addr));
+		member.setCompany(getText(edt_company));
+		member.setJob_title(getText(edt_job_title));
 		member.setNation(nation);
 		member.setEducation(education);
-		member.setMonth_income(month_income);
-		member.setMonth_outcome(month_outcome);
+		member.setMonth_income(Integer.parseInt(getText(edt_month_income)));
+		member.setMonth_outcome(Integer.parseInt(getText(edt_month_outcome)));
 
 		EditMemberMsgBusiness editMemberMsgBusiness = new EditMemberMsgBusiness(context,member);
 		editMemberMsgBusiness.setHandler(this);
@@ -163,6 +158,7 @@ public class EditPersonalActivity extends BaseActivity implements
 	public void onEditMemberMsgSuccess() {
 		showToast("操作成功");
 		startIntent(PersonalActivity.class);
+		finish();
 	}
 
 	@Override
@@ -180,6 +176,10 @@ public class EditPersonalActivity extends BaseActivity implements
 		sp_education.setSelection(member.getEducation());
 		edt_month_income.setText(member.getMonth_income()+"");
 		edt_month_outcome.setText(member.getMonth_outcome()+"");
+		if (!TextUtils.isEmpty(member.getEmergency_call())){
+			edt_emergency_call.setText(member.getEmergency_call()+"");
+		}
+
 	}
 
 

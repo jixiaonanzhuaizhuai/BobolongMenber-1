@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.lgmember.activity.BaseActivity;
 import com.lgmember.activity.BaseFragment;
 import com.lgmember.activity.R;
 import com.lgmember.business.message.MemberMessageBusiness;
@@ -17,24 +15,23 @@ import com.lgmember.business.score.ScoresRuleBusiness;
 import com.lgmember.business.score.UpgradeScoresBusiness;
 import com.lgmember.model.Member;
 import com.lgmember.model.ScoresRule;
-import com.lgmember.util.StringUtil;
+import com.lgmember.view.TopBarView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 /**
  * Created by Yanan_Wu on 2016/12/19.
  */
 
-public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusiness.ScoresRuleHandler ,View.OnClickListener ,MemberMessageBusiness.MemberMessageResulHandler,UpgradeScoresBusiness.UpgradeScoresHandler{
+public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusiness.ScoresRuleHandler  ,MemberMessageBusiness.MemberMessageResulHandler,UpgradeScoresBusiness.UpgradeScoresHandler,TopBarView.onTitleBarClickListener{
 
     private TextView rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,rule9,rule10,rule11,rule12
             ,rule13,rule14,rule15,rule16,rule17,rule18,rule19,rule20,rule21,rule22,rule23,rule24,rule25,rule26
             ,rule27,rule28,rule29,rule30,rule31;
     private ScoresRule scoresReluLocal;
     private int authorized,level,point,point_after;
-    private Button upgradeBtn;
+
+    private TopBarView topBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +50,10 @@ public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusine
     }
 
     public void initView(View view){
+
+        topBar = (TopBarView)view.findViewById(R.id.topbar);
+        topBar.setClickListener(this);
+
         rule1 = (TextView)view.findViewById(R.id.rule1);
         rule2 = (TextView)view.findViewById(R.id.rule2);
         rule3 = (TextView)view.findViewById(R.id.rule3);
@@ -84,9 +85,6 @@ public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusine
         rule29 = (TextView)view.findViewById(R.id.rule29);
         rule30 = (TextView)view.findViewById(R.id.rule30);
         rule31 = (TextView)view.findViewById(R.id.rule31);
-
-        upgradeBtn = (Button)view.findViewById(R.id.upgradeBtn);
-        upgradeBtn.setOnClickListener(this);
     }
 
     private void getMemberData() {
@@ -147,50 +145,6 @@ public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusine
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.upgradeBtn:
-                if (authorized == 0){
-                    showToast("当前会员未实名，无法升级！");
-                    return;
-                }
-                if (level == 1 &&
-                        point < scoresReluLocal.getRedup()){
-                    showToast("当前积分不足，无法升级到银卡！");
-                    return;
-                }
-                if (level == 2 &&
-                        point < scoresReluLocal.getAgup()){
-                    showToast("当前积分不足，无法升级到金卡！");
-                    return;
-                }
-                if (level == 3 &&
-                        point < scoresReluLocal.getAuup()){
-                    showToast("当前积分不足，无法升级到钻石卡！");
-                    return;
-                }
-                if (level == 4 ){
-                    showToast("目前为钻石卡(最高级别)，无法升级！");
-                    return;
-                }
-                if (level == 1){
-                    point_after = point - scoresReluLocal.getRedcut();
-                }
-                if (level == 2){
-                    point_after = point - scoresReluLocal.getAgcut();
-                }
-                if (level == 3){
-                    point_after = point - scoresReluLocal.getAucut();
-                }
-                upgradeScores();
-
-                break;
-        }
-    }
-
-
-
-    @Override
     public void onSuccess(Member member) {
         authorized = member.getAuthorized();
         level = member.getLevel();
@@ -200,5 +154,51 @@ public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusine
     @Override
     public void onSuccess() {
         showToast("恭喜您，升级成功");
+    }
+
+    @Override
+    public void onBackClick() {
+        getActivity().finish();
+    }
+
+    @Override
+    public void onRightClick() {
+        upgradeScoresBtn();
+    }
+
+    private void upgradeScoresBtn() {
+        if (authorized == 0){
+            showToast("当前会员未实名，无法升级！");
+            return;
+        }
+        if (level == 1 &&
+                point < scoresReluLocal.getRedup()){
+            showToast("当前积分不足，无法升级到银卡！");
+            return;
+        }
+        if (level == 2 &&
+                point < scoresReluLocal.getAgup()){
+            showToast("当前积分不足，无法升级到金卡！");
+            return;
+        }
+        if (level == 3 &&
+                point < scoresReluLocal.getAuup()){
+            showToast("当前积分不足，无法升级到钻石卡！");
+            return;
+        }
+        if (level == 4 ){
+            showToast("目前为钻石卡(最高级别)，无法升级！");
+            return;
+        }
+        if (level == 1){
+            point_after = point - scoresReluLocal.getRedcut();
+        }
+        if (level == 2){
+            point_after = point - scoresReluLocal.getAgcut();
+        }
+        if (level == 3){
+            point_after = point - scoresReluLocal.getAucut();
+        }
+        upgradeScores();
     }
 }

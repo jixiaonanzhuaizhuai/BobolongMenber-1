@@ -50,5 +50,25 @@
          android:layout_gravity="center_horizontal"
          android:background="@drawable/reg_btn_bg"
          android:text="注册"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <CheckBox
+            android:id="@+id/cb_user_agreement"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="我已阅读并同意"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_agreenment"
+            android:text="《播播龙俱乐部用户协议》"
+            android:textColor="@color/main_lan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>
 

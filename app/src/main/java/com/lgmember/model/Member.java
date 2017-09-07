@@ -29,7 +29,61 @@ public class Member {
     private Boolean black = false;
     private int num_regist = 0;
     private int num_sign = 0;
+    private String emergency_call;
+    private String defined_one;
+    private String defined_two;
+    private String defined_three;
+    private String defined_four;
+    private String defined_five;
     private String  reason;//实名认证消息
+
+    public String getEmergency_call() {
+        return emergency_call;
+    }
+
+    public void setEmergency_call(String emergency_call) {
+        this.emergency_call = emergency_call;
+    }
+
+    public String getDefined_one() {
+        return defined_one;
+    }
+
+    public void setDefined_one(String defined_one) {
+        this.defined_one = defined_one;
+    }
+
+    public String getDefined_two() {
+        return defined_two;
+    }
+
+    public void setDefined_two(String defined_two) {
+        this.defined_two = defined_two;
+    }
+
+    public String getDefined_three() {
+        return defined_three;
+    }
+
+    public void setDefined_three(String defined_three) {
+        this.defined_three = defined_three;
+    }
+
+    public String getDefined_four() {
+        return defined_four;
+    }
+
+    public void setDefined_four(String defined_four) {
+        this.defined_four = defined_four;
+    }
+
+    public String getDefined_five() {
+        return defined_five;
+    }
+
+    public void setDefined_five(String defined_five) {
+        this.defined_five = defined_five;
+    }
 
     public String getReason() {
         return reason;

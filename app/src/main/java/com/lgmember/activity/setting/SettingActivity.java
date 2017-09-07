@@ -42,10 +42,7 @@ public class SettingActivity extends BaseActivity implements TopBarView.onTitleB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting1);
-        // com.getui.demo.DemoPushService 为第三方自定义推送服务
-        PushManager.getInstance().initialize(this.getApplicationContext(), DemoPushService.class);
-        // com.getui.demo.DemoIntentService 为第三方自定义的推送服务事件接收类
-        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);
+
         init();
     }
 
@@ -75,6 +72,14 @@ public class SettingActivity extends BaseActivity implements TopBarView.onTitleB
         t_btn_sign.setOnCheckedChangeListener(this);
         t_btn_tuisong.setChecked(if_tuisong);
         t_btn_sign.setChecked(if_auto_sign);
+        if (t_btn_tuisong.isChecked()){
+            // com.getui.demo.DemoPushService 为第三方自定义推送服务
+            PushManager.getInstance().initialize(this.getApplicationContext(),
+                    DemoPushService.class);
+            // com.getui.demo.DemoIntentService 为第三方自定义的推送服务事件接收类
+            PushManager.getInstance().registerPushIntentService(this
+                    .getApplicationContext(), DemoIntentService.class);
+        }
 
         tv_cache_size = (TextView)findViewById(R.id.tv_cache_size);
         cacheSize = GlideCacheUtil.getInstance().getCacheSize(getApplicationContext());

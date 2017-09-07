@@ -75,6 +75,7 @@ public class MemberImpl extends HttpApi {
             jsonObject.put("education",member.getEducation());
             jsonObject.put("month_income",member.getMonth_income());
             jsonObject.put("month_outcome",member.getMonth_outcome());
+            jsonObject.put("emergency_call",member.getEmergency_call());
         } catch (JSONException e) {
             e.printStackTrace();
         }
