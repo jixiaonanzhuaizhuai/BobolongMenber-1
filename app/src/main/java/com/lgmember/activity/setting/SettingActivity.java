@@ -36,7 +36,7 @@ public class SettingActivity extends BaseActivity implements TopBarView.onTitleB
     private TextView tv_cache_size;
     private String cacheSize;
     private SharedPreferences sp,sharedPreferences;
-    private RelativeLayout rl_clear_cache,rl_about_us,rl_modifyPwd,rl_exit_login;
+    private RelativeLayout rl_clear_cache,rl_about_us,rl_modifyPwd,rl_exit_login,rl_help;
     private boolean if_tuisong,if_auto_sign;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +55,10 @@ public class SettingActivity extends BaseActivity implements TopBarView.onTitleB
 
         rl_modifyPwd = (RelativeLayout)findViewById(R.id.rl_modifyPwd);
         rl_exit_login = (RelativeLayout)findViewById(R.id.rl_exit_login);
+        rl_help = (RelativeLayout)findViewById(R.id.rl_help);
         rl_exit_login.setOnClickListener(this);
         rl_modifyPwd.setOnClickListener(this);
+        rl_help.setOnClickListener(this);
 
         rl_clear_cache = (RelativeLayout)findViewById(R.id.rl_clear_cache);
         rl_clear_cache.setOnClickListener(this);
@@ -116,6 +118,9 @@ public class SettingActivity extends BaseActivity implements TopBarView.onTitleB
                 break;
             case R.id.rl_modifyPwd:
                 startIntent(ModifyPwdActivity.class);
+                break;
+            case R.id.rl_help:
+                startIntent(HelpCenterActivity.class);
                 break;
             case R.id.rl_exit_login:
                 //清除cookie

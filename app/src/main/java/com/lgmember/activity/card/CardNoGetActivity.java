@@ -130,7 +130,6 @@ public class CardNoGetActivity extends BaseFragment implements CardListBusiness.
     public void click(View v) {
 
         //getCard();
-
         Toast.makeText(getActivity(),"领取",Toast.LENGTH_LONG).show();
     }
 

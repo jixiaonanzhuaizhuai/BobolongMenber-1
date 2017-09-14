@@ -81,6 +81,9 @@
         <activity android:name=".BaseActivity1"/>
         <activity android:name=".score.ExchangeAlreadyGiftDetail"/>
         <activity android:name=".UserAgreementActivity"/>
+        <activity android:name=".setting.HelpCenterActivity"/>
+        <activity android:name=".project.ClubProjectListActivity"/>
+        <activity android:name=".project.ClubActivityAllListActivity"/>
 
         <service
             android:name="com.lgmember.service.DemoPushService"

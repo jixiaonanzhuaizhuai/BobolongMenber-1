@@ -231,6 +231,44 @@
 		android:layout_width="fill_parent"
 		android:layout_height="1dp"
 		android:background="#cccccc" />
+
+	<TextView
+		android:id="@+id/textView7"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:textSize="20sp"
+		android:text="我的俱乐部" />
+
+	<com.stx.xhb.xbanner.XBanner
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:id="@+id/myClubBanner"
+		android:layout_width="match_parent"
+		android:layout_height="180dp"
+		app:AutoPlayTime="3000"
+		app:isAutoPlay="true"
+		app:pointsContainerBackground="#44aaaaaa"
+		app:pointNormal="@drawable/shape_noraml"
+		app:pointSelect="@drawable/shape_selected"
+		app:pointsPosition="RIGHT"
+		app:tipTextSize="12sp"
+		app:isShowNumberIndicator="true"
+		app:isShowIndicatorOnlyOne="true"
+		app:pageChangeDuration="800"/>
+	<TextView
+		android:id="@+id/cmoreactivity"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="18sp"
+		android:gravity="right"
+		android:padding="5dp"
+		android:text="更多活动>>" />
+	<View
+		android:id="@+id/view6"
+		android:layout_width="fill_parent"
+		android:layout_height="1dp"
+		android:background="#cccccc" />
+
 	<TextView
 		android:id="@+id/textView4"
 		android:layout_width="fill_parent"

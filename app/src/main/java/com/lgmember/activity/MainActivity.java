@@ -39,12 +39,15 @@ import com.lgmember.activity.message.MyMessageActivity;
 import com.lgmember.activity.person.CertificationActivity;
 import com.lgmember.activity.person.EditPersonalActivity;
 import com.lgmember.activity.person.PersonalAllActivity1;
+import com.lgmember.activity.project.ClubActivityAllListActivity;
+import com.lgmember.activity.project.ClubProjectListActivity;
 import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.activity.project.ProjectMessageManageActivity;
 import com.lgmember.activity.score.ExchangeScoresActivity;
 import com.lgmember.activity.score.MyScoresActivity;
 import com.lgmember.activity.setting.SettingActivity;
 import com.lgmember.adapter.TagsListAdapter;
+import com.lgmember.bean.ClubListResultBean;
 import com.lgmember.bean.ProjectMessageBean;
 import com.lgmember.bean.TagsListResultBean;
 import com.lgmember.business.ApkBusiness;
@@ -52,8 +55,10 @@ import com.lgmember.business.ShowNetworkImgBusiness;
 import com.lgmember.business.VersionBusiness;
 import com.lgmember.business.message.MemberMessageBusiness;
 import com.lgmember.business.message.RemindNumBusiness;
+import com.lgmember.business.project.MyClubListBusiness;
 import com.lgmember.business.project.ProjectMessageListBusiness;
 import com.lgmember.business.project.TagListBusiness;
+import com.lgmember.model.Club;
 import com.lgmember.model.Member;
 import com.lgmember.model.ProjectMessage;
 import com.lgmember.model.Tag;
@@ -82,11 +87,12 @@ import me.hwang.widgets.SmartPullableLayout;
 
 public class MainActivity extends BaseActivity implements OnClickListener,
 		ProjectMessageListBusiness.ProjectMessageListResultHandler,
-		MemberMessageBusiness.MemberMessageResulHandler,ShowNetworkImgBusiness.ShowNetworkImgResulHandler,RemindNumBusiness.RemindNumResultHandler,TagListBusiness.TagListResultHandler,VersionBusiness.VersionResulHandler,ApkBusiness.ApkResulHandler{
+		MemberMessageBusiness.MemberMessageResulHandler,ShowNetworkImgBusiness.ShowNetworkImgResulHandler,RemindNumBusiness.RemindNumResultHandler,TagListBusiness.TagListResultHandler,VersionBusiness.VersionResulHandler,ApkBusiness.ApkResulHandler,MyClubListBusiness.MyClubListResulHandler{
     private TextView moreInfo,menuTxt,sexTxt,ageTxt,nationTxt,birthdayTxt,editInfo,moreactivity,rmoreactivity,messageBtn,signBtn;
 	private TextView tv_name,tv_card_no,tv_point,tv_level,tv_gender,tv_age,tv_nation,tv_birthday;
 	private ImageView iv_photo;
-	private XBanner xRecommendBanner,allBanner;
+	private XBanner xRecommendBanner,allBanner,myClubBanner;
+	private ArrayList<String> myClubImages ;
 	private ArrayList<String> allImages ;
 	private ArrayList<String> recommendImages;
     private boolean isButton = true;
@@ -120,6 +126,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private RecyclerView recyclerView;
 	private TagsListAdapter adapter;
 
+	private List<Club> myClubList;
+	List<String> myClubTitleList;
 	private List<ProjectMessage> projectMessageList;
 	List<String> allTitleList;
 	private List<ProjectMessage> hotProjectMessageList;
@@ -170,6 +178,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 		getUnreadRemindNum();
 		getMemberMsg();
+		getMyClubList();
 		getProjectMessage();
 		getHotProjectMessage();
 		getTagsList();
@@ -177,7 +186,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 }
 
 	private void initView() {
-
+		myClubList = new ArrayList<>();
+		myClubTitleList = new ArrayList<>();
 		projectMessageList = new ArrayList<>();
 		allTitleList = new ArrayList<>();
 		hotProjectMessageList = new ArrayList<>();
@@ -191,6 +201,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 		tagList = new ArrayList<>();
 		//获取标签列表数据
+		myClubImages = new ArrayList<>();
 		allImages = new ArrayList<>();
 		recommendImages = new ArrayList<>();
 		iv_photo = (ImageView)findViewById(R.id.touxiang);
@@ -217,6 +228,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 		allBanner = (XBanner) findViewById(R.id.allBanner);
 		xRecommendBanner = (XBanner) findViewById(R.id.recommendBanner);
+		myClubBanner = (XBanner)findViewById(R.id.myClubBanner);
+		initMyClubBanner();
 		initAllBanner();
 		initRecommendBanner();
 
@@ -354,6 +367,24 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		});
 	}
 
+	private void initMyClubBanner(){
+		myClubBanner.setmAdapter(new XBanner.XBannerAdapter() {
+			@Override
+			public void loadBanner(XBanner banner, Object model, View view, int position) {
+				Glide.with(MainActivity.this).load(myClubImages.get(position)).into((ImageView) view);
+			}});
+		myClubBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
+			@Override
+			public void onItemClick(XBanner banner, int position) {
+				Club club = myClubList.get(position);
+				Intent intent = new Intent(MainActivity.this,ClubActivityAllListActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putInt("id",club.getId());
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
+	}
 	private void getServiceVersion() {
 		VersionBusiness versionBusiness = new VersionBusiness(context);
 		versionBusiness.setHandler(this);
@@ -388,7 +419,14 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		remindNumBusiness.setHandler(this);
 		remindNumBusiness.getRemindNum();
 	}
-	//即将参与的活动
+
+
+	private void getMyClubList() {
+		MyClubListBusiness myClubListBusiness = new MyClubListBusiness(context);
+		myClubListBusiness.setHandler(this);
+		myClubListBusiness.myClubList();
+
+	}
 	private void getProjectMessage() {
 		int tag = 0;
 		ProjectMessageListBusiness projectMessageListBusiness = new ProjectMessageListBusiness(context, pageNo, pageSize,tag);
@@ -525,6 +563,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                     case R.id.activity:
                     	startIntent(ProjectMessageManageActivity.class);
                         return true;
+					case R.id.club_activity:
+						startIntent(ClubProjectListActivity.class);
+						return true;
                      case R.id.scores:
 						startIntent(MyScoresActivity.class);
 						return true;
@@ -570,6 +611,24 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		TagListBusiness tagListBusiness = new TagListBusiness(context,tab);
 		tagListBusiness.setHandler(this);
 		tagListBusiness.getAllTagList();
+
+	}
+	@Override
+	public void onSuccess(ClubListResultBean clubListResultBean) {
+		myClubImages.clear();
+		myClubTitleList.clear();
+		myClubList.clear();
+
+		myClubList = clubListResultBean.getData();
+		if (myClubList.size() != 0){
+			for (int i=0;i<myClubList.size();i++){
+				String pictureUrl = Common.URL_IMG_BASE+myClubList.get(i).getPicture();
+				myClubImages.add(pictureUrl);
+				myClubTitleList.add(myClubList.get(i).getName());
+			}
+			myClubBanner.setData(myClubImages,myClubTitleList);
+		}
+
 
 	}
 
@@ -864,5 +923,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		builder.show();
 
 	}
+
 
 }

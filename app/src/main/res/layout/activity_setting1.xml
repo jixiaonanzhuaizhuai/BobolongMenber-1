@@ -182,6 +182,37 @@
     <include layout="@layout/common_line"></include>
 
     <RelativeLayout
+        android:id="@+id/rl_help"
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:layout_height="55dp">
+        <ImageView
+            android:id="@+id/iv_help"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/help"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_help"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="帮助说明"/>
+        <ImageView
+            android:layout_width="20dip"
+            android:layout_height="30dip"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/next_icon"/>
+    </RelativeLayout>
+    <include layout="@layout/common_line"></include>
+
+    <RelativeLayout
         android:id="@+id/rl_about_us"
         android:layout_width="match_parent"
         android:background="#ffffff"
@@ -211,6 +242,8 @@
             android:src="@mipmap/next_icon"/>
     </RelativeLayout>
     <include layout="@layout/common_line"></include>
+
+
 
 </LinearLayout>
 
