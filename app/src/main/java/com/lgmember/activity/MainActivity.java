@@ -41,6 +41,7 @@ import com.lgmember.activity.person.EditPersonalActivity;
 import com.lgmember.activity.person.PersonalAllActivity1;
 import com.lgmember.activity.project.ClubActivityAllListActivity;
 import com.lgmember.activity.project.ClubProjectListActivity;
+import com.lgmember.activity.project.MyClubProjectListActivity;
 import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.activity.project.ProjectMessageManageActivity;
 import com.lgmember.activity.score.ExchangeScoresActivity;
@@ -88,7 +89,7 @@ import me.hwang.widgets.SmartPullableLayout;
 public class MainActivity extends BaseActivity implements OnClickListener,
 		ProjectMessageListBusiness.ProjectMessageListResultHandler,
 		MemberMessageBusiness.MemberMessageResulHandler,ShowNetworkImgBusiness.ShowNetworkImgResulHandler,RemindNumBusiness.RemindNumResultHandler,TagListBusiness.TagListResultHandler,VersionBusiness.VersionResulHandler,ApkBusiness.ApkResulHandler,MyClubListBusiness.MyClubListResulHandler{
-    private TextView moreInfo,menuTxt,sexTxt,ageTxt,nationTxt,birthdayTxt,editInfo,moreactivity,rmoreactivity,messageBtn,signBtn;
+    private TextView moreInfo,menuTxt,sexTxt,ageTxt,nationTxt,birthdayTxt,editInfo,cmoreactivity,moreactivity,rmoreactivity,messageBtn,signBtn;
 	private TextView tv_name,tv_card_no,tv_point,tv_level,tv_gender,tv_age,tv_nation,tv_birthday;
 	private ImageView iv_photo;
 	private XBanner xRecommendBanner,allBanner,myClubBanner;
@@ -223,6 +224,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		nationTxt = (TextView)findViewById(R.id.nationTxt);
 		birthdayTxt = (TextView)findViewById(R.id.birthdayTxt);
 		editInfo = (TextView)findViewById(R.id.editInfo);
+		cmoreactivity = (TextView)findViewById(R.id.cmoreactivity);
 		moreactivity = (TextView)findViewById(R.id.moreactivity);
 		rmoreactivity = (TextView)findViewById(R.id.rmoreactivity);
 
@@ -238,6 +240,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		signBtn.setOnClickListener(this);
 		editInfo.setOnClickListener(this);
 		moreInfo.setOnClickListener(this);
+		cmoreactivity.setOnClickListener(this);
 		moreactivity.setOnClickListener(this);
 		rmoreactivity.setOnClickListener(this);
 
@@ -467,6 +470,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			break;
 		case R.id.editInfo:
 			startIntent(EditPersonalActivity.class);
+			break;
+		case R.id.cmoreactivity:
+			startIntent(MyClubProjectListActivity.class);
 			break;
 		case R.id.moreactivity:
 			Intent intent = new

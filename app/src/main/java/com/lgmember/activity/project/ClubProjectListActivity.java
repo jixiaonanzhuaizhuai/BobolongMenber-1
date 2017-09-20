@@ -69,7 +69,6 @@ protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_list);
         init();
-
         }
 
 
@@ -96,7 +95,7 @@ private void init() {
         progressBar = (ProgressBar)findViewById(R.id.progressBar1);
         loadDesc = (TextView)findViewById(R.id.tv_loading_desc);
         clubList = new ArrayList<>();
-        adapter = new ClubListAdapter(this,clubList,this);
+        adapter = new ClubListAdapter(this,clubList,this,0);
         lv_club_list.setAdapter(adapter);
 
 

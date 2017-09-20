@@ -104,7 +104,7 @@ public class ClubActivityAllListActivity extends BaseActivity implements TopBarV
                         projectMessageList.get(position);
                 DataLargeHolder.getInstance()
                         .save(projectMessage.getId(),projectMessage);
-                Intent intent = new Intent(ClubActivityAllListActivity.this,ProjectMessageDetailActivity.class);
+                Intent intent = new Intent(ClubActivityAllListActivity.this,ClubProjectMessageDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("id",projectMessage.getId());
                 intent.putExtras(bundle);

@@ -25,25 +25,21 @@ public class JoinActivityBusiness {
 
     // 先验证参数的可发性，再登陆
     public void join() {
-        // 验证参数是否为空
-        if (TextUtils.isEmpty(String.valueOf(project_id))) {
-            if (handler != null) {
-                handler.onArgumentEmpty("活动ID为空");
-            }
-            return;
-        }
-
-
         // 判断活动码是否有效
         projectMessageImpl = new ProjectMessageImpl();
         projectMessageImpl.join(project_id,handler,context);
     }
+    public void clubActivityJoin() {
+        // 判断活动码是否有效
+        projectMessageImpl = new ProjectMessageImpl();
+        projectMessageImpl.clubActivityJoin(project_id,handler,context);
+    }
+
 
     private JoinActivityResulHandler handler;
 
     public interface JoinActivityResulHandler extends HttpHandler {
-        //当参数为空
-        public void onArgumentEmpty(String string);
+
         public void onSuccess(String string);
 
     }

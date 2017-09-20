@@ -29,12 +29,14 @@ public class ClubListAdapter extends BaseAdapter implements View.OnClickListener
 
     private List<Club> clubList;
     private Context context;
+    private int flag;
     private Callback mCallback;
     private LayoutInflater layoutInflater;
 
-    public ClubListAdapter(Context context, List<Club> clubList, Callback callback) {
+    public ClubListAdapter(Context context, List<Club> clubList, Callback callback,int flag) {
         this.context = context;
         this.clubList = clubList;
+        this.flag = flag;
         this.mCallback = callback;
         this.layoutInflater = LayoutInflater.from(context);
     }
@@ -95,14 +97,20 @@ public class ClubListAdapter extends BaseAdapter implements View.OnClickListener
         vh.dep.setText(""+club.getDep());
         vh.create_time.setText(""+club.getCreate_time());
         vh.description.setText(""+club.getDescription());
-        if (club.isAdded()){
+        if (flag == 0){
+            if (club.isAdded()){
+                vh.added.setText("已加入");
+                vh.added.setEnabled(false);
+            }else {
+                vh.added.setText("加入");
+                vh.added.setOnClickListener(this);
+                vh.added.setTag(position);
+            }
+        }else {
             vh.added.setText("已加入");
             vh.added.setEnabled(false);
-        }else {
-            vh.added.setText("加入");
-            vh.added.setOnClickListener(this);
-            vh.added.setTag(position);
         }
+
 
 
         return view;

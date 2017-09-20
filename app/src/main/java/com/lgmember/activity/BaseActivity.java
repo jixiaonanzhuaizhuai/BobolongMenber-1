@@ -68,7 +68,10 @@ public class BaseActivity extends AppCompatActivity {
 	public void onError(int code) {
 		if (code == 1){
 			showLoginDialog();
+		}else {
+			showToast(context.getString(StringUtil.numToErrorState(code)));
 		}
+
 	}
 
 	public void onNetworkDisconnect() {

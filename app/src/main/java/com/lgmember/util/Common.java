@@ -71,6 +71,9 @@ public class Common {
     public static String URL_MY_CLUB_LIST = URL_BASE+"club/my";
    //加入俱乐部
    public static String URL_ADD_CLUB = URL_BASE+"club/member-add";
+
+     //俱乐部下的活动报名
+     public static String URL_CLUB_ACTIVITY_JOIN = URL_BASE+"club-project/check-in2";
     //俱乐部签到
     public static String URL_CLUB_PROJECT_SIGN = URL_BASE+"project2/sign-in";
     //会员活动报名

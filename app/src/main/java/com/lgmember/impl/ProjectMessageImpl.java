@@ -91,6 +91,36 @@ public class ProjectMessageImpl extends HttpApi {
                     }
                 });
     }
+    public void clubActivityJoin(int project_id, final JoinActivityBusiness.JoinActivityResulHandler handler, Context context){
+        //判断没有网络应该如何处理
+        if (!app.isNetWorkEnable(context)) {
+            handler.onNetworkDisconnect();
+        }
+
+        MyOkHttp mMyOkhttp = new MyOkHttp(okHttpClient());
+        mMyOkhttp.get()
+                .url(Common.URL_CLUB_ACTIVITY_JOIN)
+                .addParam("id",String.valueOf(project_id))
+                .tag(this)
+                .enqueue(new JsonResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, JSONObject response) {
+
+                        HttpResultBean httpResultBean = JsonUtil
+                                .parseJsonWithGson(response.toString(),
+                                        HttpResultBean.class);
+                        if (httpResultBean.getCode() == 0){
+                            handler.onSuccess("报名成功");
+                        }else {
+                            handler.onError(httpResultBean.getCode());
+                        }
+                    }
+                    @Override
+                    public void onFailure(int statusCode, String error_msg) {
+                        handler.onFailed(statusCode,error_msg);
+                    }
+                });
+    }
 
     public void getTagsList(int tab, final TagsListBusiness.TagsListResulHandler handler, Context context){
         //判断没有网络应该如何处理

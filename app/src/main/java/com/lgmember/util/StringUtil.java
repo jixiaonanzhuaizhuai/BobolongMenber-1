@@ -484,6 +484,18 @@ public class StringUtil {
         }
         return null;
     }
+    public static int numToErrorState(int code){
+
+        int codeArray[] = {R.string.code_0, R.string.code_1, R.string.code_2, R.string.code_3, R.string.code_4, R.string.code_5, R.string.code_6,
+                R.string.code_7, R.string.code_8, R.string.code_9, R.string.code_10, R.string.code_11};
+        for (int i = 0; i <= codeArray.length; i++) {
+            if (i == code) {
+                return codeArray[i];
+            }
+        }
+        return 0;
+    }
+
     public static String numToGender(boolean b){
 
         if (b){
