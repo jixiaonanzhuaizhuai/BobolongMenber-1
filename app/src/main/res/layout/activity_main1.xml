@@ -255,14 +255,16 @@
 		app:isShowNumberIndicator="true"
 		app:isShowIndicatorOnlyOne="true"
 		app:pageChangeDuration="800"/>
+
 	<TextView
 		android:id="@+id/cmoreactivity"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:textSize="18sp"
 		android:gravity="right"
 		android:padding="5dp"
-		android:text="更多活动>>" />
+		android:text="更多俱乐部>>"
+		android:textSize="18sp" />
+
 	<View
 		android:id="@+id/view6"
 		android:layout_width="fill_parent"
