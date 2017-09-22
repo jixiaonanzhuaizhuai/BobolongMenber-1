@@ -26,14 +26,26 @@ import org.json.JSONObject;
 
 public class ScoresImpl extends HttpApi {
 
-    public void upgradeScores(final UpgradeScoresBusiness.UpgradeScoresHandler handler, Context context){
+    public void upgradeScores(int level,int point_before,int point_after,final UpgradeScoresBusiness.UpgradeScoresHandler handler, Context context){
         //判断没有网络应该如何处理
         if (!app.isNetWorkEnable(context)) {
             handler.onNetworkDisconnect();
         }
+
+        //http post的json数据格式：  {"name": "****","pwd": "******"}
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("level", level);
+            jsonObject.put("point_before", point_before);
+            jsonObject.put("point_after", point_after);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         MyOkHttp mMyOkhttp = new MyOkHttp(okHttpClient());
         mMyOkhttp.post()
                 .url(Common.URL_SCORES_UPGRADE)
+                .jsonParams(jsonObject.toString())
                 .tag(this)
                 .enqueue(new JsonResponseHandler() {
                     @Override
@@ -119,7 +131,6 @@ public class ScoresImpl extends HttpApi {
 
         //http post的json数据格式：  {"name": "****","pwd": "******"}
         final JSONObject jsonObject = new JSONObject();
-        ;
         try {
             jsonObject.put("pageNo", 1);
             jsonObject.put("pageSize", 10);

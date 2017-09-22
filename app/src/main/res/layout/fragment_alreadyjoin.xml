@@ -43,7 +43,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp">
             <TextView
-                android:text="标签 : "
+                android:text="活动分类: "
                 android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

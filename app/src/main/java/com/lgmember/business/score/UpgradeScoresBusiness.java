@@ -26,7 +26,7 @@ public class UpgradeScoresBusiness {
 
     public  void upgradeScores(){
         ScoresImpl scoresRule = new ScoresImpl();
-        scoresRule.upgradeScores(handler,context);
+        scoresRule.upgradeScores(level,point_before,point_after,handler,context);
     }
 
 

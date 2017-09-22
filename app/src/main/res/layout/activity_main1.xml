@@ -338,7 +338,7 @@
 		android:padding="5dp"
 		android:text="更多活动>>" />
 
-	<View
+	<!--<View
 		android:id="@+id/view2"
 		android:layout_width="fill_parent"
 		android:layout_height="1dp"
@@ -354,7 +354,7 @@
 		android:id="@+id/rc_tags_list"
 		android:background="@color/white"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"/>
+		android:layout_height="wrap_content"/>-->
 </LinearLayout>
 </ScrollView>
 </me.hwang.widgets.SmartPullableLayout>

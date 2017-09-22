@@ -91,7 +91,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		MemberMessageBusiness.MemberMessageResulHandler,ShowNetworkImgBusiness.ShowNetworkImgResulHandler,RemindNumBusiness.RemindNumResultHandler,TagListBusiness.TagListResultHandler,VersionBusiness.VersionResulHandler,ApkBusiness.ApkResulHandler,MyClubListBusiness.MyClubListResulHandler{
     private TextView moreInfo,menuTxt,sexTxt,ageTxt,nationTxt,birthdayTxt,editInfo,cmoreactivity,moreactivity,rmoreactivity,messageBtn,signBtn;
 	private TextView tv_name,tv_card_no,tv_point,tv_level,tv_gender,tv_age,tv_nation,tv_birthday;
-	private TextView cmoreactivity;
 	private ImageView iv_photo;
 	private XBanner xRecommendBanner,allBanner,myClubBanner;
 	private ArrayList<String> myClubImages ;
@@ -125,7 +124,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private boolean if_auto_start;
 
 	private List<Tag> tagList ;
-	private RecyclerView recyclerView;
+	/*private RecyclerView recyclerView;*/
 	private TagsListAdapter adapter;
 
 	private List<Club> myClubList;
@@ -228,7 +227,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		cmoreactivity = (TextView)findViewById(R.id.cmoreactivity);
 		moreactivity = (TextView)findViewById(R.id.moreactivity);
 		rmoreactivity = (TextView)findViewById(R.id.rmoreactivity);
-		cmoreactivity = (TextView) findViewById(R.id.cmoreactivity);
 		allBanner = (XBanner) findViewById(R.id.allBanner);
 		xRecommendBanner = (XBanner) findViewById(R.id.recommendBanner);
 		myClubBanner = (XBanner)findViewById(R.id.myClubBanner);
@@ -244,21 +242,18 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		cmoreactivity.setOnClickListener(this);
 		moreactivity.setOnClickListener(this);
 		rmoreactivity.setOnClickListener(this);
-		cmoreactivity.setOnClickListener(this);
 		badgeView = new BadgeView(this);
 		badgeView.setTargetView(messageBtn);
 		badgeView.setBadgeCount(unReadNum);
 		badgeView.setBadgeMargin(5,5,5,5);
 
-		recyclerView = (RecyclerView)findViewById(R.id.rc_tags_list);
+		/*recyclerView = (RecyclerView)findViewById(R.id.rc_tags_list);*/
 
 		CustomLinearLayoutManager customLinearLayoutManager= new CustomLinearLayoutManager(context);
-		recyclerView.setLayoutManager(customLinearLayoutManager);
+	/*	recyclerView.setLayoutManager(customLinearLayoutManager);*/
 
-		/*RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(this);
-		recyclerView.setLayoutManager(layoutManager);*/
 		adapter = new TagsListAdapter(tagList);
-		recyclerView.setAdapter(adapter);
+		/*recyclerView.setAdapter(adapter);*/
 
 
 		mPullableLayout = (SmartPullableLayout)findViewById(R.id.layout_pullable);
@@ -473,7 +468,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			startIntent(EditPersonalActivity.class);
 			break;
 		case R.id.cmoreactivity:
-			startIntent(MyClubProjectListActivity.class);
+			startIntent(ClubProjectListActivity.class);
 			break;
 		case R.id.moreactivity:
 			Intent intent = new
@@ -486,11 +481,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 					Intent(MainActivity.this,ProjectMessageManageActivity.class);
 			intent1.putExtra("tab_id",2);
 			startActivity(intent1);
-			break;
-		case R.id.cmoreactivity:
-			Intent intent2 = new
-					Intent(MainActivity.this,ClubProjectListActivity.class);
-			startActivity(intent2);
 			break;
 	case R.id.moreInfo:
             if(isButton){

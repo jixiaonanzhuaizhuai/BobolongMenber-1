@@ -170,35 +170,30 @@ public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusine
         if (authorized == 0){
             showToast("当前会员未实名，无法升级！");
             return;
-        }
-        if (level == 1 &&
+        }else if (level == 1 &&
                 point < scoresReluLocal.getRedup()){
             showToast("当前积分不足，无法升级到银卡！");
             return;
-        }
-        if (level == 2 &&
+        }else if (level == 2 &&
                 point < scoresReluLocal.getAgup()){
             showToast("当前积分不足，无法升级到金卡！");
             return;
-        }
-        if (level == 3 &&
+        }else if (level == 3 &&
                 point < scoresReluLocal.getAuup()){
             showToast("当前积分不足，无法升级到钻石卡！");
             return;
-        }
-        if (level == 4 ){
+        }else if (level == 4 ){
             showToast("目前为钻石卡(最高级别)，无法升级！");
             return;
+        }else {
+            if (level == 1){
+                point_after = point - scoresReluLocal.getRedcut();
+            }else if (level == 2){
+                point_after = point - scoresReluLocal.getAgcut();
+            }else if (level == 3){
+                point_after = point - scoresReluLocal.getAucut();
+            }
+            upgradeScores();
         }
-        if (level == 1){
-            point_after = point - scoresReluLocal.getRedcut();
-        }
-        if (level == 2){
-            point_after = point - scoresReluLocal.getAgcut();
-        }
-        if (level == 3){
-            point_after = point - scoresReluLocal.getAucut();
-        }
-        upgradeScores();
     }
 }

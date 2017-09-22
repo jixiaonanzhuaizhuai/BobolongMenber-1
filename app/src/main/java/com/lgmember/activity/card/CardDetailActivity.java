@@ -165,6 +165,5 @@ public class CardDetailActivity extends BaseActivity
 
     @Override
     public void onRightClick() {
-
     }
 }
