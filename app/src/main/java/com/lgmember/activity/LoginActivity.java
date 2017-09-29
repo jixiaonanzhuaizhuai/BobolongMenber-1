@@ -24,11 +24,13 @@ import com.lgmember.activity.person.MessageCodeActivity;
 import com.lgmember.business.login.IfNeedCaptBusiness;
 import com.lgmember.business.login.ImgCptBusiness;
 import com.lgmember.business.login.LoginBusiness;
+import com.lgmember.business.score.StartGetScoresBusiness;
 import com.lgmember.util.Common;
 
 
-public class LoginActivity extends BaseActivity implements OnClickListener, LoginBusiness.LoginResultHandler, ImgCptBusiness.ImgCptResultHandler, IfNeedCaptBusiness.IfNeedCaptResultHandler {
+public class LoginActivity extends BaseActivity implements OnClickListener, LoginBusiness.LoginResultHandler, ImgCptBusiness.ImgCptResultHandler, IfNeedCaptBusiness.IfNeedCaptResultHandler ,StartGetScoresBusiness.StartGetScoresHandler{
 
+    private LinearLayout ll_login_bac;
     private Button loginBtn;
     private TextView registerTxt, forgetPassTxt;
     private String loginName;
@@ -58,6 +60,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     //初始化控件
     private void initView() {
+
+        ll_login_bac = (LinearLayout)findViewById(R.id.ll_login_bac);
+        ll_login_bac.getBackground().setAlpha(200);//0~255透明度值
 
         autoLogin = (CheckBox) findViewById(R.id.cb_autoLogin);
         autoLogin.setChecked(sharedPreferences.getBoolean("AUTO_ISCHECK",false));
@@ -154,6 +159,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     public void onSuccess(int state, boolean need_capt) {
         if (state == 0) {
             rememberPwd();
+            //APP打开获得积分
+            startGetScores();
             startIntent(MainActivity.class);
             finish();
         } else if (state == 1) {
@@ -172,11 +179,19 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
             showToast("验证码错误");
         }else if(state == 3) {
             showToast("您的登录密码过于简单，请及时修改");
+            startGetScores();
             startIntent(MainActivity.class);
         }else if (state == 4){
             rememberPwd();
             showDialog();
         }
+    }
+
+    private void startGetScores() {
+        StartGetScoresBusiness startGetScoresBusiness = new StartGetScoresBusiness(context);
+        //处理结果
+        startGetScoresBusiness.setHandler(this);
+        startGetScoresBusiness.startGetScores();
     }
 
     private void rememberPwd() {
@@ -253,4 +268,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         showToast("加载网络图片失败");
     }
 
+    //打开APP获得积分
+    @Override
+    public void onSuccess() {
+        //什么都不提示
+    }
 }

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import java.util.TimerTask;
 public class RegisterActivity extends BaseActivity implements OnClickListener,RegisterBusiness.RegisterResultHandler,
 		SmsCodeBusiness.GetCodeResultHandler,LoginBusiness.LoginResultHandler {
 
+	private LinearLayout ll_reg_bac;
 	private EditText phoneEdt, codeEdt;
 	private Button requestCodeBtn, regBtn;
 	private TimeCount timeCount;
@@ -61,6 +63,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,Re
 	 * 初始化控件
 	 */
 	private void init() {
+		ll_reg_bac = (LinearLayout)findViewById(R.id.ll_reg_bac);
+		ll_reg_bac.getBackground().setAlpha(200);
 		phoneEdt = (EditText) findViewById(R.id.phoneEdt);
 		codeEdt = (EditText) findViewById(R.id.codeEdt);
 		requestCodeBtn = (Button) findViewById(R.id.requestCodeBtn);

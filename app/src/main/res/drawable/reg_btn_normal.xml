@@ -10,7 +10,7 @@
     <size 
         android:height="42dp"/>
     <solid 
-        android:color="#bec8d6"/>
+        android:color="@color/login_btn_bac"/>
   
 
 </shape>

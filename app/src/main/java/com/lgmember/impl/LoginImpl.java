@@ -265,7 +265,6 @@ public class LoginImpl extends HttpApi {
 
     public void forgetPwd(String mobile, String capt, String sms_capt_token, String password, final ForgetPwdBusiness.ForgetPwdResulHandler handler, Context context) {
 
-
         //判断没有网络应该如何处理
         if (!app.isNetWorkEnable(context)) {
             handler.onNetworkDisconnect();

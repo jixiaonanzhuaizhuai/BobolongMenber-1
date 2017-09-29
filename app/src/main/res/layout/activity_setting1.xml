@@ -232,7 +232,7 @@
             android:textSize="18sp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:text="关于我们"/>
+            android:text="系统更新"/>
         <ImageView
             android:layout_width="20dip"
             android:layout_height="30dip"

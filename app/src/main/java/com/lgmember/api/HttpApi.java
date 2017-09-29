@@ -40,7 +40,6 @@ public class HttpApi {
     //设置开启 cookie
 
     public static OkHttpClient okHttpClient() {
-
 //        OkHttpClient okHttpClient = new OkHttpClient.Builder()
 //                .cookieJar(app.getCookieJar())
 //                .connectTimeout(10000L, TimeUnit.MILLISECONDS)

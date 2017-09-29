@@ -130,6 +130,7 @@ public class SignImpl extends HttpApi {
                             String resultString = null;
                             if (code == 0){
                                 int result = response.getInt("result");
+                                Log.i(TAG, "onSuccess: "+result);
                                 if (result == 0){
                                     resultString = "签到成功";
                                 }else if (result == 1){

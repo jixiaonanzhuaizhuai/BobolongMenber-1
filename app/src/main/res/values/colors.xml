@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="wel_bac">#F15A24</color>
+    <color name="white">#ffffff</color>
+    <color name="white_1">#E2E2E2</color><!--登录注册hint提示字体的颜色-->
+    <color name="login_btn_bac">#E5811E</color>
+
     <color name="main_lan">#0789cc</color>
     <color name="transparent_background_button">#11000000</color>
     <color name="transparent_background">#ffffff</color>
@@ -13,7 +18,6 @@
     <color name="slategray">#708090</color><!--灰石色 -->
     <color name="plum">#dda0dd</color><!--洋李色 -->
     <color name="chartreuse">#7fff00</color><!--黄绿色 -->
-    <color name="white">#ffffff</color><!--白色 -->
     <color name="ivory">#fffff0</color><!--象牙色 -->
     <color name="lightyellow">#ffffe0</color><!--亮黄色 -->
     <color name="yellow">#ffff00</color><!--黄色 -->

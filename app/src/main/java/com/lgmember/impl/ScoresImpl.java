@@ -12,6 +12,7 @@ import com.lgmember.bean.ScoresRuleResultBean;
 import com.lgmember.business.score.HistoryScoresBusiness;
 import com.lgmember.business.score.ScoresInfoBusiness;
 import com.lgmember.business.score.ScoresRuleBusiness;
+import com.lgmember.business.score.StartGetScoresBusiness;
 import com.lgmember.business.score.UpgradeScoresBusiness;
 import com.lgmember.model.Member;
 import com.lgmember.model.ScoresInfo;
@@ -35,9 +36,9 @@ public class ScoresImpl extends HttpApi {
         //http post的json数据格式：  {"name": "****","pwd": "******"}
         final JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("level", level);
-            jsonObject.put("point_before", point_before);
-            jsonObject.put("point_after", point_after);
+            jsonObject.put("member_level", level);
+            jsonObject.put("before_point", point_before);
+            jsonObject.put("after_point", point_after);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -64,7 +65,6 @@ public class ScoresImpl extends HttpApi {
                     }
                 });
     }
-
     public void getScoresRule(final ScoresRuleBusiness.ScoresRuleHandler handler, Context context){
         //判断没有网络应该如何处理
         if (!app.isNetWorkEnable(context)) {
@@ -91,6 +91,34 @@ public class ScoresImpl extends HttpApi {
                     }
                 });
     }
+
+    public void startGetScores(final StartGetScoresBusiness.StartGetScoresHandler handler, Context context){
+        //判断没有网络应该如何处理
+        if (!app.isNetWorkEnable(context)) {
+            handler.onNetworkDisconnect();
+        }
+        MyOkHttp mMyOkhttp = new MyOkHttp(okHttpClient());
+        mMyOkhttp.post()
+                .url(Common.URL_START_SCORES)
+                .tag(this)
+                .enqueue(new JsonResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, JSONObject response) {
+                        HttpResultBean httpResultBean = JsonUtil.parseJsonWithGson(response.toString(),HttpResultBean.class);
+                        int code = httpResultBean.getCode();
+                        if (code == 0){
+                            handler.onSuccess();
+                        }else {
+                            handler.onError(code);
+                        }
+                    }
+                    @Override
+                    public void onFailure(int statusCode, String error_msg) {
+                        handler.onFailed(statusCode,error_msg);
+                    }
+                });
+    }
+
     public void getScoresInfo(final ScoresInfoBusiness.ScoresInfoHandler handler, Context context){
         //判断没有网络应该如何处理
         if (!app.isNetWorkEnable(context)) {
@@ -121,8 +149,6 @@ public class ScoresImpl extends HttpApi {
                     }
                 });
     }
-
-
     public void getHistoryScores(int pageNo, int pageSize, final HistoryScoresBusiness.HistoryScoresResultHandler handler, Context context){
         //判断没有网络应该如何处理
         if (!app.isNetWorkEnable(context)) {

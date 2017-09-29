@@ -9,7 +9,7 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        custom:titleText="关于我们"
+        custom:titleText="系统更新"
         custom:titleSize="6sp"
         custom:titleColor="#FFFFFF"
         custom:leftBtn="@drawable/back_page" />

@@ -147,18 +147,12 @@ public class AudioRecorderActivity1 extends BaseActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            /*case R.id.btn_code_sign:
-                codeSign();
-                break;*/
             case R.id.btn_scan:
                 cameraPermission();
                 //先判断是否实名认证过，再进行二维码扫描签到
                 break;
         }
-
     }
-
-
 
     private void cameraPermission() {
         AndPermission.with(this)
@@ -175,33 +169,6 @@ public class AudioRecorderActivity1 extends BaseActivity
                 })
                 .start();
     }
-
-    public void codeSign() {
-        AlertDialog.Builder adb = new AlertDialog.Builder(this);
-        dialog = adb.create();
-        View view = getLayoutInflater().inflate(R.layout.dialog_avtivitycode, null);
-        final EditText codeEt = (EditText)view.findViewById(R.id.activityCodeEt);
-        Button btnOk = (Button)view.findViewById(R.id.okBtn);
-        Button btnCancle = (Button)view.findViewById(R.id.cancleBtn);
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                String activityCode = codeEt.getText().toString();
-                //活动码符合要求的话
-                getCodeSign(activityCode);
-                dialog.dismiss();
-            }
-        });
-        btnCancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.setView(view,0,0,0,0);
-        dialog.show();
-    }
-
     private void getCodeSign(String result) {
 
         Gson gson = new Gson();
@@ -233,7 +200,6 @@ public class AudioRecorderActivity1 extends BaseActivity
 
         }
         if(requestCode == REQUEST_CODE_SETTING) {
-
             /*Intent intent = new Intent(AudioRecorderActivity1.this,
                     com.yzq.zxinglibrary.android.CaptureActivity.class);
             startActivityForResult(intent, 0);*/

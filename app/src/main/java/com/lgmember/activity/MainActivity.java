@@ -89,9 +89,9 @@ import me.hwang.widgets.SmartPullableLayout;
 public class MainActivity extends BaseActivity implements OnClickListener,
 		ProjectMessageListBusiness.ProjectMessageListResultHandler,
 		MemberMessageBusiness.MemberMessageResulHandler,ShowNetworkImgBusiness.ShowNetworkImgResulHandler,RemindNumBusiness.RemindNumResultHandler,TagListBusiness.TagListResultHandler,VersionBusiness.VersionResulHandler,ApkBusiness.ApkResulHandler,MyClubListBusiness.MyClubListResulHandler{
-    private TextView moreInfo,menuTxt,sexTxt,ageTxt,nationTxt,birthdayTxt,editInfo,cmoreactivity,moreactivity,rmoreactivity,messageBtn,signBtn;
+    private TextView moreInfo,sexTxt,ageTxt,nationTxt,birthdayTxt,editInfo,cmoreactivity,moreactivity,rmoreactivity,messageBtn,signBtn;
 	private TextView tv_name,tv_card_no,tv_point,tv_level,tv_gender,tv_age,tv_nation,tv_birthday;
-	private ImageView iv_photo;
+	private ImageView iv_photo,iv_menu;
 	private XBanner xRecommendBanner,allBanner,myClubBanner;
 	private ArrayList<String> myClubImages ;
 	private ArrayList<String> allImages ;
@@ -215,7 +215,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		tv_age = (TextView)findViewById(R.id.tv_age);
 		tv_nation = (TextView)findViewById(R.id.tv_nation);
 		tv_birthday = (TextView)findViewById(R.id.tv_birthday);
-		menuTxt = (TextView) findViewById(R.id.menu_txt);
+		iv_menu = (ImageView) findViewById(R.id.iv_menu);
 		messageBtn = (TextView) findViewById(R.id.messageBtn);
 		signBtn = (TextView) findViewById(R.id.signBtn);
 		moreInfo = (TextView) findViewById(R.id.moreInfo);
@@ -234,7 +234,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		initAllBanner();
 		initRecommendBanner();
 
-		menuTxt.setOnClickListener(this);
+		iv_menu.setOnClickListener(this);
 		messageBtn.setOnClickListener(this);
 		signBtn.setOnClickListener(this);
 		editInfo.setOnClickListener(this);
@@ -445,7 +445,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.menu_txt:
+		case R.id.iv_menu:
 			showPopupMenu(v);
 			break;
 		case R.id.messageBtn:

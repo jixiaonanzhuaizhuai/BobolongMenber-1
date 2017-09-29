@@ -11,16 +11,11 @@ import android.util.Log;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.lgmember.api.AppDataApi;
 import com.lgmember.api.HttpApi;
 import com.lgmember.util.Common;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
@@ -37,7 +32,6 @@ public class App extends Application {
     public OkHttpClient okHttpClient() {
         return new OkHttpClient.Builder()
                 .cookieJar(new CookieJar() {
-
                   final   PersistentCookieStore cookieStore = new PersistentCookieStore(getApplicationContext());
                     @Override
                     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
@@ -46,7 +40,6 @@ public class App extends Application {
                             if (cookies != null && cookies.size() > 0) {
                                 for (Cookie item : cookies) {
                                     cookieStore.add(url, item);
-
                             }
                             }
                         }

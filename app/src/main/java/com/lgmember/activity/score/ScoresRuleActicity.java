@@ -2,6 +2,7 @@ package com.lgmember.activity.score;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,12 +101,10 @@ public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusine
         scoresRuleBusiness.getScoresRule();
     }
 
-    private void upgradeScores() {
+    private void upgradeScores(int level,int point,int point_after) {
         UpgradeScoresBusiness upgradeScoresBusiness = new UpgradeScoresBusiness(getActivity(),level + 1,point,point_after);
         upgradeScoresBusiness.setHandler(this);
         upgradeScoresBusiness.upgradeScores();
-
-
     }
     @Override
     public void onSuccess(final ScoresRule scoresRule) {
@@ -153,7 +152,14 @@ public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusine
 
     @Override
     public void onSuccess() {
-        showToast("恭喜您，升级成功");
+        String levelArray[] = {"红卡","银卡","金卡","钻石卡"};
+        for (int i = 0; i<=levelArray.length;i++){
+            if (i == level){
+                String memberLevel = levelArray[i];
+                showToast("恭喜您，升级为"+memberLevel);
+            }
+        }
+
     }
 
     @Override
@@ -193,7 +199,7 @@ public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusine
             }else if (level == 3){
                 point_after = point - scoresReluLocal.getAucut();
             }
-            upgradeScores();
+            upgradeScores(level,point,point_after);
         }
     }
 }

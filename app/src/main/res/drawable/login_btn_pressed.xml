@@ -15,7 +15,7 @@
     <size 
         android:height="50dp"/>
     <solid 
-        android:color="#0096dc"/>
+        android:color="@color/wel_bac"/>
   
 
 </shape>

@@ -54,7 +54,8 @@ public class Common {
     public static String URL_SCORES_RULE = URL_BASE+"point/rule";
    //积分升级
    public static String URL_SCORES_UPGRADE = URL_BASE+"member/upgrade";
-
+   //打开App获得积分
+   public static String URL_START_SCORES = URL_BASE+"member/app_addpoint";
     //历史积分
     public static String URL_HISTORY_SCORES = URL_BASE+"point/history";
     //积分消息
@@ -75,7 +76,7 @@ public class Common {
      //俱乐部下的活动报名
      public static String URL_CLUB_ACTIVITY_JOIN = URL_BASE+"club-project/check-in2";
     //俱乐部签到
-    public static String URL_CLUB_PROJECT_SIGN = URL_BASE+"project2/sign-in";
+    public static String URL_CLUB_PROJECT_SIGN = URL_BASE+"club-project/sign-in";
     //会员活动报名
     public static String URL_ACTIVITY_JOIN = URL_BASE+"project/check-in2";
     //会员活动列表

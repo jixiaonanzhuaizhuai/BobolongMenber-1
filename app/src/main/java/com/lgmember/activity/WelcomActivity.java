@@ -24,13 +24,14 @@ import com.lgmember.business.VersionBusiness;
 import com.lgmember.business.login.GuestLoginBusiness;
 import com.lgmember.business.login.IfGuestLoginBusiness;
 import com.lgmember.business.person.MemberNameBusiness;
+import com.lgmember.business.score.StartGetScoresBusiness;
 import com.lgmember.util.ActivityCollector;
 import com.lgmember.util.Common;
 
 import java.io.File;
 
 
-public class WelcomActivity extends BaseActivity implements OnClickListener,MemberNameBusiness.MemberNameResulHandler,GuestLoginBusiness.GUestLoginResultHandler,IfGuestLoginBusiness.IfGUestLoginResultHandler {
+public class WelcomActivity extends BaseActivity implements OnClickListener,MemberNameBusiness.MemberNameResulHandler,GuestLoginBusiness.GUestLoginResultHandler,IfGuestLoginBusiness.IfGUestLoginResultHandler,StartGetScoresBusiness.StartGetScoresHandler {
 	
 	private Button loginBtn,regBtn,visitorBtn;
 	private String LoginName;
@@ -80,6 +81,7 @@ public class WelcomActivity extends BaseActivity implements OnClickListener,Memb
 		switch (v.getId()) {
 		case R.id.loginBtn:
 			if (stateCode !=1 && !TextUtils.equals(LoginName,"游客") && sharedPreferences.getBoolean("AUTO_ISCHECK", false)){
+				startGetScores();
 				startIntent(MainActivity.class);
 			}else {
 				startIntent(LoginActivity.class);
@@ -116,6 +118,7 @@ public class WelcomActivity extends BaseActivity implements OnClickListener,Memb
 	public void onMemberNameSuccess(String name) {
 		LoginName = name;
 		if (sharedPreferences.getBoolean("AUTO_ISCHECK", false)) {
+			startGetScores();
 			startIntent(MainActivity.class);
 		} else {
 			setContentView(R.layout.welcom);
@@ -166,5 +169,17 @@ public class WelcomActivity extends BaseActivity implements OnClickListener,Memb
 		if (name.equals("游客")){
 			startIntent(MainGuestActivity.class);
 		}
+	}
+
+	private void startGetScores() {
+		StartGetScoresBusiness startGetScoresBusiness = new StartGetScoresBusiness(context);
+		//处理结果
+		startGetScoresBusiness.setHandler(this);
+		startGetScoresBusiness.startGetScores();
+	}
+
+	//打开APP，赠送积分
+	@Override
+	public void onSuccess() {
 	}
 }
