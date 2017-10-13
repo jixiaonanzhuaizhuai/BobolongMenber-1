@@ -3,6 +3,9 @@ package com.lgmember.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -64,7 +67,9 @@ public class RegisterActivity extends BaseActivity implements OnClickListener,Re
 	 */
 	private void init() {
 		ll_reg_bac = (LinearLayout)findViewById(R.id.ll_reg_bac);
-		ll_reg_bac.getBackground().setAlpha(200);
+		Drawable drawable = ll_reg_bac.getBackground();
+		drawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+
 		phoneEdt = (EditText) findViewById(R.id.phoneEdt);
 		codeEdt = (EditText) findViewById(R.id.codeEdt);
 		requestCodeBtn = (Button) findViewById(R.id.requestCodeBtn);

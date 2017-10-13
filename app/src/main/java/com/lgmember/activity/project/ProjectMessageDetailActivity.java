@@ -103,7 +103,7 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 		is_collection = projectMessage.getSaved();
 		if (is_collection){
 			iv_collection.setImageResource(R.mipmap.collection_checked);
-			tv_collection.setText("取消收藏");
+			tv_collection.setText("取消");
 		}
 		projectMessage_id = projectMessage.getId();
 
@@ -229,7 +229,7 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 	public void onCollectionSuccess(String str) {
 		if (is_collection){
 			iv_collection.setImageResource(R.mipmap.collection_checked);
-			tv_collection.setText("取消收藏");
+			tv_collection.setText("取消");
 		}else {
 			iv_collection.setImageResource(R.mipmap.collection_define);
 			tv_collection.setText("收藏");

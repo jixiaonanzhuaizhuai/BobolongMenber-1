@@ -7,10 +7,10 @@
         android:bottomLeftRadius="23dp"
         android:bottomRightRadius="23dp"
         />
-    <size 
+    <size
         android:height="50dp"/>
     <solid 
         android:color="@color/login_btn_bac"/>
-  
+
 
 </shape>

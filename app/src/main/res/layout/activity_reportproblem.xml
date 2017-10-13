@@ -2,7 +2,7 @@
     android:layout_width="fill_parent"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#ffffff"
+    android:background="@color/white_1"
     android:layout_height="fill_parent">
      <com.lgmember.view.TopBarView
          android:id="@+id/topbar"
@@ -21,34 +21,43 @@
             android:id="@+id/edt_feedback_content"
             android:lines="5"
             android:gravity="top"
+            android:padding="5dp"
             android:hint="请输入您的反馈意见(字数500以内)！"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/reg_edtarea_bg"/>
+            android:background="@color/white"/>
         <LinearLayout
             android:layout_width="fill_parent"
             android:orientation="vertical"
             android:gravity="center"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_marginTop="10dp">
             <Button
                 android:text="提交"
                 android:textColor="@color/white"
                 android:id="@+id/btn_submit"
-                android:background="@drawable/login_btn_bg"
+                android:background="@drawable/scan_sign_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></Button>
         </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="5dp">
         <TextView android:text="下面是以往问题反馈的处理意见"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="fill_parent"
-            android:textColor="#000000"
+            android:layout_width="match_parent"
             android:layout_marginTop="10px"
-            android:layout_height="wrap_content"></TextView>
+            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content"/>
+        <include layout="@layout/common_line"/>
         <ExpandableListView
             android:id="@+id/ex_lv_feedback"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
+    </LinearLayout>
     </LinearLayout>

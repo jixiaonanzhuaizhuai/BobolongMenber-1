@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="黑龙江广播电视台"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="120dp"
         android:gravity="center"
         android:textColor="@color/white"
 		android:textStyle="bold"
@@ -29,7 +29,7 @@
 	        android:id="@+id/pwdEdt"
 	        android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
-        	android:hint="请输入你的密码..."
+        	android:hint="默认密码为手机号..."
         	android:layout_marginTop="15dp"
         	android:inputType="textPassword"
         	android:background="@drawable/login_edt_bg"/>

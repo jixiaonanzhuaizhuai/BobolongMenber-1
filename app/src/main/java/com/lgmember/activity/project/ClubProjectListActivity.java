@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -80,9 +81,7 @@ protected void onResume() {
 
 private void getInitData() {
         pageNo = 1;
-        ll_loading.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
-        loadDesc.setText("正在拼命加载");
+        clubList.clear();
         getData();
 
         }
@@ -97,8 +96,6 @@ private void init() {
         clubList = new ArrayList<>();
         adapter = new ClubListAdapter(this,clubList,this,0);
         lv_club_list.setAdapter(adapter);
-
-
         lv_club_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -110,6 +107,25 @@ private void init() {
                 intent.putExtras(bundle);
                 startActivity(intent);
         }
+        });
+        lv_club_list.setOnScrollListener(new AbsListView.OnScrollListener() {
+                //滑动状态改变的时候，回调
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
+                }
+
+                //在滑动的时候不断的回调
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem,
+                                     int visibleItemCount, int totalItemCount) {
+                        if (firstVisibleItem+visibleItemCount==totalItemCount&&!isLoading) {
+                                isLoading = true;
+                                if (totalItemCount< total){
+                                        pageNo++;
+                                        getData();
+                                }
+                        }
+                }
         });
 
         mPullableLayout = (SmartPullableLayout) findViewById(R.id.layout_pullable);
@@ -157,7 +173,6 @@ private void init() {
 
                 @Override
                 public void onSuccess(ClubListResultBean bean) {
-                        clubList.clear();
                         if (bean.getData() == null) {
                                 progressBar.setVisibility(View.GONE);
                                 loadDesc.setText("还没有数据");

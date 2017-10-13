@@ -11,6 +11,11 @@
         custom:titleSize="6sp"
         custom:titleColor="#FFFFFF"
         custom:leftBtn="@drawable/back_page" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
     <EditText
         android:id="@+id/nameEdt"
         android:layout_width="fill_parent"
@@ -78,10 +83,12 @@
         android:layout_height="wrap_content">
     <Button
         android:id="@+id/uploadImgBtn"
+        android:background="@drawable/reg_btn_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:layout_marginTop="15dp"
-        android:textSize="20sp"
+        android:textSize="14sp"
         android:text="上传照片："/>
     <ImageView
             android:id="@+id/imgShow"
@@ -97,8 +104,11 @@
         android:paddingLeft="28dp"
         android:paddingRight="28dp"
         android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/reg_btn_bg"
         android:text="提交"/>
-
+    </LinearLayout>
 </LinearLayout>

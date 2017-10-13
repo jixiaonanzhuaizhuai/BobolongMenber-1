@@ -103,6 +103,9 @@ public class TagProjectMessageListActivity extends BaseActivity implements TopBa
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        adapter.setCurrentItem(position);
+                        adapter.setClick(true);
+                        adapter.notifyDataSetChanged();
 
                         ProjectMessage projectMessage =
                                 projectMessageList.get(position);

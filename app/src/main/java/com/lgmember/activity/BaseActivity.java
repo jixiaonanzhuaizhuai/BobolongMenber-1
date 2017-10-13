@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.os.CountDownTimer;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.lgmember.activity.score.ExchangeGiftDetailActivity;
 import com.lgmember.util.ActivityCollector;
+import com.lgmember.util.StatusBarCompat;
 import com.lgmember.util.StringUtil;
 
 public class BaseActivity extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class BaseActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = getApplicationContext();
+		StatusBarCompat.compat(this, getResources().getColor(R.color.main_2));//设置顶部状态栏的颜色
 		Log.d("-----BaseActivity---",getClass().getSimpleName());
 		ActivityCollector.addActivity(this);
 		ActionBar actionBar = getSupportActionBar();

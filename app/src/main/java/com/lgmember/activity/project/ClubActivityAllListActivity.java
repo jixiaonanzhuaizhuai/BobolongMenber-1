@@ -82,9 +82,6 @@ public class ClubActivityAllListActivity extends BaseActivity implements TopBarV
         pageNo = 1;
         projectMessageList.clear();
         lv_all_list.setEnabled(false);
-        ll_loading.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
-        loadDesc.setText("正在拼命加载");
         getData();
     }
 
@@ -100,6 +97,9 @@ public class ClubActivityAllListActivity extends BaseActivity implements TopBarV
         lv_all_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.setCurrentItem(position);
+                adapter.setClick(true);
+                adapter.notifyDataSetChanged();
                 ProjectMessage projectMessage =
                         projectMessageList.get(position);
                 DataLargeHolder.getInstance()

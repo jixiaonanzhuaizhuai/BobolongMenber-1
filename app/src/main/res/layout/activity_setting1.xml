@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_1"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -16,7 +17,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:background="#ffffff"
         android:layout_height="55dp">
@@ -25,7 +26,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/xiaoxituisong"/>
+            android:background="@mipmap/shezhi01"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +50,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:background="#ffffff"
         android:layout_height="55dp">
@@ -58,7 +58,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/fenxiang"/>
+            android:background="@mipmap/shezhi02"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,7 +84,6 @@
         android:id="@+id/rl_modifyPwd"
         android:layout_width="match_parent"
         android:background="#ffffff"
-        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:layout_height="55dp">
         <ImageView
@@ -92,7 +91,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/modify_pwd"/>
+            android:background="@mipmap/shezhi03"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -115,7 +114,6 @@
         android:id="@+id/rl_clear_cache"
         android:layout_width="match_parent"
         android:background="#ffffff"
-        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:layout_height="55dp">
         <ImageView
@@ -123,7 +121,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/clearbuffer"/>
+            android:background="@mipmap/shezhi04"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -154,7 +152,6 @@
         android:id="@+id/rl_exit_login"
         android:layout_width="match_parent"
         android:background="#ffffff"
-        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:layout_height="55dp">
         <ImageView
@@ -162,7 +159,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/login_out"/>
+            android:background="@mipmap/shezhi05"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -185,7 +182,6 @@
         android:id="@+id/rl_help"
         android:layout_width="match_parent"
         android:background="#ffffff"
-        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:layout_height="55dp">
         <ImageView
@@ -193,7 +189,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/help"/>
+            android:background="@mipmap/shezhi06"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -216,7 +212,6 @@
         android:id="@+id/rl_about_us"
         android:layout_width="match_parent"
         android:background="#ffffff"
-        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:layout_height="55dp">
         <ImageView
@@ -224,7 +219,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/aboutus"/>
+            android:background="@mipmap/shezhi07"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

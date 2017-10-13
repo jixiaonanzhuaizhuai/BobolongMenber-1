@@ -7,7 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -62,7 +67,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     private void initView() {
 
         ll_login_bac = (LinearLayout)findViewById(R.id.ll_login_bac);
-        ll_login_bac.getBackground().setAlpha(200);//0~255透明度值
+
+        Drawable drawable = ll_login_bac.getBackground();
+        drawable.setColorFilter(Color.GRAY,PorterDuff.Mode.MULTIPLY);
 
         autoLogin = (CheckBox) findViewById(R.id.cb_autoLogin);
         autoLogin.setChecked(sharedPreferences.getBoolean("AUTO_ISCHECK",false));

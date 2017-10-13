@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/white_1"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <com.lgmember.view.TopBarView
@@ -39,6 +39,7 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/layout_pullable"
             android:layout_width="match_parent"
+            android:layout_margin="5dp"
             android:layout_height="match_parent">
             <ListView
                 android:id="@+id/lv_all_activity_list"

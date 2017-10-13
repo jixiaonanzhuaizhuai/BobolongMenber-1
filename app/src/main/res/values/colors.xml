@@ -4,6 +4,7 @@
     <color name="white">#ffffff</color>
     <color name="white_1">#E2E2E2</color><!--登录注册hint提示字体的颜色-->
     <color name="login_btn_bac">#E5811E</color>
+    <color name="main_2">#E5811E</color>
 
     <color name="main_lan">#0789cc</color>
     <color name="transparent_background_button">#11000000</color>

@@ -6,6 +6,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/white_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,32 +18,38 @@
         custom:titleSize="6sp"
         custom:titleColor="#FFFFFF"
         custom:leftBtn="@drawable/back_page"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_margin="10dp" />
-    <TextView
-        android:id="@+id/tv_remind_stime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_margin="10dp"
-        android:layout_gravity="bottom|right"/>
-    <Button
-        android:id="@+id/btn_get"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="领取"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:layout_marginTop="15dp"
-        android:textColor="#eeeeee"
-        android:background="@drawable/login_btn_bg"
-        android:visibility="gone"
-        />
-
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_margin="10dp" />
+        <include layout="@layout/common_line"/>
+        <TextView
+            android:id="@+id/tv_remind_stime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="bottom|right"/>
+        <Button
+            android:id="@+id/btn_get"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="领取"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:background="@drawable/scan_sign_bg"
+            android:visibility="gone"
+            />
+    </LinearLayout>
 </LinearLayout>
     </ScrollView>

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/white_1"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <com.lgmember.view.TopBarView
@@ -36,29 +36,38 @@
                 android:text="正在拼命加载"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp">
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:layout_margin="5dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/biaoqian01"/>
             <TextView
                 android:text="活动分类: "
-                android:textSize="20sp"
+                android:textSize="16sp"
+                android:textColor="@color/main_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rc_tags_list"
+                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <me.hwang.widgets.SmartPullableLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/layout_pullable"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ListView
                 android:id="@+id/lv_all_activity_list"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="5sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </ListView>

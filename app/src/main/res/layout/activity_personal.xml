@@ -6,6 +6,7 @@
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+        android:background="@color/white_1"
     android:orientation="vertical">
 
         <com.lgmember.view.TopBarView
@@ -23,7 +24,7 @@
          android:layout_height="wrap_content"
          android:background="#ffffff"
          android:orientation="vertical"
-         android:layout_marginTop="15dp">
+         android:layout_marginTop="10dp">
 
          <LinearLayout
              android:id="@+id/ll_name"
@@ -38,6 +39,7 @@
                  android:orientation="horizontal">
              <TextView
                  android:text="姓名"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -65,6 +67,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="卡号"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -93,6 +96,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="积分"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -121,6 +125,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="等级"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -149,6 +154,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="手机号"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -176,6 +182,7 @@
                  android:layout_marginBottom="5dp">
                  <TextView
                      android:text="紧急电话"
+                     android:textColor="@color/main_2"
                      android:layout_width="100dp"
                      android:layout_height="wrap_content"
                      android:textSize="16sp"
@@ -204,6 +211,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="身份证号"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -232,6 +240,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="性别"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -260,6 +269,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="家庭住址"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -288,6 +298,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="工作单位"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -316,6 +327,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="职称"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -344,6 +356,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="民族"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -372,6 +385,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="来源"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -400,6 +414,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="学历"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -428,6 +443,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="月收入"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -456,6 +472,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="月支出"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -484,6 +501,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="是否实名认证"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"
@@ -512,6 +530,7 @@
                  android:layout_marginBottom="5dp">
              <TextView
                  android:text="创建时间"
+                 android:textColor="@color/main_2"
                  android:layout_width="100dp"
                  android:layout_height="wrap_content"
                  android:textSize="16sp"

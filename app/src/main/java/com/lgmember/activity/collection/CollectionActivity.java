@@ -116,7 +116,9 @@ public class CollectionActivity extends BaseActivity implements CollectionListBu
 		lv_collection_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+				adapter.setCurrentItem(position);
+				adapter.setClick(true);
+				adapter.notifyDataSetChanged();
 				ProjectMessage projectMessage =
 						collectionList.get(position);
 				DataLargeHolder.getInstance()

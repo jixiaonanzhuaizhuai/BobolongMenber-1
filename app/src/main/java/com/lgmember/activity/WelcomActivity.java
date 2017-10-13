@@ -167,7 +167,7 @@ public class WelcomActivity extends BaseActivity implements OnClickListener,Memb
 	public void onIfGuestLoginSuccess(String s) {
 		name = s;
 		if (name.equals("游客")){
-			startIntent(MainGuestActivity.class);
+			startIntent(MainGuest1Activity.class);
 		}
 	}
 

@@ -11,6 +11,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.lgmember.activity.R;
+import com.lgmember.util.StatusBarCompat;
 
 
 public class MyScoresActivity extends FragmentActivity {
@@ -29,8 +30,8 @@ public class MyScoresActivity extends FragmentActivity {
 
 	// 定义数组来存放按钮图片
 	private int mImageViewArray[] = {
-			R.drawable.manage_tab_item_alreadyjoin,
-			R.drawable.manage_tab_item_soonjoin};
+			R.drawable.manage_tab_item_his_score,
+			R.drawable.manage_tab_item_score_rule};
 
 	// Tab选项卡的文字
 	private String mTextviewArray[] = { "历史积分", "积分规则"};
@@ -39,6 +40,7 @@ public class MyScoresActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_myscores);
+		StatusBarCompat.compat(this, getResources().getColor(R.color.main_2));//设置顶部状态栏的颜色
 		initView();
 	}
 
@@ -65,9 +67,9 @@ public class MyScoresActivity extends FragmentActivity {
 					.setIndicator(getTabItemView(i));
 			// 将Tab按钮添加进Tab选项卡中
 			mTabHost.addTab(tabSpec, fragmentArray[i], null);
-			// 设置Tab按钮的背景
+			/*// 设置Tab按钮的背景
 			mTabHost.getTabWidget().getChildAt(i)
-					.setBackgroundResource(R.drawable.manage_tab_item_bg);
+					.setBackgroundResource(R.drawable.manage_tab_item_bg);*/
 		}
 	}
 
@@ -81,6 +83,7 @@ public class MyScoresActivity extends FragmentActivity {
 		imageView.setImageResource(mImageViewArray[index]);
 
 		TextView textView = (TextView) view.findViewById(R.id.textview);
+		textView.setTextColor(getResources().getColor(R.color.main_2));
 		textView.setText(mTextviewArray[index]);
 
 		return view;

@@ -55,36 +55,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include layout="@layout/common_line"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:orientation="horizontal">
         <RadioButton
             android:id="@+id/rb_left"
-            android:background="@drawable/manage_tab_item_bg"
-            android:layout_marginTop="10dp"
-            android:paddingTop="10dp"
-            android:drawablePadding="5dp"
-            android:paddingBottom="10dp"
-            android:drawableTop="@drawable/manage_tab_item_alreadyjoin"
+            android:drawableTop="@drawable/manage_tab_item_remind"
             android:gravity="center"
             android:text="系统消息"
             android:button="@null"
-            android:textColor="@color/white"
+            android:textColor="@color/main_2"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/rb_right"
-            android:background="@drawable/manage_tab_item_bg"
-            android:layout_marginTop="10dp"
-            android:paddingTop="10dp"
-            android:drawablePadding="5dp"
-            android:paddingBottom="10dp"
-            android:drawableTop="@drawable/manage_tab_item_soonjoin"
+            android:drawableTop="@drawable/manage_tab_item_message"
             android:gravity="center"
             android:text="会员消息"
-            android:textColor="@color/white"
+            android:textColor="@color/main_2"
             android:button="@null"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent" />
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

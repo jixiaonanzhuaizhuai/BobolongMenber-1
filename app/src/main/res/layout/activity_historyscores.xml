@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_1"
     android:gravity="center_horizontal">
     <com.lgmember.view.TopBarView
         android:id="@+id/topbar"
@@ -38,10 +39,13 @@
         <me.hwang.widgets.SmartPullableLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/layout_pullable"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ListView
                 android:id="@+id/lv_history_scores"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="5sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </ListView>

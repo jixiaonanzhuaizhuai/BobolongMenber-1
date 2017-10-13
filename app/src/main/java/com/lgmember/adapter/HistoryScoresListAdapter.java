@@ -56,14 +56,12 @@ public class HistoryScoresListAdapter extends BaseAdapter {
             TextView after_point = (TextView) view.findViewById(R.id.tv_after_point);
             TextView create_time = (TextView) view.findViewById(R.id.tv_create_time);
             TextView reason = (TextView) view.findViewById(R.id.tv_reason);
-            TextView userName = (TextView) view.findViewById(R.id.tv_userName);
             //打包
             vh = new ViewHolder();
             vh.before_point = before_point;
             vh.after_point = after_point;
             vh.create_time = create_time;
             vh.reason = reason;
-            vh.userName = userName;
             //上身
             view.setTag(vh);
         } else {
@@ -74,7 +72,6 @@ public class HistoryScoresListAdapter extends BaseAdapter {
         vh.before_point.setText("" + historyScores.getBefore_point());
         vh.after_point.setText("" + historyScores.getAfter_point());
         vh.create_time.setText("" + historyScores.getCreate_time());
-        vh.userName.setText("" + historyScores.getUserName());
         vh.reason.setText("" + historyScores.getReason());
         return view;
     }
@@ -84,7 +81,6 @@ public class HistoryScoresListAdapter extends BaseAdapter {
         public TextView after_point;
         public TextView create_time;
         public TextView reason;
-        public TextView userName;
 }
 }
 

@@ -9,23 +9,29 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.view.menu.MenuPopupHelper;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lgmember.AudioRecorder.AndroidAudioRecorder;
@@ -41,12 +47,12 @@ import com.lgmember.activity.person.EditPersonalActivity;
 import com.lgmember.activity.person.PersonalAllActivity1;
 import com.lgmember.activity.project.ClubActivityAllListActivity;
 import com.lgmember.activity.project.ClubProjectListActivity;
-import com.lgmember.activity.project.MyClubProjectListActivity;
 import com.lgmember.activity.project.ProjectMessageDetailActivity;
 import com.lgmember.activity.project.ProjectMessageManageActivity;
 import com.lgmember.activity.score.ExchangeScoresActivity;
 import com.lgmember.activity.score.MyScoresActivity;
 import com.lgmember.activity.setting.SettingActivity;
+import com.lgmember.adapter.MenuListAdapter;
 import com.lgmember.adapter.TagsListAdapter;
 import com.lgmember.bean.ClubListResultBean;
 import com.lgmember.bean.ProjectMessageBean;
@@ -61,6 +67,7 @@ import com.lgmember.business.project.ProjectMessageListBusiness;
 import com.lgmember.business.project.TagListBusiness;
 import com.lgmember.model.Club;
 import com.lgmember.model.Member;
+import com.lgmember.model.Menu;
 import com.lgmember.model.ProjectMessage;
 import com.lgmember.model.Tag;
 import com.lgmember.util.ActivityCollector;
@@ -77,6 +84,7 @@ import com.yanzhenjie.permission.Rationale;
 import com.yanzhenjie.permission.RationaleListener;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,9 +97,9 @@ import me.hwang.widgets.SmartPullableLayout;
 public class MainActivity extends BaseActivity implements OnClickListener,
 		ProjectMessageListBusiness.ProjectMessageListResultHandler,
 		MemberMessageBusiness.MemberMessageResulHandler,ShowNetworkImgBusiness.ShowNetworkImgResulHandler,RemindNumBusiness.RemindNumResultHandler,TagListBusiness.TagListResultHandler,VersionBusiness.VersionResulHandler,ApkBusiness.ApkResulHandler,MyClubListBusiness.MyClubListResulHandler{
-    private TextView moreInfo,sexTxt,ageTxt,nationTxt,birthdayTxt,editInfo,cmoreactivity,moreactivity,rmoreactivity,messageBtn,signBtn;
+    private TextView sexTxt,ageTxt,nationTxt,birthdayTxt,editInfo,cmoreactivity,moreactivity,rmoreactivity,messageBtn,signBtn;
 	private TextView tv_name,tv_card_no,tv_point,tv_level,tv_gender,tv_age,tv_nation,tv_birthday;
-	private ImageView iv_photo,iv_menu;
+	private ImageView iv_photo,iv_menu,iv_moreInfo;
 	private XBanner xRecommendBanner,allBanner,myClubBanner;
 	private ArrayList<String> myClubImages ;
 	private ArrayList<String> allImages ;
@@ -113,6 +121,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 	private SmartPullableLayout mPullableLayout;
 
+	private ListView lsvMore ;//memu列表
+
 	private static final int REQUEST_CODE_RECORD_AUDIO = 100;
 	private static final int REQUEST_CODE_SETTING = 300;
 
@@ -127,12 +137,18 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	/*private RecyclerView recyclerView;*/
 	private TagsListAdapter adapter;
 
+	private PopupWindow window;
+	private MenuListAdapter menuListAdapter;
+	private List<Menu> menuList;
+
 	private List<Club> myClubList;
 	List<String> myClubTitleList;
 	private List<ProjectMessage> projectMessageList;
 	List<String> allTitleList;
 	private List<ProjectMessage> hotProjectMessageList;
 	List<String> recommendTitleList;
+	private String[] menuNameDatas = {"个人资料", "活动管理", "俱乐部", "我的积分", "积分兑换","我的卡券","我要签到","我的消息","收藏","问题反馈","设置"};
+	private int[] menuImgDatas = {R.mipmap.shouye01,R.mipmap.shouye02,R.mipmap.shouye03,R.mipmap.shouye04,R.mipmap.shouye05,R.mipmap.shouye06,R.mipmap.shouye07,R.mipmap.shouye08,R.mipmap.shouye09,R.mipmap.shouye10,R.mipmap.shouye11};
 
 
 	private static final int ON_REFRESH = 1;
@@ -162,7 +178,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main1);
+		setContentView(R.layout.activity_main);
 		initView();
 	}
 	@Override
@@ -182,11 +198,42 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		getMyClubList();
 		getProjectMessage();
 		getHotProjectMessage();
-		getTagsList();
+		//getTagsList();
+		getMenuList();
 
 }
 
+	private void getMenuList() {
+		menuList.clear();
+		for (int i =0;i<menuNameDatas.length; i++){
+			Menu menu = new Menu();
+			menu.setMenuName(menuNameDatas[i]);
+			menu.setMenuImg(menuImgDatas[i]);
+			menuList.add(menu);
+		}
+	}
+
 	private void initView() {
+		menuList = new ArrayList<>();
+		menuListAdapter = new MenuListAdapter(MainActivity.this,menuList);
+		//构建一个popupwindow的布局
+		View popupView = MainActivity.this.getLayoutInflater().inflate(R.layout.popupwindow, null);
+
+		//为了演示效果，简单的设置了一些数据，实际中大家自己设置数据即可，相信大家都会。
+		lsvMore = (ListView) popupView.findViewById(R.id.lsvMore);
+		lsvMore.setAdapter(menuListAdapter);
+
+		//创建PopupWindow对象，指定宽度和高度
+		window = new PopupWindow(popupView, 600, 1500);
+               /* // TODO: 2016/5/17 设置动画
+                window.setAnimationStyle(R.style.popup_window_anim);*/
+		//设置背景颜色
+		window.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F8F8F8")));
+		//设置可以获取焦点
+		window.setFocusable(true);
+		//设置可以触摸弹出框以外的区域
+		window.setOutsideTouchable(true);
+
 		myClubList = new ArrayList<>();
 		myClubTitleList = new ArrayList<>();
 		projectMessageList = new ArrayList<>();
@@ -218,7 +265,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		iv_menu = (ImageView) findViewById(R.id.iv_menu);
 		messageBtn = (TextView) findViewById(R.id.messageBtn);
 		signBtn = (TextView) findViewById(R.id.signBtn);
-		moreInfo = (TextView) findViewById(R.id.moreInfo);
+		iv_moreInfo = (ImageView) findViewById(R.id.iv_moreInfo);
 		sexTxt = (TextView)findViewById(R.id.sexTxt);
 		ageTxt = (TextView)findViewById(R.id.ageTxt);
 		nationTxt = (TextView)findViewById(R.id.nationTxt);
@@ -238,7 +285,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		messageBtn.setOnClickListener(this);
 		signBtn.setOnClickListener(this);
 		editInfo.setOnClickListener(this);
-		moreInfo.setOnClickListener(this);
+		iv_moreInfo.setOnClickListener(this);
 		cmoreactivity.setOnClickListener(this);
 		moreactivity.setOnClickListener(this);
 		rmoreactivity.setOnClickListener(this);
@@ -446,7 +493,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.iv_menu:
-			showPopupMenu(v);
+			showPopupMenu();
 			break;
 		case R.id.messageBtn:
 			startIntent(MyMessageActivity.class);
@@ -482,7 +529,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			intent1.putExtra("tab_id",2);
 			startActivity(intent1);
 			break;
-	case R.id.moreInfo:
+	case R.id.iv_moreInfo:
             if(isButton){
                 sexTxt.setVisibility(View.VISIBLE);
 				tv_gender.setVisibility(View.VISIBLE);
@@ -496,7 +543,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
                 birthdayTxt.setVisibility(View.VISIBLE);
 				tv_birthday.setVisibility(View.VISIBLE);
 				tv_birthday.setText(birthday+"");
-                moreInfo.setText("隐藏信息>>");
+                iv_moreInfo.setImageResource(R.mipmap.mul_up);
                 isButton = false;
             }else {
                 sexTxt.setVisibility(View.GONE);
@@ -507,7 +554,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 				tv_nation.setVisibility(View.GONE);
                 birthdayTxt.setVisibility(View.GONE);
 				tv_birthday.setVisibility(View.GONE);
-                moreInfo.setText("更多信息>>");
+                iv_moreInfo.setImageResource(R.mipmap.mul_down);
                 isButton = true;
             }
 			break;
@@ -549,63 +596,63 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	}
 
 	//菜单按钮中的各个子页面点击事件
-	private void showPopupMenu(View view) {
+	private void showPopupMenu() {
+		//更新popupwindow的状态
+		window.update();
+		//以下拉的方式显示，并且可以设置显示的位置
+		window.showAsDropDown(iv_menu, 0, 0);
 
-        PopupMenu popup = new PopupMenu(MainActivity.this, view, Gravity.CENTER_HORIZONTAL);
-
-        popup.getMenuInflater().inflate(R.menu.main, popup.getMenu());
-
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.personal:
-                        startIntent(PersonalAllActivity1.class);
-                        return true;
-                    case R.id.activity:
-                    	startIntent(ProjectMessageManageActivity.class);
-                        return true;
-					case R.id.club_activity:
+		lsvMore.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+				menuListAdapter.setCurrentItem(position);
+				menuListAdapter.setClick(true);
+				menuListAdapter.notifyDataSetChanged();
+				switch (position) {
+					case 0:
+						startIntent(PersonalAllActivity1.class);
+						break;
+					case 1:
+						startIntent(ProjectMessageManageActivity.class);
+						break;
+					case 2:
 						startIntent(ClubProjectListActivity.class);
-						return true;
-                     case R.id.scores:
+						break;
+					case 3:
 						startIntent(MyScoresActivity.class);
-						return true;
-					case R.id.exchange:
+						break;
+					case 4:
 						startIntent(ExchangeScoresActivity.class);
-						return true;
-					case R.id.card:
+						break;
+					case 5:
 						startIntent(MyCardActivity.class);
-						return true;
-					case R.id.sign:
+						break;
+					case 6:
 						if (authorized == 0){
 							showDialog("请先实名认证，认证通过后才可以签到!");
 						}else if (authorized ==1){
 							recordPermission();
 						}else if (authorized == 2){
-                            showToast("您提交的实名认证正在审核中，审核通过后即可签到!");
+							showToast("您提交的实名认证正在审核中，审核通过后即可签到!");
 						}else if (authorized == 3){
 							showDialog("您提交的实名认证未审核通过，通过后即可签到！");
 						}
-						return true;
-					case R.id.messages:
+						break;
+					case 7:
 						startIntent(MyMessageActivity.class);
-						return true;
-					case R.id.collection:
+						break;
+					case 8:
 						startIntent(CollectionActivity.class);
-						return true;
-					case R.id.question:
+						break;
+					case 9:
 						startIntent(ReportProblemActivity.class);
-						return true;
-					case R.id.setting:
+						break;
+					case 10:
 						startIntent(SettingActivity.class);
-						return true;
-                }
-                return false;
-            }
-        });
-
-        popup.show();
+						break;
+				}
+			}
+		});
     }
 	// 开始自动翻页
 	private void getTagsList() {

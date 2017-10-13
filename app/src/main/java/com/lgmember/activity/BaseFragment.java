@@ -18,10 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lgmember.util.ActivityCollector;
+import com.lgmember.util.StatusBarCompat;
 
 public class BaseFragment extends Fragment {
 
 	protected Context context;
+
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		StatusBarCompat.compat(getActivity(), getResources().getColor(R.color.main_2));//设置顶部状态栏的颜色
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
 
 	public void showToast(String string ) {
 		Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();

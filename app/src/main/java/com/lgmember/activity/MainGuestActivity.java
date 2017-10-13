@@ -40,7 +40,8 @@ import me.hwang.widgets.SmartPullableLayout;
 public class MainGuestActivity extends BaseActivity implements OnClickListener,
 		ProjectMessageListBusiness.ProjectMessageListResultHandler,TagListBusiness.TagListResultHandler{
 
-    private TextView menuTxt,tv_login,tv_register,top_tv_login,top_tv_exit,moreactivity,rmoreactivity;
+    private TextView tv_login,tv_register,top_tv_login,top_tv_exit,moreactivity,rmoreactivity;
+	private ImageView iv_menu;
 	private XBanner allBanner,recommendBanner;//轮播控件
 	private ArrayList<String> immediatelyImages ;
 	private ArrayList<String> recommendImages;
@@ -74,7 +75,7 @@ public class MainGuestActivity extends BaseActivity implements OnClickListener,
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_guest);
+		setContentView(R.layout.activity_main_guest1);
 		initView();
 	}
 
@@ -111,12 +112,12 @@ public class MainGuestActivity extends BaseActivity implements OnClickListener,
 		tv_register = (TextView)findViewById(R.id.tv_register);
 		tv_register.setOnClickListener(this);
 
-		menuTxt = (TextView) findViewById(R.id.menu_txt);
+		iv_menu = (ImageView) findViewById(R.id.iv_menu);
 		moreactivity = (TextView)findViewById(R.id.moreactivity);
 		rmoreactivity = (TextView)findViewById(R.id.rmoreactivity);
 		allBanner = (XBanner) findViewById(R.id.allBanner);
 		recommendBanner = (XBanner) findViewById(R.id.recommendBanner);
-		menuTxt.setOnClickListener(this);
+		iv_menu.setOnClickListener(this);
 		moreactivity.setOnClickListener(this);
 		rmoreactivity.setOnClickListener(this);
         recyclerView = (RecyclerView)findViewById(R.id.rc_tags_list);
@@ -225,7 +226,7 @@ public class MainGuestActivity extends BaseActivity implements OnClickListener,
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.menu_txt:
+		case R.id.iv_menu:
 			showPopupMenu(v);
 			break;
 		case R.id.top_tv_login:

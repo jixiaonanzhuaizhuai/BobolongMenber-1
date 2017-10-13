@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/content"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.lgmember.view.TopBarView
@@ -13,29 +14,33 @@
         custom:titleColor="#FFFFFF"
         custom:leftBtn="@drawable/back_page"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:gravity="center">
         <ImageButton
             android:id="@+id/record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@mipmap/record_deful"
+            android:background="@mipmap/record_numal"
+            android:layout_centerInParent="true"
             android:onClick="toggleRecording"
             android:textColor="@color/white"
+            android:layout_below="@+id/topbar"
+            android:layout_marginTop="20dp"
             android:textSize="18sp" />
         <TextView
             android:id="@+id/tv_record_state"
             android:text="录音签到"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/record"/>
+            android:layout_marginTop="10dp" />
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/tv_record_state"/>
         <!--<Button
             android:id="@+id/btn_code_sign"
             android:layout_below="@+id/tv_record_state"
@@ -50,17 +55,17 @@
 
         <Button
             android:id="@+id/btn_scan"
-            android:layout_below="@+id/tv_record_state"
+            android:layout_below="@+id/line"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            android:layout_marginTop="15dp"
             android:textColor="#eeeeee"
             android:textSize="18sp"
-            android:background="@drawable/login_btn_bg"
+            android:layout_margin="10dp"
+            android:background="@drawable/scan_sign_bg"
+            android:textStyle="bold"
             android:text="扫描二维码签到"
             />
-    </RelativeLayout>
 
 </RelativeLayout>

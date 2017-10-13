@@ -86,6 +86,7 @@
         <activity android:name=".project.ClubActivityAllListActivity"/>
         <activity android:name=".project.MyClubProjectListActivity"/>
         <activity android:name=".project.ClubProjectMessageDetailActivity"/>
+        <activity android:name=".MainGuest1Activity"/>
 
         <service
             android:name="com.lgmember.service.DemoPushService"

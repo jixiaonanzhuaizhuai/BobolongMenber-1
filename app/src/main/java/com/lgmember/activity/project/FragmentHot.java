@@ -1,6 +1,7 @@
 package com.lgmember.activity.project;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -82,7 +83,7 @@ public class FragmentHot extends BaseFragment implements ProjectMessageListBusin
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_hot, container, false);
+		View view = inflater.inflate(R.layout.fragment_activitylist, container, false);
 		init(view);
 		return view;
 	}
@@ -93,9 +94,6 @@ public class FragmentHot extends BaseFragment implements ProjectMessageListBusin
 		pageNo = 1;
 		projectMessageList.clear();
 		lv_hot_activity_list.setEnabled(false);
-		ll_loading.setVisibility(View.VISIBLE);
-		progressBar.setVisibility(View.VISIBLE);
-		loadDesc.setText("正在拼命加载");
 		getData();
 	}
 
@@ -111,7 +109,7 @@ public class FragmentHot extends BaseFragment implements ProjectMessageListBusin
 		rc_tags_list.setAdapter(tagsListAdapter);
 		topBar = (TopBarView)view.findViewById(R.id.topbar);
 		topBar.setClickListener(this);
-		lv_hot_activity_list=(ListView)view.findViewById(R.id.lv_hot_activity_list);
+		lv_hot_activity_list=(ListView)view.findViewById(R.id.lv_all_activity_list);
 		projectMessageList = new ArrayList<>();
 		adapter = new ProjectMessageListAdapter(
 				getActivity(),projectMessageList);
@@ -121,7 +119,9 @@ public class FragmentHot extends BaseFragment implements ProjectMessageListBusin
 			@Override
 			public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
-
+				adapter.setCurrentItem(position);
+				adapter.setClick(true);
+				adapter.notifyDataSetChanged();
 				ProjectMessage projectMessage =
 						projectMessageList.get(position);
 				DataLargeHolder.getInstance()
@@ -168,7 +168,7 @@ public class FragmentHot extends BaseFragment implements ProjectMessageListBusin
 							pageNo = 1;
 							projectMessageList.clear();
 							getData();
-							Thread.sleep(3000);
+							Thread.sleep(2000);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -183,7 +183,7 @@ public class FragmentHot extends BaseFragment implements ProjectMessageListBusin
 					@Override
 					public void run() {
 						try {
-							Thread.sleep(3000);
+							Thread.sleep(1000);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -260,6 +260,7 @@ public class FragmentHot extends BaseFragment implements ProjectMessageListBusin
 	class TagsListHorizontalAdapter extends RecyclerView.Adapter<TagsListHorizontalAdapter.ViewHolder> {
 
 		private List<Tag> mTagsList ;
+		int currentPosition = 0;
 		class ViewHolder extends  RecyclerView.ViewHolder{
 			LinearLayout ll_tag_item;
 			TextView tv_tag_name;
@@ -284,6 +285,11 @@ public class FragmentHot extends BaseFragment implements ProjectMessageListBusin
 				@Override
 				public void onClick(View v) {
 					int position = holder.getAdapterPosition();
+					currentPosition = position;
+					tagsListAdapter.notifyDataSetChanged();
+					adapter.setCurrentItem(-1);
+					adapter.setClick(true);
+					adapter.notifyDataSetChanged();
 					Tag tag = mTagsList.get(position);
 					tagNum = tag.getId();
 					projectMessageList.clear();
@@ -299,6 +305,13 @@ public class FragmentHot extends BaseFragment implements ProjectMessageListBusin
 		public void onBindViewHolder(TagsListHorizontalAdapter.ViewHolder holder, int position) {
 			Tag tag = mTagsList.get(position);
 			holder.tv_tag_name.setText(""+tag.getTag());
+			if (currentPosition == position){
+				holder.ll_tag_item.setBackgroundResource(R.drawable.tag_bg_press);
+				holder.tv_tag_name.setTextColor(Color.WHITE);
+			}else {
+				holder.ll_tag_item.setBackgroundResource(R.drawable.tag_bg_nomal);
+				holder.tv_tag_name.setTextColor(getActivity().getResources().getColor(R.color.main_2));
+			}
 		}
 
 		@Override

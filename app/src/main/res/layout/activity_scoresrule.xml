@@ -18,17 +18,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="红卡升级所需积分："/>
         <TextView
             android:id="@+id/rule1"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -37,15 +40,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="红卡升级后扣除积分："/>
         <TextView
             android:id="@+id/rule2"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -54,15 +55,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="银卡升级所需积分："/>
         <TextView
             android:id="@+id/rule3"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -71,15 +70,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="银卡升级后扣除积分："/>
         <TextView
             android:id="@+id/rule4"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -88,15 +85,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="金卡升级所需积分："/>
         <TextView
             android:id="@+id/rule5"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -105,15 +100,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="金卡升级后扣除积分："/>
         <TextView
             android:id="@+id/rule6"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -122,15 +115,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="银卡降级积分："/>
         <TextView
             android:id="@+id/rule7"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -139,15 +130,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="金卡降级积分："/>
         <TextView
             android:id="@+id/rule8"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -156,15 +145,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="会员报名积分："/>
         <TextView
             android:id="@+id/rule9"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -173,15 +160,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="注册积分："/>
         <TextView
             android:id="@+id/rule10"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -190,15 +175,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="积分惩罚："/>
         <TextView
             android:id="@+id/rule11"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -207,15 +190,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="完善资料积分："/>
         <TextView
             android:id="@+id/rule12"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -224,15 +205,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="分享活动积分："/>
         <TextView
             android:id="@+id/rule13"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -241,15 +220,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="A级活动基础积分："/>
         <TextView
             android:id="@+id/rule14"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout><LinearLayout
@@ -257,15 +234,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="#000000"
         android:text="B级活动基础积分："/>
     <TextView
         android:id="@+id/rule15"
         android:textSize="18sp"
-        android:textColor="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>
@@ -274,15 +249,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="C级活动基础积分："/>
         <TextView
             android:id="@+id/rule16"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -291,15 +264,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="活动签到积分翻倍倍数："/>
         <TextView
             android:id="@+id/rule17"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -308,15 +279,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="节目签到积分："/>
         <TextView
             android:id="@+id/rule18"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -325,15 +294,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="#000000"
         android:text="节目签到积分翻倍倍数："/>
     <TextView
         android:id="@+id/rule19"
         android:textSize="18sp"
-        android:textColor="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>
@@ -342,15 +309,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="A级活动红卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule20"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -359,15 +324,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="A级活动银卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule21"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -376,15 +339,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="A级活动金卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule22"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -393,15 +354,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="A级活动钻石卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule23"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -410,15 +369,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="#000000"
         android:text="B级活动红卡会员翻倍倍数："/>
     <TextView
         android:id="@+id/rule24"
         android:textSize="18sp"
-        android:textColor="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout><LinearLayout
@@ -426,15 +383,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="#000000"
         android:text="B级活动银卡会员翻倍倍数："/>
     <TextView
         android:id="@+id/rule25"
         android:textSize="18sp"
-        android:textColor="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>
@@ -443,15 +398,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="B级活动金卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule26"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -460,15 +413,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="B级活动钻石卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule27"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -477,15 +428,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="C级活动红卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule28"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -494,15 +443,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="C级活动银卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule29"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -511,15 +458,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:text="C级活动金卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule30"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -528,17 +473,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_height="wrap_content"
             android:text="C级活动钻石卡会员翻倍倍数："/>
         <TextView
             android:id="@+id/rule31"
             android:textSize="18sp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>
 </ScrollView>

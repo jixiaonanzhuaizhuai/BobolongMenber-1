@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.github.ikidou.fragmentBackHandler.BackHandlerHelper;
 import com.lgmember.activity.R;
+import com.lgmember.util.StatusBarCompat;
 
 
 public class ProjectMessageManageActivity extends FragmentActivity  {
@@ -43,7 +44,7 @@ public class ProjectMessageManageActivity extends FragmentActivity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_manage);
-
+		StatusBarCompat.compat(this, getResources().getColor(R.color.main_2));//设置顶部状态栏的颜色
 		initView();
 		Intent intent = getIntent();
 		int tab_id = intent.getIntExtra("tab_id",99);
@@ -72,9 +73,9 @@ public class ProjectMessageManageActivity extends FragmentActivity  {
 					.setIndicator(getTabItemView(i));
 			// 将Tab按钮添加进Tab选项卡中
 			mTabHost.addTab(tabSpec, fragmentArray[i], null);
-			// 设置Tab按钮的背景
+			/*// 设置Tab按钮的背景
 			mTabHost.getTabWidget().getChildAt(i)
-					.setBackgroundResource(R.drawable.manage_tab_item_bg);
+					.setBackgroundResource(R.drawable.manage_tab_item_bg);*/
 		}
 	}
 
@@ -88,6 +89,7 @@ public class ProjectMessageManageActivity extends FragmentActivity  {
 		imageView.setImageResource(mImageViewArray[index]);
 
 		TextView textView = (TextView) view.findViewById(R.id.textview);
+		textView.setTextColor(getResources().getColor(R.color.main_2));
 		textView.setText(mTextviewArray[index]);
 
 		return view;

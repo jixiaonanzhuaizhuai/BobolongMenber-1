@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.github.ikidou.fragmentBackHandler.BackHandlerHelper;
 import com.lgmember.activity.R;
+import com.lgmember.util.StatusBarCompat;
 
 
 public class ExchangeScoresActivity extends FragmentActivity {
@@ -28,9 +29,9 @@ public class ExchangeScoresActivity extends FragmentActivity {
 
 	// 定义数组来存放按钮图片
 	private int mImageViewArray[] = {
-			R.drawable.manage_tab_item_alreadyjoin,
-			R.drawable.manage_tab_item_soonjoin,
-			R.drawable.manage_tab_item_hot};
+			R.drawable.manage_tab_item_allgift,
+			R.drawable.manage_tab_item_selectgift,
+			R.drawable.manage_tab_item_alreadgift};
 
 	// Tab选项卡的文字
 	private String mTextviewArray[] = { "所有礼品", "可兑换礼品","已兑换礼品"};
@@ -39,6 +40,7 @@ public class ExchangeScoresActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_exchangescores);
+		StatusBarCompat.compat(this, getResources().getColor(R.color.main_2));//设置顶部状态栏的颜色
 		initView();
 	}
 
@@ -64,9 +66,9 @@ public class ExchangeScoresActivity extends FragmentActivity {
 					.setIndicator(getTabItemView(i));
 			// 将Tab按钮添加进Tab选项卡中
 			mTabHost.addTab(tabSpec, fragmentArray[i], null);
-			// 设置Tab按钮的背景
+		/*	// 设置Tab按钮的背景
 			mTabHost.getTabWidget().getChildAt(i)
-					.setBackgroundResource(R.drawable.manage_tab_item_bg);
+					.setBackgroundResource(R.drawable.manage_tab_item_bg);*/
 		}
 	}
 
@@ -80,6 +82,7 @@ public class ExchangeScoresActivity extends FragmentActivity {
 		imageView.setImageResource(mImageViewArray[index]);
 
 		TextView textView = (TextView) view.findViewById(R.id.textview);
+		textView.setTextColor(getResources().getColor(R.color.main_2));
 		textView.setText(mTextviewArray[index]);
 
 		return view;

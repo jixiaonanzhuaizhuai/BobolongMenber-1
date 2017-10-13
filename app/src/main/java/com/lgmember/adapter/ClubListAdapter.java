@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -73,7 +74,8 @@ public class ClubListAdapter extends BaseAdapter implements View.OnClickListener
             TextView dep = (TextView) view.findViewById(R.id.tv_dep);
             TextView create_time = (TextView) view.findViewById(R.id.tv_create_time);
             TextView description = (TextView) view.findViewById(R.id.tv_description);
-            Button added = (Button)view.findViewById(R.id.btn_added);
+            LinearLayout ll_added = (LinearLayout) view.findViewById(R.id.ll_added);
+            TextView txt_added = (TextView)view.findViewById(R.id.txt_added);
 
             //打包
             vh = new ViewHolder();
@@ -82,7 +84,8 @@ public class ClubListAdapter extends BaseAdapter implements View.OnClickListener
             vh.dep = dep;
             vh.create_time = create_time;
             vh.description = description;
-            vh.added = added;
+            vh.ll_added = ll_added;
+            vh.txt_added = txt_added;
             //上身
             view.setTag(vh);
         } else {
@@ -99,16 +102,16 @@ public class ClubListAdapter extends BaseAdapter implements View.OnClickListener
         vh.description.setText(""+club.getDescription());
         if (flag == 0){
             if (club.isAdded()){
-                vh.added.setText("已加入");
-                vh.added.setEnabled(false);
+                vh.txt_added.setText("已加入");
+                vh.ll_added.setEnabled(false);
             }else {
-                vh.added.setText("加入");
-                vh.added.setOnClickListener(this);
-                vh.added.setTag(position);
+                vh.txt_added.setText("加入");
+                vh.ll_added.setOnClickListener(this);
+                vh.ll_added.setTag(position);
             }
         }else {
-            vh.added.setText("已加入");
-            vh.added.setEnabled(false);
+            vh.txt_added.setText("已加入");
+            vh.ll_added.setEnabled(false);
         }
 
 
@@ -128,7 +131,8 @@ public class ClubListAdapter extends BaseAdapter implements View.OnClickListener
         public TextView dep;
         public TextView create_time;
         public TextView description;
-        public Button added;
+        public LinearLayout ll_added;
+        public TextView txt_added;
 
     }
 

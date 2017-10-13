@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_1"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -40,9 +41,12 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/layout_pullable"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
             <ListView
                 android:id="@+id/lv_club_list"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="5sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </ListView>

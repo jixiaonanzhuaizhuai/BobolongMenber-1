@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:gravity="center_horizontal"
+    <com.lgmember.view.TopBarView
+        android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="帮助说明"/>
+        custom:titleText="帮助说明"
+        custom:titleSize="6sp"
+        custom:titleColor="#FFFFFF"
+        custom:leftBtn="@drawable/back_page"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
