@@ -49,6 +49,8 @@ public class CollectionActivity extends BaseActivity implements CollectionListBu
 
 	private List<ProjectMessage> collectionList;
 	private ProjectMessageListAdapter adapter;
+
+
 	private String TAG = "-CollectionActivity-";
 	private SmartPullableLayout mPullableLayout;
 	private static final int ON_REFRESH = 1;

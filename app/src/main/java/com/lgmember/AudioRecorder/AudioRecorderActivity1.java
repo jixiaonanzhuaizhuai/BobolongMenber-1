@@ -264,31 +264,16 @@ public class AudioRecorderActivity1 extends BaseActivity
     }
 
     public void toggleRecording(View v) {
-
-        AndPermission.with(this)
-                .requestCode(REQUEST_CODE_RECORD_AUDIO)
-                .permission(Manifest.permission.RECORD_AUDIO)
-                .callback(permissionListener)
-                .rationale(new RationaleListener() {
-                    @Override
-                    public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
-                        AndPermission.rationaleDialog(
-                                AudioRecorderActivity1.this, rationale).
-                                show();
-                    }
-                })
-                .start();
-
-        /*Util.wait(100, new Runnable() {
+        onPermissionRequests(Manifest.permission.WRITE_EXTERNAL_STORAGE, new OnBooleanListener() {
             @Override
-            public void run() {
-                if (isRecording) {
-                    stopRecording();
-                } else {
+            public void onClick(boolean bln) {
+                if(bln){
                     resumeRecording();
+                }else{
+                    showToast("录音权限被拒绝");
                 }
             }
-        });*/
+        });
     }
 
     private void resumeRecording() {
@@ -472,7 +457,8 @@ public class AudioRecorderActivity1 extends BaseActivity
                             if (isRecording) {
                                 stopRecording();
                             } else {
-                                resumeRecording();
+                                showToast("hahahahah");
+                                /*resumeRecording();*/
                             }
                         }
                     });

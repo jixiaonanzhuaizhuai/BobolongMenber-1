@@ -29,7 +29,7 @@ public class VersionBusiness {
     private VersionResulHandler handler;
     public interface VersionResulHandler extends HttpHandler {
 
-        public void onSuccess(String s);
+        public void onSuccess(int versionCode);
 
     }
     public void setHandler(VersionResulHandler handler){

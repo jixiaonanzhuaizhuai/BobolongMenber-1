@@ -119,6 +119,7 @@ public class PersonalAllActivity1 extends BaseActivity1 implements TopBarView.on
                 break;
         }
     }
+
     public void  selectFromPicture(View v){
         final View view=v ;
         final String[] items=new String[]{"拍照","相册"};

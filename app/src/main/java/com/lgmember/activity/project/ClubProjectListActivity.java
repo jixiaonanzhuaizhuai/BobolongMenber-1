@@ -81,6 +81,7 @@ protected void onResume() {
 
 private void getInitData() {
         pageNo = 1;
+        lv_club_list.setEnabled(false);
         clubList.clear();
         getData();
 
@@ -94,7 +95,7 @@ private void init() {
         progressBar = (ProgressBar)findViewById(R.id.progressBar1);
         loadDesc = (TextView)findViewById(R.id.tv_loading_desc);
         clubList = new ArrayList<>();
-        adapter = new ClubListAdapter(this,clubList,this,0);
+        adapter = new ClubListAdapter(this,clubList,this);
         lv_club_list.setAdapter(adapter);
         lv_club_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -163,37 +164,38 @@ private void init() {
                         });
                 }
 
-                private void getData() {
-                        String search = "";
-                        ClubListBusiness clubListBusiness = new ClubListBusiness(context, pageNo, pageSize, search);
-                        clubListBusiness.setHandler(this);
-                        clubListBusiness.getClubList();
+        private void getData() {
+                String search = "";
+                ClubListBusiness clubListBusiness = new ClubListBusiness(context, pageNo, pageSize, search);
+                clubListBusiness.setHandler(this);
+                clubListBusiness.getClubList();
+        }
+
+
+        @Override
+        public void onSuccess(ClubListResultBean bean) {
+                lv_club_list.setEnabled(true);
+                if (bean.getData() == null) {
+                        progressBar.setVisibility(View.GONE);
+                        loadDesc.setText("还没有数据");
+                } else {
+                        ll_loading.setVisibility(View.GONE);
+                        total = bean.getTotal();
+                        clubList.addAll(bean.getData());
+                        adapter.notifyDataSetChanged();
+                        isLoading = false;
                 }
+        }
 
+        @Override
+        public void onBackClick() {
+                finish();
+        }
 
-                @Override
-                public void onSuccess(ClubListResultBean bean) {
-                        if (bean.getData() == null) {
-                                progressBar.setVisibility(View.GONE);
-                                loadDesc.setText("还没有数据");
-                        } else {
-                                ll_loading.setVisibility(View.GONE);
-                                total = bean.getTotal();
-                                clubList.addAll(bean.getData());
-                                adapter.notifyDataSetChanged();
-                                isLoading = false;
-                        }
-                }
+        @Override
+        public void onRightClick() {
 
-                @Override
-                public void onBackClick() {
-                        finish();
-                }
-
-                @Override
-                public void onRightClick() {
-
-                }
+        }
 
         @Override
         public void click(View v) {
@@ -209,7 +211,6 @@ private void init() {
 
         @Override
         public void onSuccess() {
-                showToast("成功加入俱乐部");
                 getInitData();
         }
 }

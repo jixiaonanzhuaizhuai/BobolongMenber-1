@@ -71,8 +71,6 @@ public class App extends Application {
         cookieStore.removeAll();
     }*/
 
-
-
     /**
      * 判断网络是否可用
      *
@@ -91,7 +89,6 @@ public class App extends Application {
             }
             return true;
         }
-
     }
 
     /**

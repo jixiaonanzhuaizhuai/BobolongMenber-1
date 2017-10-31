@@ -86,7 +86,7 @@ public class LoginImpl extends HttpApi {
 
                         try {
                             int code = response.getInt("code");
-                            String version = response.getString("version");
+                            int version = response.getInt("version");
                             if (code == 0){
                                 handler.onSuccess(version);
                             }else {

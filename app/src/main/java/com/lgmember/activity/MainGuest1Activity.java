@@ -105,7 +105,7 @@ public class MainGuest1Activity extends BaseActivity implements OnClickListener,
 	private int pageNo = 1;
 	private int pageSize = 3;
 	private BadgeView badgeView;
-	private String currVersion;
+	private int currVersion;
 
     private String phone;
 	private AlertDialog dialog;
@@ -575,17 +575,17 @@ public class MainGuest1Activity extends BaseActivity implements OnClickListener,
 	}
 
 	@Override
-	public void onSuccess(String s) {
+	public void onSuccess(int sVersionCode) {
 
 		//获取手机版本号
 		PackageManager pm = getPackageManager();
 		try {
 			PackageInfo pInfo = pm.getPackageInfo(getPackageName(),0);
-			currVersion = String.valueOf(pInfo.versionCode);
+			currVersion = pInfo.versionCode;
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
-		if (!s.equals(currVersion)){
+		if (sVersionCode > currVersion){
 			showUpdateDialog();
 		}
 	}

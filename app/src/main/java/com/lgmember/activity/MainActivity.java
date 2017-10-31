@@ -62,6 +62,7 @@ import com.lgmember.business.ShowNetworkImgBusiness;
 import com.lgmember.business.VersionBusiness;
 import com.lgmember.business.message.MemberMessageBusiness;
 import com.lgmember.business.message.RemindNumBusiness;
+import com.lgmember.business.project.ClubListBusiness;
 import com.lgmember.business.project.MyClubListBusiness;
 import com.lgmember.business.project.ProjectMessageListBusiness;
 import com.lgmember.business.project.TagListBusiness;
@@ -96,7 +97,7 @@ import me.hwang.widgets.SmartPullableLayout;
 
 public class MainActivity extends BaseActivity implements OnClickListener,
 		ProjectMessageListBusiness.ProjectMessageListResultHandler,
-		MemberMessageBusiness.MemberMessageResulHandler,ShowNetworkImgBusiness.ShowNetworkImgResulHandler,RemindNumBusiness.RemindNumResultHandler,TagListBusiness.TagListResultHandler,VersionBusiness.VersionResulHandler,ApkBusiness.ApkResulHandler,MyClubListBusiness.MyClubListResulHandler{
+		MemberMessageBusiness.MemberMessageResulHandler,ShowNetworkImgBusiness.ShowNetworkImgResulHandler,RemindNumBusiness.RemindNumResultHandler,TagListBusiness.TagListResultHandler,VersionBusiness.VersionResulHandler,ApkBusiness.ApkResulHandler,ClubListBusiness.ClubListResulHandler{
     private TextView sexTxt,ageTxt,nationTxt,birthdayTxt,editInfo,cmoreactivity,moreactivity,rmoreactivity,messageBtn,signBtn;
 	private TextView tv_name,tv_card_no,tv_point,tv_level,tv_gender,tv_age,tv_nation,tv_birthday;
 	private ImageView iv_photo,iv_menu,iv_moreInfo;
@@ -112,7 +113,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private int pageNo = 1;
 	private int pageSize = 3;
 	private BadgeView badgeView;
-	private String currVersion;
+	private int currVersion;
 
     private String cardNum,phone;
 	private AlertDialog dialog;
@@ -191,11 +192,12 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		//录音
 		sp = this.getSharedPreferences(Common.SP_NAME, MODE_PRIVATE);
 		if_auto_start = sp.getBoolean(Common.SP_IF_RECORDER,false);
-		versionNoUpdateTime();pageNo = 1;
+		versionNoUpdateTime();
+		pageNo = 1;
 
 		getUnreadRemindNum();
 		getMemberMsg();
-		getMyClubList();
+		getClubList();
 		getProjectMessage();
 		getHotProjectMessage();
 		//getTagsList();
@@ -467,10 +469,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	}
 
 
-	private void getMyClubList() {
-		MyClubListBusiness myClubListBusiness = new MyClubListBusiness(context);
-		myClubListBusiness.setHandler(this);
-		myClubListBusiness.myClubList();
+	private void getClubList() {
+		String search = "";
+		ClubListBusiness clubListBusiness = new ClubListBusiness(context, pageNo, pageSize, search);
+		clubListBusiness.setHandler(this);
+		clubListBusiness.getClubList();
 
 	}
 	private void getProjectMessage() {
@@ -677,8 +680,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			}
 			myClubBanner.setData(myClubImages,myClubTitleList);
 		}
-
-
 	}
 
 	@Override
@@ -848,17 +849,17 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	}
 
 	@Override
-	public void onSuccess(String s) {
+	public void onSuccess(int sVersionCode) {
 
 		//获取手机版本号
 		PackageManager pm = getPackageManager();
 		try {
 			PackageInfo pInfo = pm.getPackageInfo(getPackageName(),0);
-			currVersion = String.valueOf(pInfo.versionCode);
+			currVersion = pInfo.versionCode;
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
-		if (!s.equals(currVersion)){
+		if (sVersionCode > currVersion){
 			showUpdateDialog();
 		}
 	}

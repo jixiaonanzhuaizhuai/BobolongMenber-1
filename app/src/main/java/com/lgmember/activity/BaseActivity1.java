@@ -38,7 +38,9 @@ public class BaseActivity1 extends AppCompatActivity implements TakePhoto.TakeRe
 		StatusBarCompat.compat(this, getResources().getColor(R.color.main_2));//设置顶部状态栏的颜色
 		Log.d("-----BaseActivity---",getClass().getSimpleName());
 		ActivityCollector.addActivity(this);
+
 		getTakePhoto().onCreate(savedInstanceState);
+
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null){
 			actionBar.hide();

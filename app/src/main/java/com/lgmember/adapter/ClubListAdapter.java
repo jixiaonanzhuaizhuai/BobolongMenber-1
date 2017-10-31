@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lgmember.activity.R;
@@ -30,14 +31,13 @@ public class ClubListAdapter extends BaseAdapter implements View.OnClickListener
 
     private List<Club> clubList;
     private Context context;
-    private int flag;
+    private boolean flag;
     private Callback mCallback;
     private LayoutInflater layoutInflater;
 
-    public ClubListAdapter(Context context, List<Club> clubList, Callback callback,int flag) {
+    public ClubListAdapter(Context context, List<Club> clubList, Callback callback) {
         this.context = context;
         this.clubList = clubList;
-        this.flag = flag;
         this.mCallback = callback;
         this.layoutInflater = LayoutInflater.from(context);
     }
@@ -100,29 +100,21 @@ public class ClubListAdapter extends BaseAdapter implements View.OnClickListener
         vh.dep.setText(""+club.getDep());
         vh.create_time.setText(""+club.getCreate_time());
         vh.description.setText(""+club.getDescription());
-        if (flag == 0){
-            if (club.isAdded()){
-                vh.txt_added.setText("已加入");
-                vh.ll_added.setEnabled(false);
-            }else {
-                vh.txt_added.setText("加入");
-                vh.ll_added.setOnClickListener(this);
-                vh.ll_added.setTag(position);
-            }
-        }else {
+        if (club.isAdded()){
             vh.txt_added.setText("已加入");
-            vh.ll_added.setEnabled(false);
+            vh.ll_added.setOnClickListener(this);
+            vh.ll_added.setTag(position);
+        }else {
+            vh.txt_added.setText("加入");
+            vh.ll_added.setOnClickListener(this);
+            vh.ll_added.setTag(position);
         }
-
-
-
         return view;
     }
 
     @Override
     public void onClick(View v) {
         mCallback.click(v);
-
     }
 
     private class ViewHolder {

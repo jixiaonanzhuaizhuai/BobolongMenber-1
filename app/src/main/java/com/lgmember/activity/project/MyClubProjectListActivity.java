@@ -96,7 +96,7 @@ private void init() {
         progressBar = (ProgressBar)findViewById(R.id.progressBar1);
         loadDesc = (TextView)findViewById(R.id.tv_loading_desc);
         clubList = new ArrayList<>();
-        adapter = new ClubListAdapter(this,clubList,this,1);
+        adapter = new ClubListAdapter(this,clubList,this);
         lv_club_list.setAdapter(adapter);
         lv_club_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

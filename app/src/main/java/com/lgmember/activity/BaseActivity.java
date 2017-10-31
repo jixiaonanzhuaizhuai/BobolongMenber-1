@@ -5,27 +5,27 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import android.os.CountDownTimer;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lgmember.activity.score.ExchangeGiftDetailActivity;
+import com.lgmember.AudioRecorder.OnBooleanListener;
 import com.lgmember.util.ActivityCollector;
 import com.lgmember.util.StatusBarCompat;
 import com.lgmember.util.StringUtil;
+import android.Manifest;
 
 public class BaseActivity extends AppCompatActivity {
 
 	protected Context context;
+	private OnBooleanListener onPermissionListener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +110,50 @@ public class BaseActivity extends AppCompatActivity {
 		normalDialog.show();
 	}
 
+	/**
+	 * 权限请求
+	 * @param permission Manifest.permission.CAMERA
+	 * @param onBooleanListener 权限请求结果回调，true-通过  false-拒绝
+	 */
+	public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
+		onPermissionListener = onBooleanListener;
+		if (ContextCompat.checkSelfPermission(this,
+				permission)
+				!= PackageManager.PERMISSION_GRANTED) {
+			// Should we show an explanation?
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+					Manifest.permission.READ_CONTACTS)) {
+				//权限已有
+				onPermissionListener.onClick(true);
+			} else {
+				//没有权限，申请一下
+				ActivityCompat.requestPermissions(this,
+						new String[]{permission},
+						1);
+			}
+		}else{
+			onPermissionListener.onClick(true);
+		}
+	}
 
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		if (requestCode == 1) {
+			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				//权限通过
+				if (onPermissionListener != null) {
+					onPermissionListener.onClick(true);
+				}
+			} else {
+				//权限拒绝
+				if (onPermissionListener != null) {
+					onPermissionListener.onClick(false);
+				}
+			}
+			return;
+		}
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
 
 
 }

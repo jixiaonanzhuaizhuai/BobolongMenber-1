@@ -147,7 +147,7 @@ public class ProjectMessageDetailActivity extends BaseActivity implements View.O
 	public void onClick(View v) {
 		switch (v.getId()){
 			case R.id.tv_hyperlink:
-				Uri uri = Uri.parse("https://www.baidu.com/");
+				Uri uri = Uri.parse(getText(tv_hyperlink));
 				Intent intent = new Intent(Intent.ACTION_VIEW,uri);
 				startActivity(intent);
 				break;

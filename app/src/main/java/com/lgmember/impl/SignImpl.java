@@ -169,7 +169,6 @@ public class SignImpl extends HttpApi {
 
         File file = new File(path);
 
-        Log.i(TAG, "uploadRecond: "+timestamp);
 
         MyOkHttp mMyOkhttp = new MyOkHttp(okHttpClient());
         mMyOkhttp.upload()

@@ -34,7 +34,7 @@ public class AboutUsActivity extends BaseActivity implements TopBarView.onTitleB
     private RelativeLayout rl_version_update;
     private TextView tv_version_des;
 
-    private String currVersion;
+    private int currVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,17 +86,17 @@ public class AboutUsActivity extends BaseActivity implements TopBarView.onTitleB
     }
 
     @Override
-    public void onSuccess(String s) {
+    public void onSuccess(int sVersionCode) {
         //获取手机版本号
         PackageManager pm = getPackageManager();
         try {
             PackageInfo pInfo = pm.getPackageInfo(getPackageName(),0);
-            currVersion = String.valueOf(pInfo.versionCode);
+            currVersion = pInfo.versionCode;
 
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        if (!s.equals(currVersion)){
+        if (sVersionCode > currVersion){
             tv_version_des.setText("版本更新");
             rl_version_update.setEnabled(true);
         }else {
