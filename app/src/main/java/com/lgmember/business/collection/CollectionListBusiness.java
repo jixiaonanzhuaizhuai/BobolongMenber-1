@@ -32,6 +32,13 @@ public class CollectionListBusiness {
         collectionImpl = new CollectionImpl();
         collectionImpl.getCollectionList(pageNo,pageSize,tag,handler,context);
     }
+    // 先验证参数的可发性，再登陆
+    public void getClubCollectionList() {
+
+        // 判断活动码是否有效
+        collectionImpl = new CollectionImpl();
+        collectionImpl.getClubCollectionList(pageNo,pageSize,tag,handler,context);
+    }
 
     private CollectionListResulHandler handler;
 

@@ -1,6 +1,5 @@
 package com.lgmember.activity.sign;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,11 +11,8 @@ import android.widget.TextView;
 import com.lgmember.activity.AudioFileFunc;
 import com.lgmember.activity.BaseActivity;
 import com.lgmember.activity.R;
-import com.lgmember.business.UploadImgBusiness;
 import com.lgmember.business.sign.UploadRecordBusiness;
 import com.lgmember.util.ErrorCode;
-
-import java.io.File;
 
 public class ProgramSignActivity extends BaseActivity implements UploadRecordBusiness.UploadRecordResulHandler {
     private final static int FLAG_WAV = 0;
@@ -40,6 +36,7 @@ public class ProgramSignActivity extends BaseActivity implements UploadRecordBus
         txt = (TextView)this.findViewById(R.id.text);
         btn_record_wav.setOnClickListener(btn_record_wav_clickListener);
         uiHandler = new UIHandler();
+
     }
     private Button.OnClickListener btn_record_wav_clickListener = new Button.OnClickListener(){
         public void onClick(View v){
@@ -161,6 +158,7 @@ public class ProgramSignActivity extends BaseActivity implements UploadRecordBus
     private void uploadRecord(String path) {
 
         session_id = java.util.UUID.randomUUID().toString();
+        Log.d(session_id,"****************"+session_id+"****************");
         UploadRecordBusiness uploadRecordBusiness =
                 new UploadRecordBusiness(context,
                         session_id,path,MediaRecordFunc.timestamp);

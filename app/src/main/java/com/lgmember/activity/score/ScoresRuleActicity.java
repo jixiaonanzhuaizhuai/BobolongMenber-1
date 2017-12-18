@@ -1,12 +1,9 @@
 package com.lgmember.activity.score;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.lgmember.activity.BaseFragment;
@@ -173,30 +170,24 @@ public class ScoresRuleActicity extends BaseFragment implements ScoresRuleBusine
     }
 
     private void upgradeScoresBtn() {
-        if (authorized == 0){
-            showToast("当前会员未实名，无法升级！");
-            return;
-        }else if (level == 1 &&
-                point < scoresReluLocal.getRedup()){
-            showToast("当前积分不足，无法升级到银卡！");
-            return;
-        }else if (level == 2 &&
-                point < scoresReluLocal.getAgup()){
-            showToast("当前积分不足，无法升级到金卡！");
-            return;
-        }else if (level == 3 &&
-                point < scoresReluLocal.getAuup()){
-            showToast("当前积分不足，无法升级到钻石卡！");
-            return;
+        if (authorized == 0){showToast("当前会员未实名，无法升级！");return;
+        }else if (level == 1 && point < scoresReluLocal.getRedup()){
+            //当前的会员积分小于红卡升级所需积分
+            showToast("当前积分不足，无法升级到银卡！");return;
+        }else if (level == 2 && point < scoresReluLocal.getAgup()){
+            //当前的会员积分小于银卡升级所需积分
+            showToast("当前积分不足，无法升级到金卡！");return;
+        }else if (level == 3 && point < scoresReluLocal.getAuup()){
+            //当前的会员积分小于金卡升级所需积分
+            showToast("当前积分不足，无法升级到钻石卡！");return;
         }else if (level == 4 ){
-            showToast("目前为钻石卡(最高级别)，无法升级！");
-            return;
+            showToast("目前为钻石卡(最高级别)，无法升级！");return;
         }else {
-            if (level == 1){
+            if (level == 1){//升级后的积分=当前积分-红卡升级后扣除积分
                 point_after = point - scoresReluLocal.getRedcut();
-            }else if (level == 2){
+            }else if (level == 2){//升级后的积分=当前积分-银卡升级后扣除积分
                 point_after = point - scoresReluLocal.getAgcut();
-            }else if (level == 3){
+            }else if (level == 3){//升级后的积分=当前积分-金卡升级后扣除积分
                 point_after = point - scoresReluLocal.getAucut();
             }
             upgradeScores(level,point,point_after);

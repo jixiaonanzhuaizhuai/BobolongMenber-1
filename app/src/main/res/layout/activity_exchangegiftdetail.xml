@@ -97,12 +97,12 @@
         android:id="@+id/btn_exchange_gift"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="兑现礼品"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/login_btn_bg"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:layout_marginTop="15dp"
-        android:textColor="#eeeeee"
-        android:background="@drawable/login_btn_bg" />
+        android:text="兑现礼品"
+        android:textColor="#eeeeee"/>
 
 
 </LinearLayout>

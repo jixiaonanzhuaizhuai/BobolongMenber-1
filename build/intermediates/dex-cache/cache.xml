@@ -3,57 +3,435 @@
 
     <item
         is-multidex="true"
-        jar="D:\Android_all1\android\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="C:\Users\yanan_wu\.android\build-cache\e8d8f43116034959707f9eaad9c772c6795285d4\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="019c1e769a749d10b62a1ebaaf14aab60b4d98f1">
-        <dex dex="D:\Android_all1\android\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_3bf26c11543c6a8cf124f6309b105461003040ae\classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Yanan_Wu\.android\build-cache\989404f4d281d02ef14cbc7bfea25e3d095ae07a\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="23c7a11871518ab47ff5864687a5b68a17f36ed7">
-        <dex dex="D:\Android_all1\android\app\build\intermediates\pre-dexed\debug\classes_b145a4b35590e1b5e84f367832fced2c40127940.jar" />
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d82525806ef7e861f64ec309f3b69e0615d997b6\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="D:\Android_all1\android\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\yanan_wu\.android\build-cache\44288e8e05a8cb41713f2a9f9d26914105f0135e\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
-        <dex dex="D:\Android_all1\android\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_b3c1b0b6220b31bb92684ce44921cef7f4ad91c7\classes.dex" />
+        sha1="6cad4a08f397bca96eef4f041d4d388c09631e9c">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_eaccfe9adba1d7ab9c9241242442615492883dcf\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Yanan_Wu\.android\build-cache\397075c2381909812c82805a6f4995400ded35f1\output\jars\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\6a076e5ac5287297bc6e20bac3b3543f31eb5ed7\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2013b068d3aecc7d4a96f39d343686bcd4a84a63">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_76b70fc12868e07c13dfca2d68ab2f7038420bec\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\85a1c2a24c93e1b6bd7c75cc4de5c85e07e5dfd0\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="97ce235af85814bc92ca38d106d9de7fabe4c499">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_af35057d9d377271796a08442e6e7d9f679e231c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\7578f6f3b870db81b9687ae2820f591607361a8b\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3b7cd890e19f1974a6a9b5c862bb3cf03eddb757\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\cd7e2df226aaebf57ee6cd5d1cb7d358da034065\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c347831883c785678d5bfdb45c2d4f84d7e17a7a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\ce43035e82fc7e3d23a74e05ec875540622363d2\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="79c3d4a8ca3c04c5fd5a4a72d43a29fe6d3667b4">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b0de06d7975dc6ff319c190ec029877c99148bd0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.7_9de649769e6e44070332af043b39b2dc24658cc4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\60abf55034fdce15c00f94ead118ef78378e7d44\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d89b45d635092afe0b971eb547293718f520f609">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6f33da42be7e603fc2002acff8ca47e78d07f5ac\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\e255b48a1a2c9f351046a485abdecd1fce15bba4\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_fb35911277df287887b89497ea3ccb80d128f85e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\9ced01c0364988cdbc88895d09ec0e37460cdcf7\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="23c7a11871518ab47ff5864687a5b68a17f36ed7">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_62b596aff96032c41bc91330eba42b4e9fa1d473\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\2e277d6b31ce9eeb9a9e378284bf21b9c0cbea44\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a624ff0e5856c86ed693acdfa917f6c1b04a6848">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_fa6d4de2894843252019743ee15c8ae62ed1fb62\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\8d07f605d93dcf97a74f0f5bb711eca67f10dd1e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3bfdddd4e47dab6e743f217d2ddde7e6cc5db0ee">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_739a26425954666bc5e30d9588d00e79371d43a3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\ed871712730983705697db1c3899979ea54a4cd1\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_242d0b42cfaff0c70101000144ffe9ac58155531\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\291976c939c273771f3d6296cd4affbe26db330f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="284e4a41a5b9f1b8c97b16b685af7b99724bca2d">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3cefecb78a6fe7485cb8d32745799fa270cd0a86\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\87aeace44d003c2576eff1fd71b7671c170a06d0\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cc612fa2610b0741f55190e7bc73034144873adb">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d2e1a30f99c826ccd40a84bd03edbe4e0951d34d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\jsr305-2.0.1_9930f9d6404b175c7d512aeed9190c4353645a66\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.9.0\f824591a0016efbaeddb8300bee54832a1398cfa\okio-1.9.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.9.0_5254b57c087216faeb26e3c014bcaf86408c6894\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\6883665298a00e0d9f0432abdcd1d6654e4d02eb\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="89431f8e8b6d5d187364cef8fcdc690ba0ed28d2">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9f3b71934750f22f6606542849d525122896bcd5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.4.2\ccde00f7ccc77af5a6d5752e2cb21f6d8998289f\okhttp-3.4.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ccde00f7ccc77af5a6d5752e2cb21f6d8998289f">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.4.2_a1eb68419dc80a2ea35a3f613b8664ccfbb942a4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\aecd7d82e0529c47b7db33e43ccf27b4ee9da49a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_20a537ee822d467854a6c28b910170108793a331\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.7.0_e808bcf2a3ef48259d43d9c992bd8bf11d5cf982\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\90ef0c45dabebe51c345a0e7481ecf3c8d5596e8\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_0b60dd785964cf25b88e1560ed040a0196c37856\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\8cb9d9190082a2989b632c9530116fb3059bc5b4\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="203f86b303ba8cf1473a5495f94121466af023b0">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_71277fc3296323896122c25b726992431373d133\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\3aa3a009f31854a33250fe923a2a312f9b52c983\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5f0bd6fa215b988dbb213d5a81ca1a6eb7b5799e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\6633b79e0f85d5403449c2f6c8570e88de14b957\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1129781759a527f4381c590881b84a143786e2c5">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_72c7e57a01de60b48d8ba3c249c7312712ee2e02\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\4d9ceb62f8eae3cba76c83499d1ba6b05817a8b0\output\jars\classes.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="d09b7b1550817d42b6cb4e68ee8eb86fdbf2cb04">
-        <dex dex="D:\Android_all1\android\app\build\intermediates\pre-dexed\debug\classes_0d48be198ba7b4733bce8df5f0faae2d4529ce57.jar" />
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_605b64aa9502c9e93de9c430d088cb2adc2a3d28\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Yanan_Wu\.android\build-cache\397075c2381909812c82805a6f4995400ded35f1\output\jars\libs\core-3.3.0.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\f288a8374c0aa8179577636a9a50d181ee885092\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e76cb8f9989a39cc2d71a101af0f519ee417ea07\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\5a72fadde4715f71a3c6a1f99379aab452232305\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="32f45bd44a3e7efc235bbfed120029290f5d674a">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c9459ce0151a24280d3b134a548b1889b44ddd1c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\394795a954af87722b972695f08291dce6e81dfb\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_0596d970cfece24c7cd70a1f72a6a141bc1bc27d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\picasso-2.5.2_2927f98a169e0399e88a5678fa98840356b1bef9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\2154ceb78f2823ce438fd01338970fb091bab5c8\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_944d6486b47f4e14cca527e683f4203de2d03cea\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.2.1\4e4cfa4adc74521d5966799fa5ab70b733552f68\rxjava-1.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4e4cfa4adc74521d5966799fa5ab70b733552f68">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\rxjava-1.2.1_3b8a8f0b0f95ff6afd22317e398e6cefe07e02ad\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\660476f4dac4236e95c417feefd81bc0a50d65c3\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0341b2d88354b249e74e4b46a5a87cc6a574293e">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ac7f2c6a2cce5b493dace9dcf0b7d07c2a294008\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="12920f9016b8b05acbc2af7cdc13cef6946fe7d3">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_8eb1cc8158e4691f0f9f10fecbd8df4cff78f1ee\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\library-2.4.0_f083e151d0af52f5b48ce27e3b55b2999680702b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\4d9ceb62f8eae3cba76c83499d1ba6b05817a8b0\output\jars\libs\core-3.3.0.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="a401911b86797eb56a18a4a7ee00a9e8335eb64b">
-        <dex dex="D:\Android_all1\android\app\build\intermediates\pre-dexed\debug\core-3.3.0_48e44376206c901d362ded9152ae11b575ee6647.jar" />
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\core-3.3.0_ba564dc11a3fe7efee65dbb01edca780c05f5ee2\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Yanan_Wu\.android\build-cache\a015fc21206a4127750d03957b980799d1570232\output\jars\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\4d6cdaab388fb6484660ccadb7d61d20a1b8ee8b\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b6574bf3528b6dbd83d40c8c2aa66be847d4ebdf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\com.github.ikidou\FragmentBackHandler\2.1\d521fedc058d0347ea591c4f43c6f7db6fab7337\FragmentBackHandler-2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d521fedc058d0347ea591c4f43c6f7db6fab7337">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\FragmentBackHandler-2.1_50c63fb9ed42ab5af1241cf134a0727ea9133d4b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\f57c63045e5af3df1d881f529308e78c211fc986\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="42ec9ef06227b1c296500107785e282218301862">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2aa8d2298c2567ffb327d00709248c29ef20de46\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.gradle\caches\modules-2\files-2.1\commons-cli\commons-cli\1.2\2bf96b7aa8b611c177d329452af1dc933e14501c\commons-cli-1.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2bf96b7aa8b611c177d329452af1dc933e14501c">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-cli-1.2_2028e4a489dd50550f128ee81588ee008e690b78\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\2b1f6a7c68608f41f58d1ce45ca7e6d80d28ab1f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8c98b57844d79a419d088b4aadbe8c1ddc327425\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\aea1dc18bce47f7d01a4cec68ec01ab5e3c54a90\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c75007d82461aecc56df64e675148a883096c790">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d964d1648dd89521942b04b78392fc23105abb4c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\ba5bae0957179761b0d565631f4043b72730c16e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="91a335dab6fcecb5f15f9f19e960e02bb3e699aa">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5191bcb37eafde35071a97db2b5e1ebcbe5e3cd3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\5607a0baf91199a0e7aeaf5a1331bc820886b600\output\jars\classes.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="cb604171452892c383d023307362c618161c4ab3">
-        <dex dex="D:\Android_all1\android\app\build\intermediates\pre-dexed\debug\classes_21546416ef2abb7da852f993bca90b6883457cdf.jar" />
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d9e8c5857d1b7f90c1ef309f2861ebc081ae14ba\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\.android\build-cache\f43265dc80fff8fc1115ecdb6813a1559a6fb9f6\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d2bfed421aca7f64f43e499f30c5df149a7af95d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a215d62ff2de1485bc7e601f768c2721940600a2">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_e3cf6cecd85fbaa5f3d19706728de0d3b5926851\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yanan_wu\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Users\yanan_wu\Desktop\work_all\Android_all\workspace\BobolongMenber-1\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.3.1_11720277c5497315d1f1e5893cb6619f2c8979a3\classes.dex" />
     </item>
 
 </items>

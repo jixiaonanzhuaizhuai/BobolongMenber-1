@@ -48,7 +48,7 @@
             android:textSize="14sp"
             android:textColor="@color/white"
             android:background="@drawable/scan_sign_bg"
-            android:visibility="gone"
+            android:visibility="visible"
             />
     </LinearLayout>
 </LinearLayout>

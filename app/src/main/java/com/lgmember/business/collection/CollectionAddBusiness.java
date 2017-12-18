@@ -28,6 +28,13 @@ public class CollectionAddBusiness {
         collectionImpl = new CollectionImpl();
         collectionImpl.addCollection(id,handler,context);
     }
+    // 添加收藏
+    public void addClubCollection() {
+
+        // 判断活动码是否有效
+        collectionImpl = new CollectionImpl();
+        collectionImpl.addClubCollection(id,handler,context);
+    }
 
     //删除收藏
     public void deleteCollection() {
@@ -35,6 +42,13 @@ public class CollectionAddBusiness {
         // 判断活动码是否有效
         collectionImpl = new CollectionImpl();
         collectionImpl.deleteCollection(id,handler,context);
+    }
+    //删除收藏
+    public void deleteClubCollection() {
+
+        // 判断活动码是否有效
+        collectionImpl = new CollectionImpl();
+        collectionImpl.deleteClubCollection(id,handler,context);
     }
 
     private CollectionResulHandler handler;

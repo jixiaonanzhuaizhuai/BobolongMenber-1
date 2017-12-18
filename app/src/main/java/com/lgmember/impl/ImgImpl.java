@@ -1,7 +1,6 @@
 package com.lgmember.impl;
 
 import android.content.Context;
-
 import android.os.Environment;
 import android.util.Log;
 
@@ -18,12 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
-
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 
 public class ImgImpl extends HttpApi {

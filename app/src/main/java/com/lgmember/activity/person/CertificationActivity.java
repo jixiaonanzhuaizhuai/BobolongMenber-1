@@ -14,17 +14,17 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.view.View.OnClickListener;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lgmember.activity.BaseActivity;
@@ -32,9 +32,9 @@ import com.lgmember.activity.LoginActivity;
 import com.lgmember.activity.MainActivity;
 import com.lgmember.activity.R;
 import com.lgmember.business.SmsCodeBusiness;
+import com.lgmember.business.UploadImgBusiness;
 import com.lgmember.business.message.MemberMessageBusiness;
 import com.lgmember.business.person.CertificationBusiness;
-import com.lgmember.business.UploadImgBusiness;
 import com.lgmember.model.Certification;
 import com.lgmember.model.Member;
 import com.lgmember.util.StringUtil;
@@ -265,6 +265,8 @@ public class CertificationActivity extends BaseActivity
 
     private void uploadIDImg(File file) {
         session_id = java.util.UUID.randomUUID().toString();
+
+        Log.d(session_id,"****************"+session_id+"****************");
         UploadImgBusiness uploadImgBusiness = new UploadImgBusiness(context,session_id,file);
         uploadImgBusiness.setHandler(this);
         uploadImgBusiness.uploadImg();

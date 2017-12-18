@@ -61,13 +61,13 @@ public class ClubProjectMessageDetailActivity extends BaseActivity implements Vi
 	private void addCollection() {
 		CollectionAddBusiness collectionAddBusiness = new CollectionAddBusiness(context,projectMessage_id);
 		collectionAddBusiness.setHandler(this);
-		collectionAddBusiness.addCollection();
+		collectionAddBusiness.addClubCollection();
 
 	}
 	private void deleteCollection() {
 		CollectionAddBusiness collectionAddBusiness = new CollectionAddBusiness(context,projectMessage_id);
 		collectionAddBusiness.setHandler(this);
-		collectionAddBusiness.deleteCollection();
+		collectionAddBusiness.deleteClubCollection();
 	}
 
 	private void init(){
